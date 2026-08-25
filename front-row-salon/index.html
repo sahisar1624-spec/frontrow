@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Row Salon — Dubai</title>
+<meta name="description" content="Front Row Salon, Bur Dubai — hair, nails, waxing, threading, facials and massage in a dreamy, unhurried space. 4.9 rated, 63 reviews. Open daily 10am–9pm.">
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  /* ---- home-only: full-bleed 3D hero + optional background video ---- */
+  .home-hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.6s var(--ease-luxury);
+    z-index: 0;
+  }
+  .hero-video.is-ready { opacity: 0.38; }
+  #hero-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--scrim);
+    pointer-events: none;
+  }
+  .home-hero-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 var(--gutter) clamp(3.5rem, 8vw, 6rem);
+  }
+  .home-hero-content .eyebrow { margin-bottom: 1.4rem; }
+  .home-hero-content h1 { max-width: 15ch; margin-bottom: 1.4rem; }
+  .home-hero-content .lede { margin-bottom: 2.2rem; }
+  .home-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .scroll-cue {
+    position: absolute;
+    right: var(--gutter);
+    bottom: clamp(2rem, 5vw, 3rem);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--muted);
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(var(--accent), transparent); animation: cue-fall 2.6s var(--ease-luxury) infinite; }
+  @keyframes cue-fall { 0% { opacity: 0; transform: scaleY(0.2); transform-origin: top; } 40% { opacity: 1; } 100% { opacity: 0; transform: scaleY(1); transform-origin: top; } }
+  @media (prefers-reduced-motion: reduce) { .scroll-cue .line { animation: none; opacity: 0.6; } }
+
+  /* ---- welcome strip ---- */
+  .welcome-strip { max-width: 780px; }
+  .welcome-strip blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 340;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.5;
+    margin: 0 0 1.75rem;
+  }
+
+  /* ---- 3-up teaser ---- */
+  .teaser-grid { align-items: start; }
+
+  /* ---- testimonial band ---- */
+  .testimonial-band { text-align: center; max-width: 820px; margin: 0 auto; }
+  .testimonial-band .review-stars { justify-content: center; display: flex; margin-bottom: 1.5rem; }
+  .testimonial-band .review-quote { font-size: clamp(1.4rem, 3vw, 2rem); }
+  .testimonial-band .review-name { margin-top: 1.5rem; display: block; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+
+  <section class="home-hero" aria-label="Front Row Salon">
+    <video id="hero-video" class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="videos/hero-loop.mp4" type="video/mp4">
+    </video>
+    <canvas id="hero-scene"></canvas>
+    <div class="hero-scrim"></div>
+    <div class="home-hero-content">
+      <div class="eyebrow">Front Row Salon &middot; Bur Dubai</div>
+      <h1>The seat you've been saving for yourself.</h1>
+      <p class="lede">Hair, nails, and beauty in a space built for real, unhurried brilliance — 4.9 rated across 63 reviews, and highly recommended.</p>
+      <div class="home-hero-actions">
+        <a class="btn btn-primary" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+        <a class="btn btn-ghost" href="services.html">Explore Services</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="line" aria-hidden="true"></span>Scroll</div>
+  </section>
+
+  <section class="section">
+    <div class="wrap welcome-strip">
+      <div class="eyebrow mb-1">Welcome</div>
+      <blockquote>&ldquo;At Front Row Salon, we celebrate women in their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love.&rdquo;</blockquote>
+      <p class="text-muted">We employ hair products with some of the most natural and rich ingredients because we believe you should never expect less.</p>
+      <a class="link-arrow mt-2" href="about.html" style="display:inline-flex;">Read our full story &rarr;</a>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block">
+        <div class="eyebrow">Find your way in</div>
+        <h2>Three places to start</h2>
+      </div>
+      <div class="grid grid-3 teaser-grid">
+        <a class="card teaser-card" href="services.html">
+          <div class="media-placeholder aspect-wide">
+            <img src="images/teaser-services.jpg" alt="A Front Row Salon styling station">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Styling &amp; treatments</span>
+              <span class="ph-file">images/teaser-services.jpg</span>
+            </div>
+          </div>
+          <h3>Services</h3>
+          <p>Cutting, colour, treatments, nails, waxing, threading, facials and massage.</p>
+          <span class="link-arrow">View services &rarr;</span>
+        </a>
+        <a class="card teaser-card" href="team.html">
+          <div class="media-placeholder aspect-wide">
+            <img src="images/teaser-team.jpg" alt="A Front Row Salon team member at work">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Meet the team</span>
+              <span class="ph-file">images/teaser-team.jpg</span>
+            </div>
+          </div>
+          <h3>Team</h3>
+          <p>Six specialists, each rated 4.6&ndash;4.9 &mdash; hair, nails, massage and more.</p>
+          <span class="link-arrow">Meet the team &rarr;</span>
+        </a>
+        <a class="card teaser-card" href="gallery.html">
+          <div class="media-placeholder aspect-wide">
+            <img src="images/teaser-gallery.jpg" alt="Inside Front Row Salon">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Inside the salon</span>
+              <span class="ph-file">images/teaser-gallery.jpg</span>
+            </div>
+          </div>
+          <h3>Gallery</h3>
+          <p>A look at the space &mdash; styling chairs, nail bar and reception.</p>
+          <span class="link-arrow">See the gallery &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap testimonial-band">
+      <div class="review-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-quote">&ldquo;Amazing service as always. I've been going to this salon for the last 2 years and I always had a very good experience. Thank you to all the staff for the best service and for always looking after me.&rdquo;</p>
+      <span class="review-name">&mdash; Cecilia C., 2 years ago</span>
+      <div class="mt-2">
+        <a class="link-arrow" href="reviews.html">Read more reviews &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band">
+        <div class="eyebrow center" style="justify-content:center;">Reserve your seat</div>
+        <h2>Front row starts with one booking.</h2>
+        <p class="lede center">Instant confirmation, pay by app or in salon &mdash; open daily, 10:00 am to 9:00 pm.</p>
+        <a class="btn btn-primary" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now on Fresha</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- optional background video: reveal only once it actually loads ---- */
+var heroVideo = document.getElementById('hero-video');
+heroVideo.addEventListener('loadeddata', function () { heroVideo.classList.add('is-ready'); });
+heroVideo.addEventListener('error', function () { heroVideo.classList.remove('is-ready'); heroVideo.style.display = 'none'; });
+
+/* ==== SIGNATURE OBJECT: a suspended glass hand-mirror ====
+   Front Row's world is reflection and the spotlight — a hovering mirror,
+   chrome-framed, glass rendered with transmission + iridescence, is the
+   one object this whole site is built to be remembered by. */
+var canvas = document.getElementById('hero-scene');
+var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 9);
+
+var keyLight = new THREE.PointLight(0xcdb0ff, 60, 40, 2);
+keyLight.position.set(-4, 3, 5);
+scene.add(keyLight);
+var rimLight = new THREE.PointLight(0xeecaa0, 40, 40, 2);
+rimLight.position.set(5, -2, 3);
+scene.add(rimLight);
+scene.add(new THREE.AmbientLight(0x2a2233, 1.2));
+
+var mirror = new THREE.Group();
+
+var glassGeo = new THREE.CylinderGeometry(1.9, 1.9, 0.14, 96);
+var glassMat = new THREE.MeshPhysicalMaterial({
+  color: 0xcdb0ff,
+  metalness: 0.05,
+  roughness: 0.04,
+  transmission: 0.92,
+  thickness: 1.6,
+  iridescence: 0.7,
+  iridescenceIOR: 1.3,
+  clearcoat: 1,
+  clearcoatRoughness: 0.05
+});
+var glass = new THREE.Mesh(glassGeo, glassMat);
+glass.rotation.x = Math.PI / 2;
+mirror.add(glass);
+
+var bezelGeo = new THREE.TorusGeometry(1.93, 0.07, 32, 128);
+var metalMat = new THREE.MeshPhysicalMaterial({
+  color: 0xeecaa0,
+  metalness: 0.9,
+  roughness: 0.15,
+  clearcoat: 1,
+  clearcoatRoughness: 0.1
+});
+var bezel = new THREE.Mesh(bezelGeo, metalMat);
+mirror.add(bezel);
+
+var handleGeo = new THREE.CylinderGeometry(0.09, 0.11, 2.6, 32);
+var handle = new THREE.Mesh(handleGeo, metalMat);
+handle.position.set(0, -3.15, 0);
+mirror.add(handle);
+
+var ringGeo = new THREE.TorusGeometry(0.28, 0.055, 24, 64);
+var ring = new THREE.Mesh(ringGeo, metalMat);
+ring.position.set(0, -1.95, 0);
+ring.rotation.x = Math.PI / 2;
+mirror.add(ring);
+
+scene.add(mirror);
+
+// sparse drifting dust, consistent with the site's ambient atmosphere
+var DUST = 220;
+var dustPos = new Float32Array(DUST * 3);
+for (var i = 0; i < DUST; i++) {
+  dustPos[i * 3] = (Math.random() - 0.5) * 22;
+  dustPos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+  dustPos[i * 3 + 2] = (Math.random() - 0.5) * 16 - 2;
+}
+var dustGeo = new THREE.BufferGeometry();
+dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+var dustMat = new THREE.PointsMaterial({ size: 0.03, color: 0xf4ede4, transparent: true, opacity: 0.4, depthWrite: false, blending: THREE.AdditiveBlending });
+var dust = new THREE.Points(dustGeo, dustMat);
+scene.add(dust);
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', onResize);
+
+var clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  if (!prefersReducedMotion) {
+    var t = clock.getElapsedTime();
+    mirror.position.y = Math.sin(t * 0.35) * 0.18;
+    mirror.rotation.y += 0.0016;
+    dust.rotation.y = t * 0.01;
+  }
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ==== SCROLL CHOREOGRAPHY ====
+   0%  — mirror faces the viewer square-on, soft idle float, warm+cool light even
+   50% — mirror has turned toward profile, catching a cooler iridescent edge glint,
+         camera has dollied a touch closer
+   100%— mirror settles back toward the viewer as the hero exits, ready to hand
+         off to the page content beneath it
+   Scoped to the hero's own scroll range only — this is a hero moment, not a
+   whole-document scrub. */
+if (!prefersReducedMotion) {
+  var heroEl = document.querySelector('.home-hero');
+  var ticking = false;
+  function progress() {
+    var rect = heroEl.getBoundingClientRect();
+    var total = heroEl.offsetHeight;
+    var p = Math.min(Math.max(-rect.top / total, 0), 1);
+    return p;
+  }
+  function ease(p) { return 0.5 - 0.5 * Math.cos(Math.PI * p); } // sine.inOut equivalent
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var p = ease(progress());
+      mirror.rotation.x = p * (Math.PI * 0.38);
+      camera.position.z = 9 - p * 2.3;
+      camera.position.y = 0.2 + p * 0.5;
+      keyLight.intensity = 60 - p * 25;
+      rimLight.intensity = 40 + p * 30;
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+</script>
+<script src="shared/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Front Row Salon</title>
+<meta name="description" content="Contact Front Row Salon, Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai. Open daily 10:00 am – 9:00 pm.">
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<canvas id="ambient-scene" class="ambient-canvas" aria-hidden="true"></canvas>
+<header id="site-header"></header>
+
+<main class="page-shell">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">Contact Us</div>
+      <h1>Say hello before you visit.</h1>
+      <p class="lede">Send a message and we'll get back to you, or book directly for instant confirmation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:start;">
+
+        <div>
+          <div class="eyebrow mb-1">Details</div>
+          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>Al Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
+          <p class="text-muted mb-2">Open daily, Monday &ndash; Sunday, 10:00 am &ndash; 9:00 pm.</p>
+
+          <div class="eyebrow mb-1 mt-3">Reach us</div>
+          <div>
+            <span class="footer-placeholder">Phone &mdash; add number</span>
+            <span class="footer-placeholder">Instagram &mdash; add link</span>
+            <span class="footer-placeholder">WhatsApp &mdash; add number</span>
+          </div>
+          <p class="text-muted mt-2" style="font-size:0.85rem;">These aren't supplied yet &mdash; drop them in and the placeholders above become live links.</p>
+
+          <a class="btn btn-primary mt-3" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+        </div>
+
+        <div class="card">
+          <div class="eyebrow mb-2">Send a message</div>
+          <form id="contact-form" novalidate>
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <div class="form-status" id="cf-status" role="status">
+              <span>&#10003;</span>
+              <span>Message sent &mdash; thank you. We'll be in touch shortly.</span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="shared/scene.js"></script>
+<script src="shared/nav.js"></script>
+<script>
+  /* Front-end only — no backend. Shows a confirmation state on submit. */
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('cf-status');
+    status.classList.add('is-visible');
+    this.reset();
+  });
+</script>
+</body>
+</html>

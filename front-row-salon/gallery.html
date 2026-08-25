@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Front Row Salon</title>
+<meta name="description" content="A look inside Front Row Salon — interior, styling stations, nail care area and reception.">
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<canvas id="ambient-scene" class="ambient-canvas" aria-hidden="true"></canvas>
+<header id="site-header"></header>
+
+<main class="page-shell">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">Gallery</div>
+      <h1>The room, in pieces.</h1>
+      <p class="lede">Photos and clips land here as they're ready &mdash; hover a video tile to see it move.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="gallery-grid" id="gallery-grid">
+
+        <figure class="span-2">
+          <div class="media-placeholder">
+            <img src="images/interior-1.jpg" alt="Modern interior at Front Row Salon">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Modern interior</span>
+              <span class="ph-file">images/interior-1.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Modern interior</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder">
+            <img src="images/styling-chairs.jpg" alt="Styling stations at Front Row Salon">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Styling stations</span>
+              <span class="ph-file">images/styling-chairs.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Styling stations</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder">
+            <img src="images/nail-station.jpg" alt="Nail care area at Front Row Salon">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Nail care area</span>
+              <span class="ph-file">images/nail-station.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Nail care area</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder gallery-video" data-gallery-video>
+            <video muted loop playsinline preload="metadata">
+              <source src="videos/gallery-clip-1.mp4" type="video/mp4">
+            </video>
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9656;</span>
+              <span class="ph-label">Salon clip</span>
+              <span class="ph-file">videos/gallery-clip-1.mp4</span>
+            </div>
+            <span class="play-indicator">&#9656;</span>
+          </div>
+          <figcaption class="gallery-caption">In motion</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder">
+            <img src="images/reception.jpg" alt="Reception area at Front Row Salon">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Reception area</span>
+              <span class="ph-file">images/reception.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Reception area</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder">
+            <img src="images/gallery-2.jpg" alt="Front Row Salon, detail">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Detail shot</span>
+              <span class="ph-file">images/gallery-2.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Detail</figcaption>
+        </figure>
+
+        <figure class="span-2">
+          <div class="media-placeholder gallery-video" data-gallery-video>
+            <video muted loop playsinline preload="metadata">
+              <source src="videos/gallery-clip-2.mp4" type="video/mp4">
+            </video>
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9656;</span>
+              <span class="ph-label">Salon clip</span>
+              <span class="ph-file">videos/gallery-clip-2.mp4</span>
+            </div>
+            <span class="play-indicator">&#9656;</span>
+          </div>
+          <figcaption class="gallery-caption">In motion</figcaption>
+        </figure>
+
+        <figure>
+          <div class="media-placeholder">
+            <img src="images/gallery-3.jpg" alt="Front Row Salon, detail">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Detail shot</span>
+              <span class="ph-file">images/gallery-3.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Detail</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="cta-band">
+        <div class="eyebrow center" style="justify-content:center;">See it in person</div>
+        <h2>The photos don't do it justice.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="shared/scene.js"></script>
+<script src="shared/nav.js"></script>
+<script>
+  /* Video tiles autoplay muted + loop only on hover/focus, so the gallery
+     stays quiet until someone actually looks at a clip. */
+  document.querySelectorAll('[data-gallery-video]').forEach(function (tile) {
+    var video = tile.querySelector('video');
+    if (!video) return;
+    function play() { video.play().catch(function () {}); }
+    function pause() { video.pause(); }
+    tile.addEventListener('mouseenter', play);
+    tile.addEventListener('mouseleave', pause);
+    tile.addEventListener('touchstart', play, { passive: true });
+  });
+</script>
+</body>
+</html>

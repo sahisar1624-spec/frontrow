@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maps &amp; Timings — Front Row Salon</title>
+<meta name="description" content="Find Front Row Salon at Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai. Open daily 10:00 am – 9:00 pm.">
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  .map-placeholder {
+    aspect-ratio: 16/9;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    background:
+      linear-gradient(155deg, var(--bg-elev-2), var(--bg-elev));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(1px 1px at 20% 30%, var(--hairline) 100%, transparent),
+      radial-gradient(1px 1px at 60% 70%, var(--hairline) 100%, transparent),
+      radial-gradient(1px 1px at 80% 20%, var(--hairline) 100%, transparent),
+      radial-gradient(1px 1px at 40% 85%, var(--hairline) 100%, transparent);
+    opacity: 0.6;
+  }
+  .map-placeholder .pin { font-size: 1.6rem; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<canvas id="ambient-scene" class="ambient-canvas" aria-hidden="true"></canvas>
+<header id="site-header"></header>
+
+<main class="page-shell">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">Maps &amp; Timings</div>
+      <h1>Bur Dubai, easy to find.</h1>
+      <p class="lede">Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool &mdash; open every day of the week.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:start;">
+
+        <div>
+          <div class="eyebrow mb-1">Address</div>
+          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>Al Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
+          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20Al%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai" target="_blank" rel="noopener noreferrer">Get Directions</a>
+
+          <hr class="hr mt-3 mb-3">
+
+          <div class="eyebrow mb-1">Rating</div>
+          <p class="lede">4.9 out of 5, from 63 reviews &mdash; Highly Recommended.</p>
+        </div>
+
+        <div>
+          <div class="map-placeholder">
+            <span class="pin">&#9679;</span>
+            <span class="ph-label">Google Maps embed goes here</span>
+            <span class="ph-file">&lt;iframe src="https://www.google.com/maps/embed?..."&gt;</span>
+            <p class="text-muted" style="font-size:0.8rem; max-width:34ch;">Drop in a Google Maps Embed API iframe for Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai once an API key is available.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block">
+        <div class="eyebrow">Timings</div>
+        <h2>Open every day, the same hours.</h2>
+      </div>
+      <table class="hours-table">
+        <tbody>
+          <tr><td>Monday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Tuesday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Wednesday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Thursday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Friday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Saturday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Sunday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band">
+        <div class="eyebrow center" style="justify-content:center;">Plan your visit</div>
+        <h2>Reserve your slot in advance.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="shared/scene.js"></script>
+<script src="shared/nav.js"></script>
+</body>
+</html>

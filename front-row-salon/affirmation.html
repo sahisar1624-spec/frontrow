@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Affirmation — Front Row Salon</title>
+<meta name="description" content="A quiet daily affirmation from Front Row Salon — on real, authentic beauty and self-worth.">
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  .affirmation-shell { flex-direction: column; }
+  .new-affirmation-btn { margin-top: 2.5rem; }
+</style>
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<main>
+  <canvas id="orb-scene" class="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="hero-scrim" style="position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(60% 50% at 50% 45%, transparent, rgba(11,9,16,0.55) 85%);"></div>
+
+  <section class="affirmation-shell">
+    <div class="eyebrow center" style="justify-content:center;">A moment, just for you</div>
+    <p class="affirmation-text" id="affirmation-text">You don't need permission to take up the front row.</p>
+    <div class="affirmation-index" id="affirmation-index">01 / 10</div>
+    <button class="btn btn-ghost new-affirmation-btn" id="new-affirmation">New Affirmation</button>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ==== ten original affirmations, in the salon's own voice ==== */
+var AFFIRMATIONS = [
+  "You don't need permission to take up the front row.",
+  "Beauty that's really yours doesn't need to be argued for.",
+  "The version of you that already exists is worth showing up for.",
+  "You're allowed to want to feel good, plainly, with no explanation attached.",
+  "What's real about you was never the thing that needed fixing.",
+  "Confidence isn't a look you put on — it's one you already had underneath.",
+  "You get to decide what 'put together' means for you today.",
+  "Caring for yourself is not the same as performing for anyone else.",
+  "Some days call for less. Let today be one of the easy ones.",
+  "The mirror isn't asking you to be different — only to notice what's already there."
+];
+var index = 0;
+
+var textEl = document.getElementById('affirmation-text');
+var indexEl = document.getElementById('affirmation-index');
+var btn = document.getElementById('new-affirmation');
+
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
+function renderIndex() { indexEl.textContent = pad(index + 1) + ' / ' + pad(AFFIRMATIONS.length); }
+renderIndex();
+
+function swapAffirmation() {
+  var next = index;
+  if (AFFIRMATIONS.length > 1) {
+    do { next = Math.floor(Math.random() * AFFIRMATIONS.length); } while (next === index);
+  }
+  index = next;
+
+  if (prefersReducedMotion) {
+    textEl.textContent = AFFIRMATIONS[index];
+    renderIndex();
+    pulseOrb();
+    return;
+  }
+
+  textEl.classList.add('is-swapping');
+  window.setTimeout(function () {
+    textEl.textContent = AFFIRMATIONS[index];
+    renderIndex();
+    textEl.classList.remove('is-swapping');
+  }, 560);
+  pulseOrb();
+}
+btn.addEventListener('click', swapAffirmation);
+
+/* ==== SIGNATURE OBJECT: a glass orb with a warm inner light ====
+   Calmer and slower than the home hero — this page is a pause, not a
+   showcase. The orb breathes; it doesn't perform. */
+var canvas = document.getElementById('orb-scene');
+var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 7);
+
+scene.add(new THREE.AmbientLight(0x2a2233, 1.1));
+var coolLight = new THREE.PointLight(0xcdb0ff, 34, 30, 2);
+coolLight.position.set(-3, 2, 4);
+scene.add(coolLight);
+var warmLight = new THREE.PointLight(0xeecaa0, 22, 30, 2);
+warmLight.position.set(3, -2, 3);
+scene.add(warmLight);
+
+var orbMat = new THREE.MeshPhysicalMaterial({
+  color: 0xcdb0ff,
+  metalness: 0,
+  roughness: 0.05,
+  transmission: 0.95,
+  thickness: 2.2,
+  iridescence: 0.8,
+  iridescenceIOR: 1.35,
+  clearcoat: 1,
+  clearcoatRoughness: 0.05
+});
+var orb = new THREE.Mesh(new THREE.SphereGeometry(1.65, 96, 96), orbMat);
+scene.add(orb);
+
+var coreMat = new THREE.MeshBasicMaterial({ color: 0xf4ede4 });
+var core = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), coreMat);
+scene.add(core);
+
+// slow-rising petals of light rather than orbiting dust — a calmer motion
+var PETALS = 140;
+var petalPos = new Float32Array(PETALS * 3);
+var petalSpeed = new Float32Array(PETALS);
+var petalColor = new Float32Array(PETALS * 3);
+var palette = [new THREE.Color(0xcdb0ff), new THREE.Color(0xeecaa0), new THREE.Color(0xf4ede4)];
+function resetPetal(i, randomY) {
+  petalPos[i * 3] = (Math.random() - 0.5) * 12;
+  petalPos[i * 3 + 1] = randomY ? (Math.random() - 0.5) * 10 : -6.5;
+  petalPos[i * 3 + 2] = (Math.random() - 0.5) * 8;
+  petalSpeed[i] = 0.12 + Math.random() * 0.22;
+  var c = palette[Math.floor(Math.random() * palette.length)];
+  petalColor[i * 3] = c.r; petalColor[i * 3 + 1] = c.g; petalColor[i * 3 + 2] = c.b;
+}
+for (var i = 0; i < PETALS; i++) resetPetal(i, true);
+var petalGeo = new THREE.BufferGeometry();
+petalGeo.setAttribute('position', new THREE.BufferAttribute(petalPos, 3));
+petalGeo.setAttribute('color', new THREE.BufferAttribute(petalColor, 3));
+var petalMat = new THREE.PointsMaterial({ size: 0.05, vertexColors: true, transparent: true, opacity: 0.6, depthWrite: false, blending: THREE.AdditiveBlending });
+var petals = new THREE.Points(petalGeo, petalMat);
+scene.add(petals);
+
+/* optional soft bloom pass — falls back to a plain render if the
+   postprocessing addons can't be fetched, so the page still works */
+var composer = null;
+(async function setupBloom() {
+  if (prefersReducedMotion) return;
+  try {
+    var pp = await import('three/addons/postprocessing/EffectComposer.js');
+    var rp = await import('three/addons/postprocessing/RenderPass.js');
+    var bp = await import('three/addons/postprocessing/UnrealBloomPass.js');
+    composer = new pp.EffectComposer(renderer);
+    composer.addPass(new rp.RenderPass(scene, camera));
+    var bloom = new bp.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.85, 0.7, 0.15);
+    composer.addPass(bloom);
+    window.addEventListener('resize', function () { composer.setSize(window.innerWidth, window.innerHeight); });
+  } catch (err) {
+    composer = null; // plain render loop below already handles this
+  }
+})();
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', onResize);
+
+/* gentle pulse + color shift on "New Affirmation" — a soft breath, not a snap */
+var pulseStart = 0;
+var pulsing = false;
+var pulseFromColor = new THREE.Color(0xcdb0ff);
+var pulseToColor = new THREE.Color(0xeecaa0);
+function pulseOrb() {
+  if (prefersReducedMotion) {
+    var tmp = pulseFromColor; pulseFromColor = pulseToColor; pulseToColor = tmp;
+    orbMat.color.copy(pulseToColor);
+    return;
+  }
+  pulseStart = clock.getElapsedTime();
+  pulsing = true;
+  var tmp2 = pulseFromColor; pulseFromColor = pulseToColor; pulseToColor = tmp2;
+}
+
+var clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  var t = clock.getElapsedTime();
+
+  if (!prefersReducedMotion) {
+    orb.rotation.y = t * 0.05;
+    orb.position.y = Math.sin(t * 0.25) * 0.12;
+    core.position.copy(orb.position);
+    core.scale.setScalar(1 + Math.sin(t * 0.6) * 0.06);
+
+    var dt = Math.min(clock.getDelta(), 0.05);
+    var pos = petals.geometry.attributes.position.array;
+    for (var i = 0; i < PETALS; i++) {
+      pos[i * 3 + 1] += petalSpeed[i] * dt;
+      if (pos[i * 3 + 1] > 6) { resetPetal(i, false); pos = petals.geometry.attributes.position.array; }
+    }
+    petals.geometry.attributes.position.needsUpdate = true;
+    petals.rotation.y = t * 0.01;
+
+    if (pulsing) {
+      var p = Math.min((t - pulseStart) / 1.6, 1);
+      var eased = 0.5 - 0.5 * Math.cos(Math.PI * p); // sine.inOut
+      var glow = Math.sin(Math.PI * eased); // rises then falls back — a single soft breath
+      orbMat.iridescence = 0.8 + glow * 0.15;
+      var mixed = pulseFromColor.clone().lerp(pulseToColor, eased);
+      orbMat.color.copy(mixed);
+      coolLight.intensity = 34 + glow * 22;
+      warmLight.intensity = 22 + glow * 18;
+      orb.scale.setScalar(1 + glow * 0.06);
+      if (p >= 1) pulsing = false;
+    }
+  }
+
+  if (composer) composer.render(); else renderer.render(scene, camera);
+}
+animate();
+</script>
+<script src="shared/nav.js"></script>
+</body>
+</html>
