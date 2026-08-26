@@ -12,7 +12,7 @@
     border-radius: var(--radius);
     border: 1px solid var(--hairline);
     background:
-      linear-gradient(155deg, var(--bg-elev-2), var(--bg-elev));
+      linear-gradient(155deg, var(--paper-card), var(--paper-elev));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,12 +33,11 @@
       radial-gradient(1px 1px at 40% 85%, var(--hairline) 100%, transparent);
     opacity: 0.6;
   }
-  .map-placeholder .pin { font-size: 1.6rem; color: var(--accent); }
+  .map-placeholder .pin { font-size: 1.6rem; color: var(--rosewood); }
 </style>
 </head>
 <body>
 
-<canvas id="ambient-scene" class="ambient-canvas" aria-hidden="true"></canvas>
 <header id="site-header"></header>
 
 <main class="page-shell">
@@ -113,14 +112,6 @@
 
 <footer id="site-footer"></footer>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
-  }
-}
-</script>
-<script type="module" src="shared/scene.js"></script>
 <script src="shared/nav.js"></script>
 </body>
 </html>
