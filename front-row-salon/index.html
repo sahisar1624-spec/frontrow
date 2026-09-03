@@ -6,6 +6,7 @@
 <title>Front Row Salon — Dubai</title>
 <meta name="description" content="Front Row Salon, Bur Dubai — hair, nails, waxing, threading, facials and massage in a warm, unhurried space. 4.9 rated, 63 reviews. Open daily 10am–9pm.">
 <link rel="stylesheet" href="shared/style.css">
+<link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
   /* ---- home-only: editorial split hero ---- */
   .home-hero { padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--hairline); }
@@ -54,20 +55,18 @@
         <h1>The seat you've been saving for yourself.</h1>
         <p class="lede">Hair, nails, and beauty in a space built for real, unhurried brilliance — 4.9 rated across 63 reviews, and highly recommended.</p>
         <div class="home-hero-actions">
-          <a class="btn btn-primary" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
           <a class="btn btn-ghost" href="services.html">Explore Services</a>
         </div>
       </div>
       <figure class="home-hero-figure">
         <span class="frame-tag">No. 01</span>
         <div class="media-placeholder aspect-tall">
-          <video autoplay muted loop playsinline aria-hidden="true">
-            <source src="videos/hero-loop.mp4" type="video/mp4">
-          </video>
+          <img src="images/salon-styling-stations.jpg" alt="Styling stations inside Front Row Salon, gold-framed mirrors and black leather chairs">
           <div class="ph-fallback">
             <span class="ph-icon">&#10022;</span>
             <span class="ph-label">The salon, front and centre</span>
-            <span class="ph-file">videos/hero-loop.mp4</span>
+            <span class="ph-file">images/salon-styling-stations.jpg</span>
           </div>
         </div>
         <figcaption>Photographed in the salon &middot; Bur Dubai</figcaption>
@@ -93,11 +92,11 @@
       <div class="grid grid-3">
         <a class="card teaser-card reveal" href="services.html">
           <div class="media-placeholder aspect-wide">
-            <img src="images/teaser-services.jpg" alt="A Front Row Salon styling station">
+            <img src="images/salon-treatment-room-1.jpg" alt="A treatment room at Front Row Salon">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Styling &amp; treatments</span>
-              <span class="ph-file">images/teaser-services.jpg</span>
+              <span class="ph-file">images/salon-treatment-room-1.jpg</span>
             </div>
           </div>
           <h3>Services</h3>
@@ -119,11 +118,11 @@
         </a>
         <a class="card teaser-card reveal" href="gallery.html">
           <div class="media-placeholder aspect-wide">
-            <img src="images/teaser-gallery.jpg" alt="Inside Front Row Salon">
+            <img src="images/salon-reception.jpg" alt="Reception desk at Front Row Salon">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Inside the salon</span>
-              <span class="ph-file">images/teaser-gallery.jpg</span>
+              <span class="ph-file">images/salon-reception.jpg</span>
             </div>
           </div>
           <h3>Gallery</h3>
@@ -151,7 +150,7 @@
         <div class="eyebrow center" style="justify-content:center;">Reserve your seat</div>
         <h2>Front row starts with one booking.</h2>
         <p class="lede center">Instant confirmation, pay by app or in salon &mdash; open daily, 10:00 am to 9:00 pm.</p>
-        <a class="btn btn-primary" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now on Fresha</a>
+        <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now on Fresha</a>
       </div>
     </div>
   </section>
@@ -160,13 +159,6 @@
 
 <footer id="site-footer"></footer>
 
-<script>
-  var heroVideo = document.querySelector('.home-hero-figure video');
-  if (heroVideo) {
-    heroVideo.addEventListener('loadeddata', function () { heroVideo.closest('.media-placeholder').classList.add('is-loaded'); });
-    heroVideo.addEventListener('error', function () { heroVideo.style.display = 'none'; });
-  }
-</script>
 <script src="shared/nav.js"></script>
 </body>
 </html>

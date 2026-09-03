@@ -6,34 +6,16 @@
 <title>Maps &amp; Timings — Front Row Salon</title>
 <meta name="description" content="Find Front Row Salon at Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai. Open daily 10:00 am – 9:00 pm.">
 <link rel="stylesheet" href="shared/style.css">
+<link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
-  .map-placeholder {
+  .map-embed {
     aspect-ratio: 16/9;
     border-radius: var(--radius);
     border: 1px solid var(--hairline);
-    background:
-      linear-gradient(155deg, var(--paper-card), var(--paper-elev));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    text-align: center;
-    padding: 2rem;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  .map-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(1px 1px at 20% 30%, var(--hairline) 100%, transparent),
-      radial-gradient(1px 1px at 60% 70%, var(--hairline) 100%, transparent),
-      radial-gradient(1px 1px at 80% 20%, var(--hairline) 100%, transparent),
-      radial-gradient(1px 1px at 40% 85%, var(--hairline) 100%, transparent);
-    opacity: 0.6;
-  }
-  .map-placeholder .pin { font-size: 1.6rem; color: var(--rosewood); }
+  .map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.25) contrast(1.05); }
 </style>
 </head>
 <body>
@@ -56,8 +38,19 @@
 
         <div>
           <div class="eyebrow mb-1">Address</div>
-          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>Al Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
-          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20Al%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai" target="_blank" rel="noopener noreferrer">Get Directions</a>
+          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>AL Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
+          <a class="btn btn-primary" href="https://maps.google.com/?daddr=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai" target="_blank" rel="noopener noreferrer">Get Directions</a>
+
+          <hr class="hr mt-3 mb-3">
+
+          <div class="eyebrow mb-1">Reach us</div>
+          <table class="hours-table" style="max-width:420px;">
+            <tbody>
+              <tr><td>Phone</td><td><a href="tel:+97143365582">+971 4 336 5582</a></td></tr>
+              <tr><td>Mobile</td><td><a href="tel:+971502329348">+971 50 232 9348</a></td></tr>
+              <tr><td>Email</td><td><a href="mailto:frontrowsalon22@gmail.com">frontrowsalon22@gmail.com</a></td></tr>
+            </tbody>
+          </table>
 
           <hr class="hr mt-3 mb-3">
 
@@ -66,11 +59,14 @@
         </div>
 
         <div>
-          <div class="map-placeholder">
-            <span class="pin">&#9679;</span>
-            <span class="ph-label">Google Maps embed goes here</span>
-            <span class="ph-file">&lt;iframe src="https://www.google.com/maps/embed?..."&gt;</span>
-            <p class="text-muted" style="font-size:0.8rem; max-width:34ch;">Drop in a Google Maps Embed API iframe for Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai once an API key is available.</p>
+          <div class="map-embed">
+            <iframe
+              src="https://maps.google.com/maps?q=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Front Row Salon on Google Maps"
+              aria-label="Map showing Front Row Salon location at Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai">
+            </iframe>
           </div>
         </div>
 
@@ -79,6 +75,19 @@
   </section>
 
   <section class="section section-alt">
+    <div class="wrap">
+      <div class="media-placeholder aspect-wide">
+        <img src="images/salon-reception.jpg" alt="Front Row Salon reception, with the salon crest on the wall">
+        <div class="ph-fallback">
+          <span class="ph-icon">&#10022;</span>
+          <span class="ph-label">Reception</span>
+          <span class="ph-file">images/salon-reception.jpg</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
       <div class="head-block">
         <div class="eyebrow">Timings</div>
@@ -103,7 +112,7 @@
       <div class="cta-band">
         <div class="eyebrow center" style="justify-content:center;">Plan your visit</div>
         <h2>Reserve your slot in advance.</h2>
-        <a class="btn btn-primary mt-2" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
       </div>
     </div>
   </section>
