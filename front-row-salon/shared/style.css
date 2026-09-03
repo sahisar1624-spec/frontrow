@@ -879,3 +879,115 @@ html.js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
+
+/* ---------------------------------------------------------------------- */
+/* chat widget — a small front-of-house assistant, bottom-right on every  */
+/* page. Rule-based (keyword matching over real site info), no backend.   */
+/* ---------------------------------------------------------------------- */
+#frs-chat { position: fixed; right: clamp(1rem, 3vw, 1.75rem); bottom: clamp(1rem, 3vw, 1.75rem); z-index: 80; }
+.frs-chat-fab {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--brass);
+  color: var(--on-accent);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 28px -10px rgba(0,0,0,0.6);
+  transition: transform 0.35s var(--ease), background 0.35s var(--ease);
+  position: relative;
+}
+.frs-chat-fab:hover { transform: translateY(-2px); background: #e6c184; }
+.frs-chat-fab svg { width: 26px; height: 26px; }
+.frs-chat-fab .frs-chat-fab-close { display: none; }
+.frs-chat-fab[aria-expanded="true"] .frs-chat-fab-open { display: none; }
+.frs-chat-fab[aria-expanded="true"] .frs-chat-fab-close { display: block; }
+.frs-chat-ping {
+  position: absolute; top: -3px; right: -3px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--rosewood); border: 2px solid var(--paper);
+}
+.frs-chat-fab[data-seen="true"] .frs-chat-ping { display: none; }
+
+.frs-chat-panel {
+  position: absolute;
+  right: 0; bottom: calc(100% + 1rem);
+  width: min(360px, calc(100vw - 2.5rem));
+  height: min(520px, calc(100vh - 8rem));
+  background: var(--paper-card);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0; transform: translateY(12px) scale(0.98);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s linear 0.3s;
+}
+.frs-chat-panel.is-open {
+  opacity: 1; transform: translateY(0) scale(1);
+  visibility: visible; pointer-events: auto;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .frs-chat-panel { transition: opacity 0.15s linear, visibility 0s linear 0.15s; }
+  .frs-chat-panel.is-open { transition: opacity 0.15s linear; }
+}
+
+.frs-chat-head {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(155deg, var(--paper-elev), var(--paper-card));
+  flex-shrink: 0;
+}
+.frs-chat-head img { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; }
+.frs-chat-head-text { flex: 1; min-width: 0; }
+.frs-chat-head-text strong { font-family: var(--font-display); font-style: italic; font-size: 1.02rem; display: block; }
+.frs-chat-head-text span { font-size: 0.7rem; color: var(--muted); display: flex; align-items: center; gap: 0.35rem; }
+.frs-chat-head-text span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6fbf73; display: inline-block; flex-shrink: 0; }
+.frs-chat-head-close {
+  background: none; border: 1px solid var(--hairline); border-radius: 50%;
+  width: 28px; height: 28px; color: var(--muted); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.frs-chat-head-close:hover { border-color: var(--brass); color: var(--brass); }
+
+.frs-chat-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.frs-msg { max-width: 84%; font-size: 0.86rem; line-height: 1.55; padding: 0.6rem 0.85rem; border-radius: 12px; }
+.frs-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.frs-msg-bot { align-self: flex-start; background: var(--paper-elev); border: 1px solid var(--hairline); color: var(--ink); border-bottom-left-radius: 3px; }
+.frs-msg-user { align-self: flex-end; background: var(--brass); color: var(--on-accent); border-bottom-right-radius: 3px; }
+.frs-msg-typing { align-self: flex-start; display: flex; gap: 4px; padding: 0.75rem 0.9rem; background: var(--paper-elev); border: 1px solid var(--hairline); border-radius: 12px; border-bottom-left-radius: 3px; }
+.frs-msg-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted-dim); animation: frs-bounce 1.2s infinite; }
+.frs-msg-typing span:nth-child(2) { animation-delay: 0.15s; }
+.frs-msg-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes frs-bounce { 0%, 60%, 100% { opacity: 0.35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .frs-msg-typing span { animation: none; opacity: 0.7; } }
+
+.frs-chat-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 1rem 0.8rem; flex-shrink: 0; }
+.frs-chip {
+  font-size: 0.72rem; letter-spacing: 0.02em;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  padding: 0.4rem 0.75rem; background: var(--paper); color: var(--muted);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.frs-chip:hover { border-color: var(--brass); color: var(--brass); }
+
+.frs-chat-form { display: flex; gap: 0.5rem; padding: 0.85rem; border-top: 1px solid var(--hairline); flex-shrink: 0; }
+.frs-chat-form input {
+  flex: 1; background: var(--paper); border: 1px solid var(--hairline); border-radius: 999px;
+  padding: 0.6rem 1rem; color: var(--ink); font-family: var(--font-body); font-size: 0.85rem;
+}
+.frs-chat-form input:focus { outline: none; border-color: var(--brass); }
+.frs-chat-form button {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: var(--brass); color: var(--on-accent); border: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.frs-chat-form button:hover { background: #e6c184; }
+.frs-chat-form button svg { width: 16px; height: 16px; }
+
+@media (max-width: 420px) {
+  .frs-chat-panel { position: fixed; right: 0.75rem; left: 0.75rem; bottom: 5.5rem; width: auto; }
+}
