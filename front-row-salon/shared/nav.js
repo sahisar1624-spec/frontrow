@@ -50,6 +50,11 @@
   }
   window.FRSBookButtonHTML = bookBtn;
 
+  function brandMark() {
+    return '<a class="brand" href="index.html"><img class="brand-mark" src="images/logo-mark.jpg" alt="Front Row Beauty Salon crest">' +
+      '<span class="brand-text"><span>Front Row Beauty Salon</span><small>Hair &middot; Nails &middot; Skin</small></span></a>';
+  }
+
   function renderHeader() {
     var mount = document.getElementById('site-header');
     if (!mount) return;
@@ -62,9 +67,9 @@
 
     mount.innerHTML =
       '<div class="nav">' +
-        '<a class="brand" href="index.html"><img class="brand-mark" src="images/logo-mark.jpg" alt="Front Row Beauty Salon crest"><span class="brand-text"><span>Front Row</span><small>Salon &middot; Dubai</small></span></a>' +
+        brandMark() +
         '<div class="nav-actions">' +
-          bookBtn('btn-sm', 'Book Now') +
+          bookBtn('btn-sm nav-book-btn', 'Book Now') +
           '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-overlay">' +
             '<span class="bars"><span></span><span></span></span>Index' +
           '</button>' +
@@ -111,7 +116,7 @@
       '<div class="wrap">' +
         '<div class="footer-top">' +
           '<div class="footer-brand">' +
-            '<a class="brand" href="index.html"><img class="brand-mark" src="images/logo-mark.jpg" alt="Front Row Beauty Salon crest"><span class="brand-text"><span>Front Row</span><small>Salon &middot; Dubai</small></span></a>' +
+            brandMark() +
             '<p>A warm, unhurried salon in Bur Dubai — real brilliance, natural ingredients, no less.</p>' +
           '</div>' +
           '<div class="footer-col">' +
