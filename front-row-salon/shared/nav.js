@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FRONT ROW SALON — shared header, footer, index overlay, reveals, media
+   FRONT ROW BEAUTY SALON — shared header, footer, index overlay, reveals, media
    Injected on every page via #site-header / #site-footer mount points, so
    the same markup and behaviour ship everywhere without a server-side
    include (this site is meant to open directly from disk, file:// and all).
@@ -11,19 +11,29 @@
      and about to manage it — never permanently, if JS is blocked or errors. */
   document.documentElement.classList.add('js-ready');
 
-  var FRESHA_URL = 'https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking';
+  var FRESHA_URL = 'https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true';
+  var PHONE_DISPLAY = '+971 4 336 5582';
+  var PHONE_TEL = '+97143365582';
+  var MOBILE_DISPLAY = '+971 50 232 9348';
+  var MOBILE_TEL = '+971502329348';
+  var WHATSAPP_URL = 'https://wa.me/971502329348';
+  var EMAIL = 'frontrowsalon22@gmail.com';
+  var DIRECTIONS_URL = 'https://maps.google.com/?daddr=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai';
+  window.FRSContact = { FRESHA_URL: FRESHA_URL, PHONE_DISPLAY: PHONE_DISPLAY, PHONE_TEL: PHONE_TEL, MOBILE_DISPLAY: MOBILE_DISPLAY, MOBILE_TEL: MOBILE_TEL, WHATSAPP_URL: WHATSAPP_URL, EMAIL: EMAIL, DIRECTIONS_URL: DIRECTIONS_URL };
 
   var PAGES = [
     { href: 'index.html', label: 'Home' },
     { href: 'about.html', label: 'About Us' },
     { href: 'services.html', label: 'Services' },
     { href: 'pricelist.html', label: 'Price List' },
-    { href: 'team.html', label: 'Team' },
-    { href: 'location.html', label: 'Maps & Timings' },
+    { href: 'loyalty.html', label: 'Loyalty & Membership' },
+    { href: 'products.html', label: 'Products' },
     { href: 'brands.html', label: 'Brand Partners' },
-    { href: 'reviews.html', label: 'Reviews' },
-    { href: 'information.html', label: 'Information' },
+    { href: 'team.html', label: 'Team' },
     { href: 'gallery.html', label: 'Gallery' },
+    { href: 'reviews.html', label: 'Reviews' },
+    { href: 'location.html', label: 'Maps & Timings' },
+    { href: 'information.html', label: 'Information' },
     { href: 'contact.html', label: 'Contact Us' },
     { href: 'affirmation.html', label: 'Daily Affirmation' }
   ];
@@ -41,6 +51,11 @@
   }
   window.FRSBookButtonHTML = bookBtn;
 
+  function brandMark() {
+    return '<a class="brand" href="index.html"><img class="brand-mark" src="images/logo-mark.jpg" alt="Front Row Beauty Salon crest">' +
+      '<span class="brand-text"><span>Front Row Beauty Salon</span><small>Hair &middot; Nails &middot; Skin</small></span></a>';
+  }
+
   function renderHeader() {
     var mount = document.getElementById('site-header');
     if (!mount) return;
@@ -53,9 +68,9 @@
 
     mount.innerHTML =
       '<div class="nav">' +
-        '<a class="brand" href="index.html"><span>Front Row</span><small>Salon &middot; Dubai</small></a>' +
+        brandMark() +
         '<div class="nav-actions">' +
-          bookBtn('btn-sm', 'Book Now') +
+          bookBtn('btn-sm nav-book-btn', 'Book Now') +
           '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-overlay">' +
             '<span class="bars"><span></span><span></span></span>Index' +
           '</button>' +
@@ -67,7 +82,7 @@
           '<div class="eyebrow">Contents</div>' +
           '<div class="nav-overlay-list" style="margin-top:1.5rem;">' + indexLinks + '</div>' +
           '<div class="nav-overlay-foot">' +
-            '<span class="text-muted" style="font-size:0.85rem;">Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai</span>' +
+            '<span class="text-muted" style="font-size:0.85rem;">Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai &middot; ' + PHONE_DISPLAY + '</span>' +
             bookBtn('btn-sm', 'Book an appointment') +
           '</div>' +
         '</div>' +
@@ -102,28 +117,34 @@
       '<div class="wrap">' +
         '<div class="footer-top">' +
           '<div class="footer-brand">' +
-            '<a class="brand" href="index.html"><span>Front Row</span><small>Salon &middot; Dubai</small></a>' +
+            brandMark() +
             '<p>A warm, unhurried salon in Bur Dubai — real brilliance, natural ingredients, no less.</p>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Visit</h4>' +
-            '<p>Al Nasser Building,<br>Kuwait Street, Al Raffa Road,<br>Mankhool, Bur Dubai, Shop 5</p>' +
+            '<p><a href="' + DIRECTIONS_URL + '" target="_blank" rel="noopener noreferrer">Al Nasser Building,<br>Kuwait Street, Al Raffa Road,<br>Mankhool, Bur Dubai, Shop 5</a></p>' +
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Hours</h4>' +
             '<p>Open daily<br>Monday &ndash; Sunday<br>10:00 am &ndash; 9:00 pm</p>' +
           '</div>' +
           '<div class="footer-col">' +
-            '<h4>Follow</h4>' +
-            '<div>' +
-              '<span class="footer-placeholder">Instagram &mdash; add link</span>' +
-              '<span class="footer-placeholder">WhatsApp &mdash; add number</span>' +
-              '<span class="footer-placeholder">Phone &mdash; add number</span>' +
-            '</div>' +
+            '<h4>Get in touch</h4>' +
+            '<p>' +
+              '<a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a><br>' +
+              '<a href="tel:' + MOBILE_TEL + '">' + MOBILE_DISPLAY + '</a><br>' +
+              '<a href="mailto:' + EMAIL + '">' + EMAIL + '</a><br>' +
+              '<a href="' + WHATSAPP_URL + '" target="_blank" rel="noopener noreferrer">WhatsApp us</a>' +
+            '</p>' +
           '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
-          '<span>&copy; ' + new Date().getFullYear() + ' Front Row Salon. Highly recommended &mdash; 4.9 &middot; 63 reviews.</span>' +
+          '<span>&copy; ' + new Date().getFullYear() + ' Front Row Beauty Salon. Highly recommended &mdash; 4.9 &middot; 63 reviews.</span>' +
+          '<span class="footer-legal">' +
+            '<a href="privacy-policy.html">Privacy Policy</a> &middot; ' +
+            '<a href="terms-of-service.html">Terms of Service</a> &middot; ' +
+            '<a href="terms-of-use.html">Terms of Use</a>' +
+          '</span>' +
           '<span>Instant confirmation &middot; Pay by app or in salon</span>' +
         '</div>' +
       '</div>';
@@ -174,10 +195,34 @@
     }, 4000);
   }
 
+  /* ---- page transition: a brief fade to paper before leaving for another
+     page on this site, so navigation feels like one continuous piece
+     instead of a hard cut. Only ever engages after a real click on a real
+     internal link — a blocked/slow script just leaves normal <a> browsing
+     untouched, nothing on the page depends on this to be usable. ---- */
+  function initPageTransition() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var overlay = document.createElement('div');
+    overlay.id = 'page-transition';
+    document.body.appendChild(overlay);
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest('a');
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      var href = a.getAttribute('href');
+      if (!href || !/^[a-zA-Z0-9_-]+\.html(#.*)?$/.test(href)) return;
+      e.preventDefault();
+      overlay.classList.add('is-active');
+      window.setTimeout(function () { window.location.href = href; }, 340);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
     initMedia();
     initReveal();
+    initPageTransition();
   });
 })();

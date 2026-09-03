@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services — Front Row Salon</title>
-<meta name="description" content="Hair cutting & styling, colour, treatments, nails, nail extensions, nail art, waxing, threading, bleaching, massage, facials and makeup at Front Row Salon, Bur Dubai.">
+<title>Services — Front Row Beauty Salon</title>
+<meta name="description" content="Hair cutting & styling, colour, treatments, nails, nail extensions, nail art, waxing, threading, bleaching, massage, facials and makeup at Front Row Beauty Salon, Bur Dubai.">
 <link rel="stylesheet" href="shared/style.css">
+<link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
   .promo-callout {
     display: flex;
@@ -19,6 +20,14 @@
     padding: 1.75rem clamp(1.5rem, 4vw, 2.5rem);
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
+  .pillar-row { align-items: center; margin-bottom: clamp(3.5rem, 7vw, 6rem); }
+  .pillar-row:last-child { margin-bottom: 0; }
+  .pillar-row .media-placeholder { aspect-ratio: 4/3; }
+  .pillar-row-reverse .pillar-media { order: 2; }
+  @media (max-width: 860px) { .pillar-row-reverse .pillar-media { order: 0; } }
+  .pillar-copy .eyebrow { margin-bottom: 0.85rem; }
+  .pillar-copy h2 { margin-bottom: 1rem; }
+  .pillar-copy p { color: var(--muted); line-height: 1.75; }
 </style>
 </head>
 <body>
@@ -28,7 +37,7 @@
 <main class="page-shell">
 
   <section class="page-hero">
-    <div class="wrap">
+    <div class="wrap reveal">
       <div class="eyebrow">Services</div>
       <h1>Everything happens in one chair, unhurried.</h1>
       <p class="lede">From a first cut to a full transformation — every category below is available to book, with exact pricing on the price list.</p>
@@ -38,94 +47,148 @@
   <section class="section">
     <div class="wrap">
 
+      <div class="grid grid-2 pillar-row reveal">
+        <div class="media-placeholder pillar-media">
+          <img src="images/salon-styling-stations.jpg" alt="Hair styling station at Front Row Beauty Salon">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Hair</span>
+            <span class="ph-file">images/salon-styling-stations.jpg</span>
+          </div>
+        </div>
+        <div class="pillar-copy">
+          <div class="eyebrow">Hair</div>
+          <h2>Cut, coloured and finished around how your hair actually falls.</h2>
+          <p>Hair is where Front Row starts. Every cut and colour is built from a real consultation, not a template pulled off a mood board — precision cutting, full colour and colour correction, balayage, keratin-smoothing treatments and the wash &amp; blow-dry that's become a signature booking on its own. We work with foil-gold heritage names like L&rsquo;Or&eacute;al, Inoa and Schwarzkopf Professional for colour that holds its depth in daylight, Olaplex and K18 to protect and rebuild the hair's bond while we're in there, and Nashi Argan for a finish that still looks intentional three days after you leave the chair. Whether it's a first cut or a full transformation, every hair appointment gets the same unhurried, precise attention.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2 pillar-row pillar-row-reverse reveal">
+        <div class="pillar-copy">
+          <div class="eyebrow">Nails</div>
+          <h2>Never squeezed into a lunch break.</h2>
+          <p>Our nail bar is set up for the two-hour mani-pedi as comfortably as a fifteen-minute polish change &mdash; classic and gel manicures, the Classic Pedicure our regulars keep rebooking, sculpted extensions built to your natural nail bed, and hand-painted nail art for the days that call for a little more front row. We finish with Essie and Klio for colour that's still glossy weeks later, and reach for Lycon and Rica where a service calls for wax rather than polish. Solo appointment or a mani-pedi booked with a friend in the next chair &mdash; the standard doesn't change: real technique, real time, a finish worth choosing again.</p>
+        </div>
+        <div class="media-placeholder pillar-media">
+          <img src="images/nail-station.jpg" alt="Nail care station at Front Row Beauty Salon">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Nails</span>
+            <span class="ph-file">images/nail-station.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-2 pillar-row reveal">
+        <div class="media-placeholder pillar-media">
+          <img src="images/salon-treatment-room-1.jpg" alt="Treatment room for facials and body services at Front Row Beauty Salon">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Body &amp; Face</span>
+            <span class="ph-file">images/salon-treatment-room-1.jpg</span>
+          </div>
+        </div>
+        <div class="pillar-copy">
+          <div class="eyebrow">Body &amp; Face</div>
+          <h2>Time set aside on purpose &mdash; not squeezed between two other bookings.</h2>
+          <p>Beyond hair and nails, Front Row is a full beauty stop &mdash; waxing, threading and bleaching for face and body, facials tuned to what your skin needs that week rather than a fixed routine, and massage with real, unhurried time behind it. Our treatment rooms use Dermalogica and Esthemax for facials that genuinely address the skin in front of us, and Lycon and Rica for waxing gentle enough for sensitive areas and thorough enough to last. The Full Arms, Full Legs &amp; Underarms package &mdash; three services, one visit &mdash; is one of our most-booked combinations for exactly that reason. Every body and face appointment ends the way every Front Row appointment should: unhurried, and worth the trip back.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+
       <div class="promo-callout">
         <div>
           <div class="eyebrow mb-1">Summer Promotion</div>
           <p style="margin:0; max-width:52ch;" class="text-muted">This season's offers are live in salon and on our booking page &mdash; ask your stylist or check Fresha when you book to see what's currently included.</p>
         </div>
-        <a class="btn btn-ghost btn-sm" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">See on Fresha</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">See on Fresha</a>
       </div>
 
       <div class="grid grid-3">
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Hair</span>
           <h3 class="h3">Hair Cutting &amp; Styling</h3>
           <p>Precision cuts and finished styles, shaped around how your hair actually falls.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Hair</span>
           <h3 class="h3">Hair Coloring</h3>
           <p>Colour work built on natural, rich ingredients &mdash; because the result should hold up in daylight.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Hair</span>
           <h3 class="h3">Hair Treatments</h3>
           <p>Restorative treatments for hair that's been through a lot &mdash; heat, colour, climate, or all three.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Nails</span>
           <h3 class="h3">Nails</h3>
           <p>Manicures and pedicures, including our Classic Pedicure, done properly and without rushing.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Nails</span>
           <h3 class="h3">Nail Extensions</h3>
           <p>Length and shape built to last, fitted to your natural nail bed.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Nails</span>
           <h3 class="h3">Nail Art</h3>
           <p>Detail work for the days that call for a little more front row.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Face &amp; Body</span>
           <h3 class="h3">Waxing</h3>
           <p>Includes our Full Arms, Full Legs &amp; Underarms package &mdash; three services, one visit.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Face &amp; Body</span>
           <h3 class="h3">Threading</h3>
           <p>Clean, precise shaping for brows and face.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Face &amp; Body</span>
           <h3 class="h3">Bleaching</h3>
           <p>Even-toned finishing for face and body.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Wellness</span>
           <h3 class="h3">Massages</h3>
           <p>Time set aside on purpose &mdash; with Maricon, our massage therapist, among others.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Wellness</span>
           <h3 class="h3">Facials</h3>
           <p>Skin care treatments suited to what your skin needs that week, not a fixed routine.</p>
           <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
         </div>
 
-        <div class="card service-card">
+        <div class="card service-card reveal">
           <span class="service-card-num">Beauty</span>
           <h3 class="h3">Makeup</h3>
           <p>From a natural daytime look to full front-row glam.</p>
@@ -136,14 +199,14 @@
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="wrap">
-      <div class="cta-band">
+      <div class="cta-band reveal">
         <div class="eyebrow center" style="justify-content:center;">Ready when you are</div>
         <h2>See exact prices, then book.</h2>
         <div class="row gap-md center" style="justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
           <a class="btn btn-ghost" href="pricelist.html">View Price List</a>
-          <a class="btn btn-primary" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
         </div>
       </div>
     </div>
@@ -154,5 +217,6 @@
 <footer id="site-footer"></footer>
 
 <script src="shared/nav.js"></script>
+<script src="shared/chatbot.js"></script>
 </body>
 </html>
