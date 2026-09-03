@@ -98,8 +98,12 @@
       a: function () { return 'Email us at <a href="mailto:' + C.EMAIL + '">' + C.EMAIL + '</a>.'; }
     },
     {
-      k: ['promo', 'offer', 'discount', 'deal', 'package', 'membership'],
-      a: function () { return 'Our current promotions are live in salon and on Fresha &mdash; ask your stylist when you book, or check the offers shown when you ' + bookLink('book here') + '.'; }
+      k: ['membership', 'loyalty', 'annual card', 'member card'],
+      a: function () { return 'Our Annual Membership gets you 20% off every salon service, year-round, for AED 500 + VAT 5% &mdash; shareable with one family member or friend. Full details on our <a href="loyalty.html">Loyalty &amp; Membership page</a>.'; }
+    },
+    {
+      k: ['promo', 'offer', 'discount', 'deal', 'package'],
+      a: function () { return 'Our current promotions are live in salon and on Fresha &mdash; ask your stylist when you book, or check the offers shown when you ' + bookLink('book here') + '. We also have a 20% Annual Membership &mdash; see our <a href="loyalty.html">Loyalty page</a>.'; }
     },
     {
       k: ['patch test', 'allerg', 'sensitiv', 'pregnan'],

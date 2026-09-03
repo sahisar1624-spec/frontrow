@@ -26,6 +26,7 @@
     { href: 'about.html', label: 'About Us' },
     { href: 'services.html', label: 'Services' },
     { href: 'pricelist.html', label: 'Price List' },
+    { href: 'loyalty.html', label: 'Loyalty & Membership' },
     { href: 'products.html', label: 'Products' },
     { href: 'brands.html', label: 'Brand Partners' },
     { href: 'team.html', label: 'Team' },

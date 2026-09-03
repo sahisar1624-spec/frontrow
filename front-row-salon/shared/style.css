@@ -995,3 +995,67 @@ html.js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
 @media (max-width: 420px) {
   .frs-chat-panel { position: fixed; right: 0.75rem; left: 0.75rem; bottom: 5.5rem; width: auto; }
 }
+
+/* ---------------------------------------------------------------------- */
+/* membership card — a physical card, rendered                            */
+/* ---------------------------------------------------------------------- */
+.membership-card {
+  position: relative;
+  aspect-ratio: 85.6 / 54;
+  border-radius: 16px;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  background: linear-gradient(155deg, var(--paper-elev) 0%, var(--paper) 55%, var(--paper-card) 100%);
+  border: 1px solid var(--brass-soft);
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.membership-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 90% at 8% 0%, var(--brass-soft), transparent 55%);
+  pointer-events: none;
+}
+.membership-card-top { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.membership-card-eyebrow { font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--brass); }
+.membership-card-title { font-family: var(--font-display); font-style: italic; font-size: clamp(1.3rem, 3vw, 1.9rem); margin-top: 0.35rem; }
+.membership-card-mark { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; }
+.membership-card-bottom { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.membership-card-value { font-family: var(--font-display); font-style: italic; color: var(--brass); font-size: clamp(1.1rem, 2.6vw, 1.5rem); }
+.membership-card-name { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.membership-benefit-list { display: flex; flex-direction: column; }
+.membership-benefit {
+  display: grid; grid-template-columns: 28px 1fr; gap: 1rem;
+  padding: 1.25rem 0; border-bottom: 1px solid var(--hairline);
+}
+.membership-benefit:last-child { border-bottom: none; }
+.membership-benefit .num { font-family: var(--font-display); font-style: italic; color: var(--brass); font-size: 1.1rem; }
+.membership-benefit h4 { color: var(--ink); font-size: 0.95rem; margin-bottom: 0.3rem; }
+.membership-benefit p { color: var(--muted); font-size: 0.88rem; margin: 0; }
+
+/* ---------------------------------------------------------------------- */
+/* premium hover motion — restrained, applied only to interactive elements */
+/* ---------------------------------------------------------------------- */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.65s var(--ease);
+  pointer-events: none;
+}
+.btn-primary:hover::after { left: 130%; }
+@media (prefers-reduced-motion: reduce) { .btn-primary::after { display: none; } }
+
+.card:hover h3, .card:hover .h3 { color: var(--brass); transition: color 0.4s var(--ease); }
+h3, .h3 { transition: color 0.4s var(--ease); }
+
+.teaser-card .media-placeholder img { transition: opacity 0.45s var(--ease), transform 0.6s var(--ease); }
+.teaser-card:hover .media-placeholder img { transform: scale(1.06); }
+
+.brand:hover .brand-text > span:first-child { color: var(--brass); }
+.brand-text > span:first-child { transition: color 0.35s var(--ease); }
