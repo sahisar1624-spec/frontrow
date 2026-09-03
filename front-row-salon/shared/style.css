@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FRONT ROW SALON — shared design system
+   FRONT ROW BEAUTY SALON — shared design system
    Direction: black & gold luxury editorial — a fashion-magazine "front row"
    world after dark. Near-black charcoal ground with a warm grey ambience,
    ivory ink, foil-gold as the primary accent paired with a soft rose-blush
@@ -1059,3 +1059,28 @@ h3, .h3 { transition: color 0.4s var(--ease); }
 
 .brand:hover .brand-text > span:first-child { color: var(--brass); }
 .brand-text > span:first-child { transition: color 0.35s var(--ease); }
+
+/* ---------------------------------------------------------------------- */
+/* page transition — a brief fade to paper when leaving for another page. */
+/* Purely additive: the overlay is transparent and inert until JS (having */
+/* already run) makes it opaque for an outgoing click, so a page never    */
+/* depends on this for its content to appear.                            */
+/* ---------------------------------------------------------------------- */
+#page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--paper);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.38s var(--ease), visibility 0s linear 0.38s;
+}
+#page-transition.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.38s var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  #page-transition { transition: none; }
+}

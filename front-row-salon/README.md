@@ -1,6 +1,6 @@
-# Front Row Salon — website
+# Front Row Beauty Salon — website
 
-A static, no-build multi-page site for Front Row Salon (Bur Dubai). Every
+A static, no-build multi-page site for Front Row Beauty Salon (Bur Dubai). Every
 `.html` file opens directly in a browser — no server, no bundler, no
 npm install, and no 3D/WebGL anywhere on the site.
 

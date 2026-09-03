@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FRONT ROW SALON — front-of-house chat widget
+   FRONT ROW BEAUTY SALON — front-of-house chat widget
    A small, rule-based FAQ assistant (no backend, no external API) that
    answers the questions clients actually ask most: hours, location,
    booking, pricing, services, brands, cancellation and payment. Matches

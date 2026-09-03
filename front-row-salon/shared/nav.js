@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FRONT ROW SALON — shared header, footer, index overlay, reveals, media
+   FRONT ROW BEAUTY SALON — shared header, footer, index overlay, reveals, media
    Injected on every page via #site-header / #site-footer mount points, so
    the same markup and behaviour ship everywhere without a server-side
    include (this site is meant to open directly from disk, file:// and all).
@@ -139,7 +139,7 @@
           '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
-          '<span>&copy; ' + new Date().getFullYear() + ' Front Row Salon. Highly recommended &mdash; 4.9 &middot; 63 reviews.</span>' +
+          '<span>&copy; ' + new Date().getFullYear() + ' Front Row Beauty Salon. Highly recommended &mdash; 4.9 &middot; 63 reviews.</span>' +
           '<span class="footer-legal">' +
             '<a href="privacy-policy.html">Privacy Policy</a> &middot; ' +
             '<a href="terms-of-service.html">Terms of Service</a> &middot; ' +
@@ -195,10 +195,34 @@
     }, 4000);
   }
 
+  /* ---- page transition: a brief fade to paper before leaving for another
+     page on this site, so navigation feels like one continuous piece
+     instead of a hard cut. Only ever engages after a real click on a real
+     internal link — a blocked/slow script just leaves normal <a> browsing
+     untouched, nothing on the page depends on this to be usable. ---- */
+  function initPageTransition() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var overlay = document.createElement('div');
+    overlay.id = 'page-transition';
+    document.body.appendChild(overlay);
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest('a');
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      var href = a.getAttribute('href');
+      if (!href || !/^[a-zA-Z0-9_-]+\.html(#.*)?$/.test(href)) return;
+      e.preventDefault();
+      overlay.classList.add('is-active');
+      window.setTimeout(function () { window.location.href = href; }, 340);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
     initMedia();
     initReveal();
+    initPageTransition();
   });
 })();
