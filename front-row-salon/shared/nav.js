@@ -134,6 +134,11 @@
         '</div>' +
         '<div class="footer-bottom">' +
           '<span>&copy; ' + new Date().getFullYear() + ' Front Row Salon. Highly recommended &mdash; 4.9 &middot; 63 reviews.</span>' +
+          '<span class="footer-legal">' +
+            '<a href="privacy-policy.html">Privacy Policy</a> &middot; ' +
+            '<a href="terms-of-service.html">Terms of Service</a> &middot; ' +
+            '<a href="terms-of-use.html">Terms of Use</a>' +
+          '</span>' +
           '<span>Instant confirmation &middot; Pay by app or in salon</span>' +
         '</div>' +
       '</div>';
