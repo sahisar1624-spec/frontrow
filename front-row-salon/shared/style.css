@@ -292,6 +292,7 @@ p { color: var(--ink); }
   border: none;
   color: var(--ink);
   padding: 0;
+  min-width: 0;
 }
 .brand img.brand-mark {
   width: 36px;
@@ -301,7 +302,10 @@ p { color: var(--ink); }
   display: block;
   flex-shrink: 0;
 }
-.brand-text { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; }
+/* min-width: 0 + ellipsis so a long brand name truncates instead of
+   overlapping the theme toggle / Index button on a narrow phone screen */
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; min-width: 0; }
+.brand-text > span:first-child { overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 560px) {
   .brand { font-size: 1.02rem; gap: 0.5rem; }
   .brand img.brand-mark { width: 28px; height: 28px; }
@@ -318,7 +322,7 @@ p { color: var(--ink); }
   text-transform: uppercase;
   color: var(--muted);
 }
-.nav-actions { display: flex; align-items: center; gap: 1rem; }
+.nav-actions { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
 
 .nav-toggle {
   display: inline-flex;
