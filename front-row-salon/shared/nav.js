@@ -45,6 +45,34 @@
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
+  /* ---- light / dark theme toggle: manual, remembered per visitor.
+     Defaults to the dark palette (this brand's default identity) unless
+     the visitor has previously chosen light. A tiny inline script in each
+     page's <head> applies the stored choice before first paint, so this
+     just keeps the toggle button in sync and handles clicks. ---- */
+  var THEME_KEY = 'frs-theme';
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+  function applyTheme(theme) {
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    var btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.innerHTML = theme === 'light' ? '&#9789;' : '&#9728;';
+      btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+    }
+  }
+  function initThemeToggle() {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    applyTheme(currentTheme());
+    btn.addEventListener('click', function () {
+      applyTheme(currentTheme() === 'light' ? 'dark' : 'light');
+    });
+  }
+
   function bookBtn(extraClass, label) {
     return '<a class="btn btn-primary ' + extraClass + '" href="' + FRESHA_URL + '" target="_blank" rel="noopener noreferrer">' +
       (label || 'Book Now') + '</a>';
@@ -71,6 +99,7 @@
         brandMark() +
         '<div class="nav-actions">' +
           bookBtn('btn-sm nav-book-btn', 'Book Now') +
+          '<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme"></button>' +
           '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-overlay">' +
             '<span class="bars"><span></span><span></span></span>Index' +
           '</button>' +
@@ -107,6 +136,8 @@
     });
     close.addEventListener('click', closeOverlay);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeOverlay(); });
+
+    initThemeToggle();
   }
 
   function renderFooter() {

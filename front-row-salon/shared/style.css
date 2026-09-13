@@ -29,6 +29,7 @@
   --brass-soft:   rgba(212, 175, 106, 0.14);
 
   --on-accent:    #17130f;   /* text sitting on gold/blush fills */
+  --nav-bg:       rgba(16, 13, 14, 0.86);
 
   /* ---- type ---- */
   --font-display: 'Bodoni Moda', 'Didot', 'Georgia', serif;
@@ -42,6 +43,29 @@
   --section-y: clamp(4rem, 9vw, 7rem);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- light theme: same editorial world, day-lit instead of after-dark.
+   Toggled by adding data-theme="light" to <html> (see shared/nav.js);
+   defaults to the dark palette above when unset. Rosewood/brass are
+   deepened here rather than reused verbatim — the dark-mode tints are too
+   pale to read as text against a light ground. ---- */
+:root[data-theme="light"] {
+  --paper:        #f8f3ec;
+  --paper-elev:   #f0e8db;
+  --paper-card:   #ffffff;
+  --ink:          #221a16;
+  --muted:        #5c4f47;
+  --muted-dim:    #83766c;
+  --hairline:     rgba(34, 26, 22, 0.14);
+  --hairline-soft:rgba(34, 26, 22, 0.07);
+
+  --rosewood:     #a8506b;
+  --rosewood-soft:rgba(168, 80, 107, 0.10);
+  --brass:        #9c7a2e;
+  --brass-soft:   rgba(156, 122, 46, 0.12);
+
+  --nav-bg:       rgba(248, 243, 236, 0.86);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -244,7 +268,7 @@ p { color: var(--ink); }
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem var(--gutter);
-  background: rgba(16, 13, 14, 0.86);
+  background: var(--nav-bg);
   backdrop-filter: blur(14px) saturate(120%);
   border-bottom: 1px solid var(--hairline);
 }
@@ -308,6 +332,22 @@ p { color: var(--ink); }
 .nav-toggle .bars span { height: 1px; background: currentColor; display: block; transition: transform 0.4s var(--ease); }
 .nav-toggle[aria-expanded="true"] .bars span:first-child { transform: translateY(4px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .bars span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1;
+  transition: border-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.theme-toggle:hover { border-color: var(--rosewood); color: var(--rosewood); transform: translateY(-2px); }
 
 /* Full-screen "Index" overlay — a magazine contents page. Numbering here
    is real information (this is an actual index), not decoration. */
