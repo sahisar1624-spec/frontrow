@@ -1037,6 +1037,56 @@ html.js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------------------------------------------------------------------- */
+/* before / after pairs — gallery                                          */
+/* ---------------------------------------------------------------------- */
+.before-after-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--gutter); }
+.before-after-pair figcaption { margin-top: 0.85rem; font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--ink); text-align: center; }
+.before-after-frames { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.before-after-frames .media-placeholder { aspect-ratio: 3/4; }
+.before-after-tag {
+  position: absolute; top: 0.6rem; left: 0.6rem; z-index: 2;
+  background: rgba(16,13,14,0.72); color: var(--ink);
+  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.25rem 0.6rem; border-radius: 999px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* floating actions — WhatsApp shortcut + mobile-only Book Now bar         */
+/* ---------------------------------------------------------------------- */
+#frs-whatsapp {
+  position: fixed;
+  left: clamp(1rem, 3vw, 1.75rem);
+  bottom: clamp(1rem, 3vw, 1.75rem);
+  z-index: 80;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #0b1c10;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 28px -10px rgba(0,0,0,0.6);
+  transition: transform 0.35s var(--ease);
+}
+#frs-whatsapp:hover { transform: translateY(-3px); }
+
+#frs-mobile-book-bar {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 70;
+  padding: 0.75rem clamp(1rem, 4vw, 1.5rem) calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px) saturate(120%);
+  border-top: 1px solid var(--hairline);
+}
+#frs-mobile-book-bar .btn { display: flex; width: 100%; justify-content: center; }
+@media (max-width: 640px) {
+  #frs-mobile-book-bar { display: block; }
+  body { padding-bottom: 76px; }
+  #frs-whatsapp { bottom: calc(76px + clamp(1rem, 3vw, 1.75rem)); }
+  #frs-chat { bottom: calc(76px + clamp(1rem, 3vw, 1.75rem)); }
+}
+
+/* ---------------------------------------------------------------------- */
 /* membership card — a physical card, rendered                            */
 /* ---------------------------------------------------------------------- */
 .membership-card {

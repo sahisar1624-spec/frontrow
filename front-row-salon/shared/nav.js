@@ -19,7 +19,8 @@
   var WHATSAPP_URL = 'https://wa.me/971502329348';
   var EMAIL = 'frontrowsalon22@gmail.com';
   var DIRECTIONS_URL = 'https://maps.google.com/?daddr=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai';
-  window.FRSContact = { FRESHA_URL: FRESHA_URL, PHONE_DISPLAY: PHONE_DISPLAY, PHONE_TEL: PHONE_TEL, MOBILE_DISPLAY: MOBILE_DISPLAY, MOBILE_TEL: MOBILE_TEL, WHATSAPP_URL: WHATSAPP_URL, EMAIL: EMAIL, DIRECTIONS_URL: DIRECTIONS_URL };
+  var GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/search/?api=1&query=Front+Row+Beauty+Salon+Bur+Dubai';
+  window.FRSContact = { FRESHA_URL: FRESHA_URL, PHONE_DISPLAY: PHONE_DISPLAY, PHONE_TEL: PHONE_TEL, MOBILE_DISPLAY: MOBILE_DISPLAY, MOBILE_TEL: MOBILE_TEL, WHATSAPP_URL: WHATSAPP_URL, EMAIL: EMAIL, DIRECTIONS_URL: DIRECTIONS_URL, GOOGLE_REVIEWS_URL: GOOGLE_REVIEWS_URL };
 
   var PAGES = [
     { href: 'index.html', label: 'Home' },
@@ -249,11 +250,76 @@
     });
   }
 
+  /* ---- structured data: tells Google this is a real, bookable local
+     business (address, hours, phone, rating) so search results can show
+     more than a blue link. Same facts already printed on every page —
+     this just repeats them in a machine-readable form Google recognises. ---- */
+  function injectSchema() {
+    if (document.getElementById('frs-schema')) return;
+    var data = {
+      '@context': 'https://schema.org',
+      '@type': 'BeautySalon',
+      'name': 'Front Row Beauty Salon',
+      'image': 'https://frontrowbeautysalon.com/images/salon-styling-stations.jpg',
+      'url': 'https://frontrowbeautysalon.com/',
+      'telephone': PHONE_TEL,
+      'priceRange': 'AED',
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': 'Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Shop 5',
+        'addressLocality': 'Dubai',
+        'addressCountry': 'AE'
+      },
+      'openingHoursSpecification': {
+        '@type': 'OpeningHoursSpecification',
+        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        'opens': '10:00',
+        'closes': '21:00'
+      },
+      'sameAs': [FRESHA_URL],
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': '4.9',
+        'reviewCount': '63'
+      }
+    };
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'frs-schema';
+    script.text = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+
+  /* ---- floating actions: a WhatsApp shortcut (bottom-left, every screen
+     size) and a full-width "Book Now" bar that only appears on phones,
+     where the header's own Book Now button is hidden to save space. ---- */
+  function renderFloatingActions() {
+    if (document.getElementById('frs-whatsapp')) return;
+
+    var wa = document.createElement('a');
+    wa.id = 'frs-whatsapp';
+    wa.href = WHATSAPP_URL;
+    wa.target = '_blank';
+    wa.rel = 'noopener noreferrer';
+    wa.setAttribute('aria-label', 'Message us on WhatsApp');
+    wa.innerHTML = '<svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true">' +
+      '<path d="M16 3C9.1 3 3.5 8.6 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-2.3c1.9 1.1 4 1.6 6 1.6 6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4.2 1.4 1.4-4.1-.2-.4c-1.1-1.7-1.6-3.6-1.6-5.6 0-5.7 4.6-10.3 10.3-10.3s10.3 4.6 10.3 10.3S21.7 25.7 16 25.7zm5.6-7.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/>' +
+      '</svg>';
+    document.body.appendChild(wa);
+
+    var bar = document.createElement('div');
+    bar.id = 'frs-mobile-book-bar';
+    bar.innerHTML = bookBtn('', 'Book Now on Fresha');
+    document.body.appendChild(bar);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
     initMedia();
     initReveal();
     initPageTransition();
+    injectSchema();
+    renderFloatingActions();
   });
 })();
