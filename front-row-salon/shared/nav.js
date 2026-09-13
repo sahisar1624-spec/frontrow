@@ -313,6 +313,85 @@
     document.body.appendChild(bar);
   }
 
+  /* ---- scroll progress: a thin gold line at the very top of the viewport
+     tracking how far down the page the visitor has read. ---- */
+  function initScrollProgress() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var bar = document.createElement('div');
+    bar.id = 'frs-scroll-progress';
+    document.body.appendChild(bar);
+    var ticking = false;
+    function update() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  }
+
+  /* ---- staggered headline reveal: splits the big page/hero titles into
+     one <span> per word so they rise in with a slight cascade instead of
+     as a single block. Falls back to the plain heading if JS is off. ---- */
+  function initStagger() {
+    var heads = document.querySelectorAll('.page-hero h1, .home-hero-content h1');
+    if (!heads.length || !('IntersectionObserver' in window)) return;
+    heads.forEach(function (h) {
+      var words = h.textContent.trim().split(/\s+/);
+      h.innerHTML = words.map(function (w) {
+        return '<span class="stagger-word">' + w + '</span>';
+      }).join(' ');
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var spans = entry.target.querySelectorAll('.stagger-word');
+        spans.forEach(function (span, i) {
+          span.style.transitionDelay = (i * 0.06) + 's';
+          span.classList.add('is-visible');
+        });
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    heads.forEach(function (h) { io.observe(h); });
+  }
+
+  /* ---- animated stat counters: any <span class="stat-number" data-count>
+     counts up from 0 the moment it scrolls into view. data-decimals keeps
+     values like "4.9" from being truncated to whole numbers. ---- */
+  function initCounters() {
+    var els = document.querySelectorAll('.stat-number[data-count]');
+    if (!els.length) return;
+    function animate(el) {
+      var target = parseFloat(el.getAttribute('data-count'));
+      var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      var duration = 1300;
+      var start = null;
+      function step(ts) {
+        if (start === null) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (target * eased).toFixed(decimals);
+        if (progress < 1) window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    }
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(animate);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { animate(entry.target); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.4 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
@@ -321,5 +400,8 @@
     initPageTransition();
     injectSchema();
     renderFloatingActions();
+    initScrollProgress();
+    initStagger();
+    initCounters();
   });
 })();

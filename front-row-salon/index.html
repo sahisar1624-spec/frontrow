@@ -21,8 +21,8 @@
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
   /* ---- home-only: editorial split hero ---- */
-  .home-hero { padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--hairline); }
-  .home-hero-grid { display: grid; grid-template-columns: 1.05fr 0.85fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .home-hero { position: relative; overflow: hidden; padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--hairline); }
+  .home-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.85fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
   @media (max-width: 860px) { .home-hero-grid { grid-template-columns: 1fr; } }
   .home-hero-content h1 { margin: 1.1rem 0 1.4rem; }
   .home-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
@@ -55,6 +55,7 @@
 <main>
 
   <section class="home-hero">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap home-hero-grid">
       <div class="home-hero-content">
         <div class="eyebrow">Front Row Beauty Salon &middot; Bur Dubai</div>
@@ -78,6 +79,13 @@
       </figure>
     </div>
   </section>
+
+  <div class="highlight-ticker">
+    <div class="highlight-ticker-track">
+      <span>4.9&#9733; Rated</span><span>63 Reviews</span><span>Open Daily 10am&ndash;9pm</span><span>Instant Confirmation</span><span>Hair &middot; Nails &middot; Skin</span>
+      <span aria-hidden="true">4.9&#9733; Rated</span><span aria-hidden="true">63 Reviews</span><span aria-hidden="true">Open Daily 10am&ndash;9pm</span><span aria-hidden="true">Instant Confirmation</span><span aria-hidden="true">Hair &middot; Nails &middot; Skin</span>
+    </div>
+  </div>
 
   <section class="section">
     <div class="wrap welcome-strip reveal">
@@ -139,6 +147,17 @@
   </section>
 
   <section class="section">
+    <div class="wrap">
+      <div class="grid grid-4 stats-grid reveal">
+        <div class="stat-tile"><span class="stat-number" data-count="4.9" data-decimals="1">0</span><span class="stat-label">Google Rating</span></div>
+        <div class="stat-tile"><span class="stat-number" data-count="63">0</span><span class="stat-label">Reviews</span></div>
+        <div class="stat-tile"><span class="stat-number" data-count="6">0</span><span class="stat-label">Specialists</span></div>
+        <div class="stat-tile"><span class="stat-number" data-count="7">0</span><span class="stat-label">Days a Week</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap testimonial-band reveal">
       <div class="review-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="review-quote">&ldquo;Amazing service as always. I've been going to this salon for the last 2 years and I always had a very good experience. Thank you to all the staff for the best service and for always looking after me.&rdquo;</p>
@@ -166,5 +185,23 @@
 
 <script src="shared/nav.js"></script>
 <script src="shared/chatbot.js"></script>
+<script>
+  /* Homepage-only: a faint warm light that follows the cursor behind the
+     hero text, on desktop pointers only, and never under reduced motion. */
+  (function () {
+    var hero = document.querySelector('.home-hero');
+    var glow = document.querySelector('.hero-glow');
+    if (!hero || !glow) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    hero.addEventListener('mousemove', function (e) {
+      var r = hero.getBoundingClientRect();
+      glow.style.setProperty('--gx', (e.clientX - r.left) + 'px');
+      glow.style.setProperty('--gy', (e.clientY - r.top) + 'px');
+      glow.classList.add('is-active');
+    });
+    hero.addEventListener('mouseleave', function () { glow.classList.remove('is-active'); });
+  })();
+</script>
 </body>
 </html>
