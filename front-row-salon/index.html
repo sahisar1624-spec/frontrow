@@ -46,6 +46,62 @@
   .testimonial-band .review-stars { justify-content: center; display: flex; margin-bottom: 1.5rem; }
   .testimonial-band .review-quote { font-size: clamp(1.4rem, 3vw, 2rem); }
   .testimonial-band .review-name { margin-top: 1.5rem; display: block; color: var(--muted); }
+
+  /* ---- merged in from the standalone pages below, for the continuous scroll ---- */
+.about-lead { max-width: 900px; }
+  .about-lead blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 340;
+    font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+    line-height: 1.5;
+  }
+  .belief-grid { align-items: start; }
+  .belief-grid .card .eyebrow { margin-bottom: 1rem; }
+
+.promo-callout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    border: 1px solid var(--rosewood-soft);
+    background: linear-gradient(120deg, var(--rosewood-soft), transparent 60%), var(--paper-elev);
+    border-radius: var(--radius);
+    padding: 1.75rem clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .pillar-row { align-items: center; margin-bottom: clamp(3.5rem, 7vw, 6rem); }
+  .pillar-row:last-child { margin-bottom: 0; }
+  .pillar-row .media-placeholder { aspect-ratio: 4/3; }
+  .pillar-row-reverse .pillar-media { order: 2; }
+  @media (max-width: 860px) { .pillar-row-reverse .pillar-media { order: 0; } }
+  .pillar-copy .eyebrow { margin-bottom: 0.85rem; }
+  .pillar-copy h2 { margin-bottom: 1rem; }
+  .pillar-copy p { color: var(--muted); line-height: 1.75; }
+
+.loyalty-hero-grid { align-items: center; }
+  .loyalty-hero-grid .lede { margin-top: 1rem; }
+
+.brand-tile .logo-mono {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-dim);
+  }
+
+.map-embed {
+    aspect-ratio: 16/9;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+    position: relative;
+  }
+  .map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.25) contrast(1.05); }
+
+.new-affirmation-btn { margin-top: 2.5rem; }
 </style>
 </head>
 <body>
@@ -54,7 +110,7 @@
 
 <main>
 
-  <section class="home-hero">
+  <section class="home-hero" id="home">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap home-hero-grid">
       <div class="home-hero-content">
@@ -179,6 +235,1415 @@
     </div>
   </section>
 
+  <section id="about">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">About Us</div>
+      <h1>Real, raw, authentic brilliance.</h1>
+      <p class="lede">Front Row Beauty Salon is built around the women who sit in the chair — not around a version of them that's easier to sell to.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap about-lead">
+      <blockquote>&ldquo;At Front Row Beauty Salon, we celebrate women in their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love. We employ hair products with some of the most natural and rich ingredients because we believe you should never expect less.&rdquo;</blockquote>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">What we believe</div>
+        <h2>Two ideas, held the same way every time.</h2>
+      </div>
+      <div class="grid grid-2 belief-grid">
+        <div class="card reveal">
+          <div class="eyebrow">Authentic brilliance</div>
+          <h3 class="mb-1">You don't need to be talked into yourself.</h3>
+          <p class="text-muted">We work from who you already are, not from a trend board. A cut, a colour, a set of nails should make the person underneath more visible, not less — the confidence we're chasing is the kind that was already there, waiting for the right chair.</p>
+        </div>
+        <div class="card reveal">
+          <div class="eyebrow">Natural, rich ingredients</div>
+          <h3 class="mb-1">You should never expect less.</h3>
+          <p class="text-muted">What goes on your hair matters as much as what it's shaped into afterward. We choose products built from natural, rich ingredients as a baseline, not an upsell — because the result should hold up under real light, not just salon light.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:center;">
+        <div>
+          <div class="eyebrow">Inside the salon</div>
+          <h2 class="mt-1 mb-1">A room built to slow down in.</h2>
+          <p class="lede">Bur Dubai, Al Nasser Building — a short walk from Al Raffa Road, and an easy exhale once you're through the door.</p>
+        </div>
+        <div class="media-placeholder aspect-wide">
+          <img src="images/salon-product-display.jpg" alt="Product display wall and seating at Front Row Beauty Salon, with the salon crest on the wall" loading="lazy" decoding="async">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#9656;</span>
+            <span class="ph-label">Salon atmosphere, in motion</span>
+            <span class="ph-file">images/salon-product-display.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Come see for yourself</div>
+        <h2>Step into the look you love.</h2>
+        <p class="lede center">Instant confirmation, pay by app or in salon.</p>
+        <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="services">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Services</div>
+      <h1>Everything happens in one chair, unhurried.</h1>
+      <p class="lede">From a first cut to a full transformation — every category below is available to book, with exact pricing on the price list.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="grid grid-2 pillar-row reveal">
+        <div class="media-placeholder pillar-media">
+          <img src="images/salon-styling-stations.jpg" alt="Hair styling station at Front Row Beauty Salon" loading="lazy" decoding="async">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Hair</span>
+            <span class="ph-file">images/salon-styling-stations.jpg</span>
+          </div>
+        </div>
+        <div class="pillar-copy">
+          <div class="eyebrow">Hair</div>
+          <h2>Cut, coloured and finished around how your hair actually falls.</h2>
+          <p>Hair is where Front Row starts. Every cut and colour is built from a real consultation, not a template pulled off a mood board — precision cutting, full colour and colour correction, balayage, keratin-smoothing treatments and the wash &amp; blow-dry that's become a signature booking on its own. We work with foil-gold heritage names like L&rsquo;Or&eacute;al, Inoa and Schwarzkopf Professional for colour that holds its depth in daylight, Olaplex and K18 to protect and rebuild the hair's bond while we're in there, and Nashi Argan for a finish that still looks intentional three days after you leave the chair. Whether it's a first cut or a full transformation, every hair appointment gets the same unhurried, precise attention.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2 pillar-row pillar-row-reverse reveal">
+        <div class="pillar-copy">
+          <div class="eyebrow">Nails</div>
+          <h2>Never squeezed into a lunch break.</h2>
+          <p>Our nail bar is set up for the two-hour mani-pedi as comfortably as a fifteen-minute polish change &mdash; classic and gel manicures, the Classic Pedicure our regulars keep rebooking, sculpted extensions built to your natural nail bed, and hand-painted nail art for the days that call for a little more front row. We finish with Essie and Klio for colour that's still glossy weeks later, and reach for Lycon and Rica where a service calls for wax rather than polish. Solo appointment or a mani-pedi booked with a friend in the next chair &mdash; the standard doesn't change: real technique, real time, a finish worth choosing again.</p>
+        </div>
+        <div class="media-placeholder pillar-media">
+          <img src="images/nail-station.jpg" alt="Nail care station at Front Row Beauty Salon" loading="lazy" decoding="async">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Nails</span>
+            <span class="ph-file">images/nail-station.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-2 pillar-row reveal">
+        <div class="media-placeholder pillar-media">
+          <img src="images/salon-treatment-room-1.jpg" alt="Treatment room for facials and body services at Front Row Beauty Salon" loading="lazy" decoding="async">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">Body &amp; Face</span>
+            <span class="ph-file">images/salon-treatment-room-1.jpg</span>
+          </div>
+        </div>
+        <div class="pillar-copy">
+          <div class="eyebrow">Body &amp; Face</div>
+          <h2>Time set aside on purpose &mdash; not squeezed between two other bookings.</h2>
+          <p>Beyond hair and nails, Front Row is a full beauty stop &mdash; waxing, threading and bleaching for face and body, facials tuned to what your skin needs that week rather than a fixed routine, and massage with real, unhurried time behind it. Our treatment rooms use Dermalogica and Esthemax for facials that genuinely address the skin in front of us, and Lycon and Rica for waxing gentle enough for sensitive areas and thorough enough to last. The Full Arms, Full Legs &amp; Underarms package &mdash; three services, one visit &mdash; is one of our most-booked combinations for exactly that reason. Every body and face appointment ends the way every Front Row appointment should: unhurried, and worth the trip back.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+
+      <div class="promo-callout">
+        <div>
+          <div class="eyebrow mb-1">Summer Promotion</div>
+          <p style="margin:0; max-width:52ch;" class="text-muted">This season's offers are live in salon and on our booking page &mdash; ask your stylist or check Fresha when you book to see what's currently included.</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">See on Fresha</a>
+      </div>
+
+      <div class="grid grid-3">
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Hair</span>
+          <h3 class="h3">Hair Cutting &amp; Styling</h3>
+          <p>Precision cuts and finished styles, shaped around how your hair actually falls.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Hair</span>
+          <h3 class="h3">Hair Coloring</h3>
+          <p>Colour work built on natural, rich ingredients &mdash; because the result should hold up in daylight.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Hair</span>
+          <h3 class="h3">Hair Treatments</h3>
+          <p>Restorative treatments for hair that's been through a lot &mdash; heat, colour, climate, or all three.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Nails</span>
+          <h3 class="h3">Nails</h3>
+          <p>Manicures and pedicures, including our Classic Pedicure, done properly and without rushing.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Nails</span>
+          <h3 class="h3">Nail Extensions</h3>
+          <p>Length and shape built to last, fitted to your natural nail bed.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Nails</span>
+          <h3 class="h3">Nail Art</h3>
+          <p>Detail work for the days that call for a little more front row.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Face &amp; Body</span>
+          <h3 class="h3">Waxing</h3>
+          <p>Includes our Full Arms, Full Legs &amp; Underarms package &mdash; three services, one visit.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Face &amp; Body</span>
+          <h3 class="h3">Threading</h3>
+          <p>Clean, precise shaping for brows and face.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Face &amp; Body</span>
+          <h3 class="h3">Bleaching</h3>
+          <p>Even-toned finishing for face and body.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Wellness</span>
+          <h3 class="h3">Massages</h3>
+          <p>Time set aside on purpose &mdash; with Maricon, our massage therapist, among others.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Wellness</span>
+          <h3 class="h3">Facials</h3>
+          <p>Skin care treatments suited to what your skin needs that week, not a fixed routine.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+        <div class="card service-card reveal">
+          <span class="service-card-num">Beauty</span>
+          <h3 class="h3">Makeup</h3>
+          <p>From a natural daytime look to full front-row glam.</p>
+          <a class="link-arrow" href="pricelist.html">See pricing &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Ready when you are</div>
+        <h2>See exact prices, then book.</h2>
+        <div class="row gap-md center" style="justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+          <a class="btn btn-ghost" href="pricelist.html">View Price List</a>
+          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="pricelist">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Price List</div>
+      <h1>What it costs, plainly.</h1>
+      <p class="lede">Published prices below. Where a category isn't priced here yet, ask in salon or check the full menu when you book on Fresha.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="price-group reveal">
+        <h3>Hair</h3>
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Duration</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="price-name">Hair Wash &amp; Blow Dry</span></td>
+              <td>50 min &ndash; 1h 30</td>
+              <td class="price-amount">from AED 73.50</td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Hair Cutting &amp; Styling</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Hair Coloring</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Hair Treatments</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">Exact rates for cutting, colour and treatment work depend on hair length and the service chosen &mdash; see the full menu on the booking page or ask your stylist.</p>
+      </div>
+
+      <div class="price-group reveal">
+        <h3>Nails</h3>
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Duration</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="price-name">Classic Pedicure</span></td>
+              <td>45 min</td>
+              <td class="price-amount">AED 84</td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Nail Extensions</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Nail Art</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">Other manicure, pedicure, extension and nail art pricing is available in salon or on the full booking menu.</p>
+      </div>
+
+      <div class="price-group reveal">
+        <h3>Waxing, Threading &amp; Bleaching</h3>
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Duration</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="price-name">Body Waxing &mdash; Full Arms, Full Legs, Underarms</span>
+                <span class="price-duration">3 services, one visit</span>
+              </td>
+              <td>1h 25</td>
+              <td class="price-amount">AED 136.50<span class="price-save">Save 22%</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Eyebrow</span></td>
+              <td>20 min</td>
+              <td class="price-amount">AED 26.25</td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Threading</span> <span class="price-duration">other areas</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Bleaching</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-group reveal">
+        <h3>Massages &amp; Facials</h3>
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Duration</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="price-name">Massages</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+            <tr>
+              <td><span class="price-name">Facials</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">Massage and facial pricing varies by treatment length and focus &mdash; see the full menu on the booking page.</p>
+      </div>
+
+      <div class="price-group reveal">
+        <h3>Makeup</h3>
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Duration</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="price-name">Makeup</span></td>
+              <td>&mdash;</td>
+              <td><span class="text-muted" style="font-size:0.85rem;">Ask in salon</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cta-band mt-3 reveal">
+        <div class="eyebrow center" style="justify-content:center;">Instant confirmation</div>
+        <h2>See the full menu and book on Fresha.</h2>
+        <p class="lede center">Pay by app, or pay manually in salon.</p>
+        <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+
+      <div class="cta-band mt-3 reveal">
+        <div class="eyebrow center" style="justify-content:center;">Visiting often?</div>
+        <h2>Get 20% off every visit with our Annual Membership.</h2>
+        <p class="lede center">AED 500 + VAT 5%, one card, shareable with one family member or friend.</p>
+        <a class="btn btn-ghost" href="loyalty.html">See Membership Details &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+  </section>
+
+  <section id="loyalty">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Loyalty &amp; Membership</div>
+      <h1>The Annual Membership.</h1>
+      <p class="lede">One card, 20% off every visit, year-round &mdash; for the clients who already know they're coming back.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2 loyalty-hero-grid">
+        <div class="membership-card reveal">
+          <div class="membership-card-top">
+            <div>
+              <div class="membership-card-eyebrow">Annual Membership Card</div>
+              <div class="membership-card-title">Front Row Beauty Salon</div>
+            </div>
+            <img class="membership-card-mark" src="images/logo-mark.jpg" alt="Front Row Beauty Salon crest" loading="lazy" decoding="async">
+          </div>
+          <div class="membership-card-bottom">
+            <div>
+              <span class="membership-card-name">Member</span><br>
+              Name &amp; Surname
+            </div>
+            <div class="membership-card-value">AED 500 <span style="font-size:0.6em; color:var(--muted);">+ VAT 5%</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow mb-1">Why members rebook here</div>
+          <h2 class="mb-1">Front row seats, held for you all year.</h2>
+          <p class="text-muted">The Annual Membership is a one-time registration that unlocks 20% off salon services for a full year &mdash; hair, nails, waxing, threading, facials and massage. It's built for the clients who are already loyal to us and want that reflected every time they book.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Membership benefits</div>
+        <h2>What's included.</h2>
+      </div>
+      <div class="membership-benefit-list">
+        <div class="membership-benefit reveal">
+          <span class="num">01</span>
+          <div>
+            <h4>20% off, year-round</h4>
+            <p>A flat 20% discount on all salon services, for the full term of your membership &mdash; excluding seasonal promotions.</p>
+          </div>
+        </div>
+        <div class="membership-benefit reveal">
+          <span class="num">02</span>
+          <div>
+            <h4>Share it with one person</h4>
+            <p>Your membership can be transferred to, or shared with, one additional member &mdash; family or a friend.</p>
+          </div>
+        </div>
+        <div class="membership-benefit reveal">
+          <span class="num">03</span>
+          <div>
+            <h4>A full year of value</h4>
+            <p>Registration is AED 500 + VAT 5%, valid for 12 months from your date of issue &mdash; use it as often as you like.</p>
+          </div>
+        </div>
+        <div class="membership-benefit reveal">
+          <span class="num">04</span>
+          <div>
+            <h4>A grace period at expiry</h4>
+            <p>Remaining membership value can still be redeemed against any salon service for up to 3 months after your card expires.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="legal-note">
+        <strong>Plain-language summary:</strong> the AED 500 + VAT registration fee is non-refundable, your card is valid for a year, and you get 20% off every salon visit in that time. Full terms below.
+      </div>
+
+      <div class="head-block reveal">
+        <div class="eyebrow">Terms &amp; Conditions</div>
+        <h2>The fine print, in full.</h2>
+      </div>
+
+      <div class="legal-body">
+        <section>
+          <h2>1. Registration fee</h2>
+          <p>A non-refundable deposit of AED 500 (+ VAT 5%) is charged upon commencement of membership.</p>
+        </section>
+        <section>
+          <h2>2. Expiry</h2>
+          <p>Membership expires at the determined date shown on the card, regardless of the extent to which the benefit or available membership services and facilities have been used.</p>
+        </section>
+        <section>
+          <h2>3. Sharing &amp; transfer</h2>
+          <p>Membership can be transferred to, or shared with, one (1) additional member &mdash; family or friend.</p>
+        </section>
+        <section>
+          <h2>4. Discount</h2>
+          <p>20% discount applies on all salon services year-round, excluding promotions.</p>
+        </section>
+        <section>
+          <h2>5. Pricing changes</h2>
+          <p>Prices are subject to change without prior notice.</p>
+        </section>
+        <section>
+          <h2>6. Late arrivals</h2>
+          <p>Management is entitled to regretfully cancel any reservation in the case of delays that exceed 15 minutes, as delays do impact existing reservations made by other members.</p>
+        </section>
+        <section>
+          <h2>7. Redemption after expiry</h2>
+          <p>Any remaining Annual Membership amount (AED 500 + VAT 5%) can be redeemed for salon services after the date of expiry, within 3 months.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Ready to join?</div>
+        <h2>Register your Annual Membership.</h2>
+        <p class="lede center">Ask at reception on your next visit, or reach us directly &mdash; we'll set your card up on the spot.</p>
+        <div class="row gap-md center" style="justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+          <a class="btn btn-ghost" href="contact.html">Contact Us</a>
+          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/paid-plans" target="_blank" rel="noopener noreferrer">Buy a Membership on Fresha</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="products">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Products</div>
+      <h1>Take the salon home with you.</h1>
+      <p class="lede">Everything we use in your service &mdash; from Nashi Argan to Olaplex &mdash; is also available to buy in salon. Our full online catalogue is being added below, brand by brand.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Featured</div>
+        <h2>A first look at what's on our shelves.</h2>
+        <p class="lede mt-1">Product photos, sizes and pricing are being added here one brand at a time &mdash; ask in salon for anything you don't see yet, or check back soon.</p>
+      </div>
+
+      <div class="grid grid-3">
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-nashi-argan-shampoo.jpg" alt="Nashi Argan haircare product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-nashi-argan-shampoo.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">Nashi Argan</span>
+            <h3 class="h3">Argan haircare range</h3>
+            <p>Shampoo, mask and oil finishing treatments &mdash; the range behind our signature blow-dry finish.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-olaplex.jpg" alt="Olaplex bond repair product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-olaplex.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">Olaplex</span>
+            <h3 class="h3">Bond repair, No.3 &amp; up</h3>
+            <p>The at-home step that protects colour and rebuilds strength between salon visits.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-k18.jpg" alt="K18 bond repair product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-k18.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">K18</span>
+            <h3 class="h3">Leave-in molecular repair</h3>
+            <p>A four-minute mask that reverses damage from colour, lightening and heat.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-dermalogica.jpg" alt="Dermalogica skincare product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-dermalogica.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">Dermalogica</span>
+            <h3 class="h3">Skincare &amp; facial essentials</h3>
+            <p>Cleansers, serums and SPF to carry your facial results through the week.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-essie.jpg" alt="Essie nail polish product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-essie.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">Essie</span>
+            <h3 class="h3">Nail colour</h3>
+            <p>The shade from your last manicure, ready to touch up at home.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+        <div class="card product-card reveal">
+          <div class="media-placeholder">
+            <img src="images/product-klio.jpg" alt="Klio nail care product" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Product photo coming soon</span>
+              <span class="ph-file">images/product-klio.jpg</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-brand">Klio</span>
+            <h3 class="h3">Nail care essentials</h3>
+            <p>Cuticle oils and strengtheners to keep your set healthy between visits.</p>
+            <span class="product-price">Ask in salon</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="product-coming-soon reveal">
+        <span class="ph-icon">&#10022;</span>
+        <h3 class="h3 mb-1">The full catalogue is on its way.</h3>
+        <p style="max-width:52ch; margin:0 auto;">We're photographing and pricing every product across L&rsquo;Or&eacute;al, Inoa, Schwarzkopf Professional, Esthemax, Lycon and Rica next &mdash; this page will keep growing. In the meantime, everything is available to buy in salon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Can't find what you're after?</div>
+        <h2>Ask us in salon or send a message.</h2>
+        <div class="row gap-md center" style="justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+          <a class="btn btn-ghost" href="contact.html">Contact Us</a>
+          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="brands">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Brand Partners</div>
+      <h1>What we put on you, we choose carefully.</h1>
+      <p class="lede">Front Row Beauty Salon works exclusively with names we trust for hair, skin, nails and waxing &mdash; nothing on the shelf by accident.</p>
+    </div>
+  </section>
+
+  <div class="brand-marquee" aria-hidden="true">
+    <div class="brand-marquee-track">
+      <span>L&rsquo;Or&eacute;al</span><span>Olaplex</span><span>Inoa</span><span>Schwarzkopf Professional</span><span>K18</span><span>Nashi</span><span>Dermalogica</span><span>Esthemax</span><span>Lycon</span><span>Rica</span><span>Essie</span><span>Klio</span>
+      <span>L&rsquo;Or&eacute;al</span><span>Olaplex</span><span>Inoa</span><span>Schwarzkopf Professional</span><span>K18</span><span>Nashi</span><span>Dermalogica</span><span>Esthemax</span><span>Lycon</span><span>Rica</span><span>Essie</span><span>Klio</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Our partners</div>
+        <h2>Twelve names, one standard.</h2>
+        <p class="lede mt-1">Every product on our shelves and in your service is chosen for a reason &mdash; not because it's the cheapest option on the supplier list.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="brand-tile reveal"><span class="name">L&rsquo;Or&eacute;al</span><span class="use">Haircare &amp; colour</span></div>
+        <div class="brand-tile reveal"><span class="name">Olaplex</span><span class="use">Bond repair</span></div>
+        <div class="brand-tile reveal"><span class="name">Inoa</span><span class="use">Ammonia-free colour</span></div>
+        <div class="brand-tile reveal"><span class="name">Schwarzkopf Professional</span><span class="use">Haircare &amp; colour</span></div>
+        <div class="brand-tile reveal"><span class="name">K18</span><span class="use">Bond repair</span></div>
+        <div class="brand-tile reveal"><span class="name">Nashi</span><span class="use">Haircare, Argan-based</span></div>
+        <div class="brand-tile reveal"><span class="name">Dermalogica</span><span class="use">Skincare &amp; facials</span></div>
+        <div class="brand-tile reveal"><span class="name">Esthemax</span><span class="use">Facial masking</span></div>
+        <div class="brand-tile reveal"><span class="name">Lycon</span><span class="use">Waxing</span></div>
+        <div class="brand-tile reveal"><span class="name">Rica</span><span class="use">Waxing</span></div>
+        <div class="brand-tile reveal"><span class="name">Essie</span><span class="use">Nail colour</span></div>
+        <div class="brand-tile reveal"><span class="name">Klio</span><span class="use">Nail care</span></div>
+      </div>
+      <p class="text-muted mt-3" style="font-size:0.8rem;">Logo marks are placeholders pending permission to display each brand's artwork &mdash; names are shown in text until then.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:center;">
+        <div class="media-placeholder aspect-wide">
+          <img src="images/salon-product-display.jpg" alt="Nashi Argan and other brand-partner products on display at Front Row Beauty Salon" loading="lazy" decoding="async">
+          <div class="ph-fallback">
+            <span class="ph-icon">&#10022;</span>
+            <span class="ph-label">On our shelves</span>
+            <span class="ph-file">images/salon-product-display.jpg</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow mb-1">On our shelves</div>
+          <h2 class="mb-1">Front row seats for our favourite products, too.</h2>
+          <p class="lede">Everything you see used in your service is also available to take home &mdash; ask your stylist, or visit our <a class="link-arrow" href="products.html" style="display:inline-flex;">Products page &rarr;</a> as we build out the full retail catalogue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Trusted products, real results</div>
+        <h2>Feel the difference in your first visit.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="team">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Team</div>
+      <h1>Six people, one standard.</h1>
+      <p class="lede">Every booking is with someone who's earned their rating one appointment at a time.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-3">
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-jessy.jpg" alt="Jessy, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Jessy</span>
+              <span class="ph-file">images/team-jessy.jpg</span>
+            </div>
+          </div>
+          <h3>Jessy</h3>
+          <span class="rating-pill">&#9733; 4.9</span>
+        </div>
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-marian.jpg" alt="Marian, Admin, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Marian</span>
+              <span class="ph-file">images/team-marian.jpg</span>
+            </div>
+          </div>
+          <h3>Marian</h3>
+          <p class="role">Admin</p>
+          <span class="rating-pill">&#9733; 4.9</span>
+        </div>
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-maricon.jpg" alt="Maricon, Massage Therapist / Nails, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Maricon</span>
+              <span class="ph-file">images/team-maricon.jpg</span>
+            </div>
+          </div>
+          <h3>Maricon</h3>
+          <p class="role">Massage Therapist / Nails</p>
+          <span class="rating-pill">&#9733; 4.9</span>
+        </div>
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-sima.jpg" alt="Sima, Hair Master, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Sima</span>
+              <span class="ph-file">images/team-sima.jpg</span>
+            </div>
+          </div>
+          <h3>Sima</h3>
+          <p class="role">Hair Master</p>
+          <span class="rating-pill">&#9733; 4.8</span>
+        </div>
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-nash.jpg" alt="Nash, Beauty Therapist, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Nash</span>
+              <span class="ph-file">images/team-nash.jpg</span>
+            </div>
+          </div>
+          <h3>Nash</h3>
+          <p class="role">Beauty Therapist</p>
+          <span class="rating-pill">&#9733; 4.6</span>
+        </div>
+
+        <div class="card team-card reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/team-naina.jpg" alt="Naina, All Around, Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9733;</span>
+              <span class="ph-label">Photo of Naina</span>
+              <span class="ph-file">images/team-naina.jpg</span>
+            </div>
+          </div>
+          <h3>Naina</h3>
+          <p class="role">All Around</p>
+          <span class="rating-pill">&#9733; 4.9</span>
+        </div>
+
+      </div>
+      <p class="text-muted mt-3" style="font-size:0.85rem;">Each card has room for an optional short intro video per stylist — drop one in alongside the photo whenever it's ready, no layout changes needed.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Pick your person</div>
+        <h2>Book with the team you trust.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="gallery">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Gallery</div>
+      <h1>The room, in pieces.</h1>
+      <p class="lede">Photos and clips land here as they're ready &mdash; hover a video tile to see it move.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="gallery-grid" id="gallery-grid">
+
+        <figure class="span-2 reveal">
+          <div class="media-placeholder">
+            <img src="images/interior-1.jpg" alt="Modern interior at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Modern interior</span>
+              <span class="ph-file">images/interior-1.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Modern interior</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder">
+            <img src="images/styling-chairs.jpg" alt="Styling stations at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Styling stations</span>
+              <span class="ph-file">images/styling-chairs.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Styling stations</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder">
+            <img src="images/nail-station.jpg" alt="Nail care area at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Nail care area</span>
+              <span class="ph-file">images/nail-station.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Nail care area</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder gallery-video" data-gallery-video>
+            <video muted loop playsinline preload="metadata">
+              <source src="videos/gallery-clip-1.mp4" type="video/mp4">
+            </video>
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9656;</span>
+              <span class="ph-label">Salon clip</span>
+              <span class="ph-file">videos/gallery-clip-1.mp4</span>
+            </div>
+            <span class="play-indicator">&#9656;</span>
+          </div>
+          <figcaption class="gallery-caption">In motion</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder">
+            <img src="images/reception.jpg" alt="Reception area at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Reception area</span>
+              <span class="ph-file">images/reception.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Reception area</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder">
+            <img src="images/gallery-2.jpg" alt="Front Row Beauty Salon, detail" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Detail shot</span>
+              <span class="ph-file">images/gallery-2.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Detail</figcaption>
+        </figure>
+
+        <figure class="span-2 reveal">
+          <div class="media-placeholder gallery-video" data-gallery-video>
+            <video muted loop playsinline preload="metadata">
+              <source src="videos/gallery-clip-2.mp4" type="video/mp4">
+            </video>
+            <div class="ph-fallback">
+              <span class="ph-icon">&#9656;</span>
+              <span class="ph-label">Salon clip</span>
+              <span class="ph-file">videos/gallery-clip-2.mp4</span>
+            </div>
+            <span class="play-indicator">&#9656;</span>
+          </div>
+          <figcaption class="gallery-caption">In motion</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder">
+            <img src="images/gallery-3.jpg" alt="Front Row Beauty Salon, detail" loading="lazy" decoding="async">
+            <div class="ph-fallback">
+              <span class="ph-icon">&#10022;</span>
+              <span class="ph-label">Detail shot</span>
+              <span class="ph-file">images/gallery-3.jpg</span>
+            </div>
+          </div>
+          <figcaption class="gallery-caption">Detail</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Before &amp; After</div>
+        <h2>The transformation, side by side.</h2>
+        <p class="lede">A few of the results our clients have booked us back for.</p>
+      </div>
+      <div class="before-after-grid">
+
+        <figure class="before-after-pair reveal">
+          <div class="before-after-frames">
+            <div class="media-placeholder">
+              <span class="before-after-tag">Before</span>
+              <img src="images/before-after-1-before.jpg" alt="Before a colour and cut at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">Before</span>
+                <span class="ph-file">images/before-after-1-before.jpg</span>
+              </div>
+            </div>
+            <div class="media-placeholder">
+              <span class="before-after-tag">After</span>
+              <img src="images/before-after-1-after.jpg" alt="After a colour and cut at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">After</span>
+                <span class="ph-file">images/before-after-1-after.jpg</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Colour &amp; cut</figcaption>
+        </figure>
+
+        <figure class="before-after-pair reveal">
+          <div class="before-after-frames">
+            <div class="media-placeholder">
+              <span class="before-after-tag">Before</span>
+              <img src="images/before-after-2-before.jpg" alt="Before a manicure at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">Before</span>
+                <span class="ph-file">images/before-after-2-before.jpg</span>
+              </div>
+            </div>
+            <div class="media-placeholder">
+              <span class="before-after-tag">After</span>
+              <img src="images/before-after-2-after.jpg" alt="After a manicure at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">After</span>
+                <span class="ph-file">images/before-after-2-after.jpg</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Manicure</figcaption>
+        </figure>
+
+        <figure class="before-after-pair reveal">
+          <div class="before-after-frames">
+            <div class="media-placeholder">
+              <span class="before-after-tag">Before</span>
+              <img src="images/before-after-3-before.jpg" alt="Before a facial at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">Before</span>
+                <span class="ph-file">images/before-after-3-before.jpg</span>
+              </div>
+            </div>
+            <div class="media-placeholder">
+              <span class="before-after-tag">After</span>
+              <img src="images/before-after-3-after.jpg" alt="After a facial at Front Row Beauty Salon" loading="lazy" decoding="async">
+              <div class="ph-fallback">
+                <span class="ph-icon">&#10022;</span>
+                <span class="ph-label">After</span>
+                <span class="ph-file">images/before-after-3-after.jpg</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Facial</figcaption>
+        </figure>
+
+      </div>
+      <p class="text-muted mt-3" style="font-size:0.85rem;">Ask a client's permission before posting their before/after — drop the two photos in with these exact filenames and they'll appear here automatically, no code changes needed.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">See it in person</div>
+        <h2>The photos don't do it justice.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="reviews">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Reviews</div>
+      <div class="rating-headline mt-2">
+        <span class="big">4.9</span>
+        <div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-muted" style="margin-top:0.3rem;">from 63 reviews &mdash; Highly Recommended</p>
+        </div>
+      </div>
+      <a class="link-arrow mt-2" href="https://www.google.com/maps/search/?api=1&query=Front+Row+Beauty+Salon+Bur+Dubai" target="_blank" rel="noopener noreferrer" style="display:inline-flex;">See all our reviews on Google &rarr;</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-3">
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Mary and Jessy were amazing. They spent almost 2 hours for my Mani Pedi and did a fantastic job. Thank you.&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Dipti M</span>
+            <span class="review-sub">2 services &middot; 2 professionals &middot; 7 months ago</span>
+          </div>
+        </div>
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;<span style="opacity:0.25;">&#9733;</span></div>
+          <p class="review-quote">&ldquo;The salon is clean, the staff is efficient and pleasant, and their services are reasonably priced. I will definitely visit them again.&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Petula D</span>
+            <span class="review-sub">5 services &middot; 10 months ago</span>
+          </div>
+        </div>
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Great&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Janice F</span>
+            <span class="review-sub">3 services &middot; 1 year ago</span>
+          </div>
+        </div>
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Very good&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Candy C</span>
+            <span class="review-sub">3 services &middot; 1 year ago</span>
+          </div>
+        </div>
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Staff great n well trained &#128079;&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Janice F</span>
+            <span class="review-sub">3 services &middot; 2 years ago</span>
+          </div>
+        </div>
+
+        <div class="card review-card reveal">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Amazing service as always. I've been going to this salon for the last 2 years and I always had a very good experience. Thank you to all the staff for the best service and for always looking after me.&rdquo;</p>
+          <div class="review-meta">
+            <span class="review-name">Cecilia C</span>
+            <span class="review-sub">7 services &middot; 2 years ago</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Add your own</div>
+        <h2>Come find out why they keep coming back.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="location">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Maps &amp; Timings</div>
+      <h1>Bur Dubai, easy to find.</h1>
+      <p class="lede">Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool &mdash; open every day of the week.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:start;">
+
+        <div>
+          <div class="eyebrow mb-1">Address</div>
+          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>AL Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
+          <a class="btn btn-primary" href="https://maps.google.com/?daddr=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai" target="_blank" rel="noopener noreferrer">Get Directions</a>
+
+          <hr class="hr mt-3 mb-3">
+
+          <div class="eyebrow mb-1">Reach us</div>
+          <table class="hours-table" style="max-width:420px;">
+            <tbody>
+              <tr><td>Phone</td><td><a href="tel:+97143365582">+971 4 336 5582</a></td></tr>
+              <tr><td>Mobile</td><td><a href="tel:+971502329348">+971 50 232 9348</a></td></tr>
+              <tr><td>Email</td><td><a href="mailto:frontrowsalon22@gmail.com">frontrowsalon22@gmail.com</a></td></tr>
+            </tbody>
+          </table>
+
+          <hr class="hr mt-3 mb-3">
+
+          <div class="eyebrow mb-1">Rating</div>
+          <p class="lede">4.9 out of 5, from 63 reviews &mdash; Highly Recommended.</p>
+        </div>
+
+        <div>
+          <div class="map-embed">
+            <iframe
+              src="https://maps.google.com/maps?q=Al%20Nasser%20Building%2C%20Kuwait%20Street%2C%20AL%20Raffa%20Road%2C%20Mankhool%2C%20Bur%20Dubai%2C%20Shop%205%2C%20Dubai&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Front Row Beauty Salon on Google Maps"
+              aria-label="Map showing Front Row Beauty Salon location at Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="media-placeholder aspect-wide">
+        <img src="images/salon-reception.jpg" alt="Front Row Beauty Salon reception, with the salon crest on the wall" loading="lazy" decoding="async">
+        <div class="ph-fallback">
+          <span class="ph-icon">&#10022;</span>
+          <span class="ph-label">Reception</span>
+          <span class="ph-file">images/salon-reception.jpg</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Timings</div>
+        <h2>Open every day, the same hours.</h2>
+      </div>
+      <table class="hours-table">
+        <tbody>
+          <tr><td>Monday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Tuesday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Wednesday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Thursday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Friday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Saturday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+          <tr><td>Sunday</td><td>10:00 am &ndash; 9:00 pm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Plan your visit</div>
+        <h2>Reserve your slot in advance.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="information">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Information</div>
+      <h1>Everything practical, in one place.</h1>
+      <p class="lede">Payment, confirmation, hours and address &mdash; the details before you book.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="info-list">
+        <div class="info-row">
+          <h4>Payment methods</h4>
+          <p>Pay by app, or pay manually in salon &mdash; both are accepted.</p>
+        </div>
+        <div class="info-row">
+          <h4>Confirmation</h4>
+          <p>Bookings are confirmed instantly.</p>
+        </div>
+        <div class="info-row">
+          <h4>Hours</h4>
+          <p>Open daily, Monday &ndash; Sunday, 10:00 am &ndash; 9:00 pm.</p>
+        </div>
+        <div class="info-row">
+          <h4>Address</h4>
+          <p>Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai, Shop 5.</p>
+        </div>
+        <div class="info-row">
+          <h4>Rating</h4>
+          <p>4.9 out of 5, from 63 reviews &mdash; Highly Recommended.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <div class="eyebrow">Frequently asked</div>
+        <h2>A few common questions.</h2>
+      </div>
+      <div>
+        <details class="faq-item" open>
+          <summary>Do I need to pay online?</summary>
+          <p>No &mdash; you can pay by app, or pay manually in salon.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my booking confirmed right away?</summary>
+          <p>Yes, confirmation is instant once you book.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What are your hours?</summary>
+          <p>We're open every day of the week, Monday through Sunday, 10:00 am to 9:00 pm.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where are you located?</summary>
+          <p>Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur Dubai, Shop 5. See the <a class="link-arrow" href="location.html" style="display:inline;">Maps &amp; Timings page</a> for directions.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">Ready to book</div>
+        <h2>Instant confirmation, your way to pay.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="contact">
+<section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">Contact Us</div>
+      <h1>Say hello before you visit.</h1>
+      <p class="lede">Send a message and we'll get back to you, or book directly for instant confirmation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-2" style="align-items:start;">
+
+        <div>
+          <div class="eyebrow mb-1">Details</div>
+          <p class="lede mb-2">Al Nasser Building, Kuwait Street,<br>Al Raffa Road, Mankhool,<br>Bur Dubai, Shop 5</p>
+          <p class="text-muted mb-2">Open daily, Monday &ndash; Sunday, 10:00 am &ndash; 9:00 pm.</p>
+
+          <div class="eyebrow mb-1 mt-3">Reach us</div>
+          <table class="hours-table" style="max-width:420px;">
+            <tbody>
+              <tr><td>Phone</td><td><a href="tel:+97143365582">+971 4 336 5582</a></td></tr>
+              <tr><td>Mobile</td><td><a href="tel:+971502329348">+971 50 232 9348</a></td></tr>
+              <tr><td>WhatsApp</td><td><a href="https://wa.me/971502329348" target="_blank" rel="noopener noreferrer">Message us</a></td></tr>
+              <tr><td>Email</td><td><a href="mailto:frontrowsalon22@gmail.com">frontrowsalon22@gmail.com</a></td></tr>
+            </tbody>
+          </table>
+
+          <a class="btn btn-primary mt-3" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+        </div>
+
+        <div class="card reveal">
+          <div class="eyebrow mb-2">Send a message</div>
+          <form id="contact-form" novalidate>
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <div class="form-status" id="cf-status" role="status">
+              <span>&#10003;</span>
+              <span>Message sent &mdash; thank you. We'll be in touch shortly.</span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section id="affirmation">
+<section class="affirmation-shell">
+    <div class="affirmation-glow" id="affirmation-glow" aria-hidden="true"></div>
+    <div class="affirmation-card">
+      <div class="eyebrow center" style="justify-content:center;">A moment, just for you</div>
+      <p class="affirmation-text" id="affirmation-text">You don't need permission to take up the front row.</p>
+      <div class="affirmation-index" id="affirmation-index">01 / 10</div>
+      <button class="btn btn-ghost new-affirmation-btn" id="new-affirmation">New Affirmation</button>
+    </div>
+  </section>
+  </section>
+
 </main>
 
 <footer id="site-footer"></footer>
@@ -202,6 +1667,88 @@
     });
     hero.addEventListener('mouseleave', function () { glow.classList.remove('is-active'); });
   })();
+</script>
+<script>
+(function(){
+/* Video tiles autoplay muted + loop only on hover/focus, so the gallery
+     stays quiet until someone actually looks at a clip. */
+  document.querySelectorAll('[data-gallery-video]').forEach(function (tile) {
+    var video = tile.querySelector('video');
+    if (!video) return;
+    function play() { video.play().catch(function () {}); }
+    function pause() { video.pause(); }
+    tile.addEventListener('mouseenter', play);
+    tile.addEventListener('mouseleave', pause);
+    tile.addEventListener('touchstart', play, { passive: true });
+  });
+})();
+
+(function(){
+/* Front-end only — no backend. Shows a confirmation state on submit. */
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('cf-status');
+    status.classList.add('is-visible');
+    this.reset();
+  });
+})();
+
+(function(){
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ten original affirmations, in the salon's own voice */
+var AFFIRMATIONS = [
+  "You don't need permission to take up the front row.",
+  "Beauty that's really yours doesn't need to be argued for.",
+  "The version of you that already exists is worth showing up for.",
+  "You're allowed to want to feel good, plainly, with no explanation attached.",
+  "What's real about you was never the thing that needed fixing.",
+  "Confidence isn't a look you put on — it's one you already had underneath.",
+  "You get to decide what 'put together' means for you today.",
+  "Caring for yourself is not the same as performing for anyone else.",
+  "Some days call for less. Let today be one of the easy ones.",
+  "The mirror isn't asking you to be different — only to notice what's already there."
+];
+var index = 0;
+
+var textEl = document.getElementById('affirmation-text');
+var indexEl = document.getElementById('affirmation-index');
+var glowEl = document.getElementById('affirmation-glow');
+var btn = document.getElementById('new-affirmation');
+
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
+function renderIndex() { indexEl.textContent = pad(index + 1) + ' / ' + pad(AFFIRMATIONS.length); }
+renderIndex();
+
+function pulseGlow() {
+  if (prefersReducedMotion) return;
+  glowEl.classList.add('is-pulsing');
+  window.setTimeout(function () { glowEl.classList.remove('is-pulsing'); }, 1600);
+}
+
+function swapAffirmation() {
+  var next = index;
+  if (AFFIRMATIONS.length > 1) {
+    do { next = Math.floor(Math.random() * AFFIRMATIONS.length); } while (next === index);
+  }
+  index = next;
+  pulseGlow();
+
+  if (prefersReducedMotion) {
+    textEl.textContent = AFFIRMATIONS[index];
+    renderIndex();
+    return;
+  }
+
+  textEl.classList.add('is-swapping');
+  window.setTimeout(function () {
+    textEl.textContent = AFFIRMATIONS[index];
+    renderIndex();
+    textEl.classList.remove('is-swapping');
+  }, 480);
+}
+btn.addEventListener('click', swapAffirmation);
+})();
 </script>
 </body>
 </html>

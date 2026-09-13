@@ -421,6 +421,10 @@ p { color: var(--ink); }
 
 .page-shell { padding-top: 84px; }
 
+/* every chapter of the continuous-scroll homepage lands correctly below
+   the fixed header when jumped to via the Index or a direct #anchor link */
+main > section[id] { scroll-margin-top: 84px; }
+
 /* ---------------------------------------------------------------------- */
 /* footer                                                                   */
 /* ---------------------------------------------------------------------- */

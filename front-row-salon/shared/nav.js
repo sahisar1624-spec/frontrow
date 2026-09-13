@@ -22,21 +22,27 @@
   var GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/search/?api=1&query=Front+Row+Beauty+Salon+Bur+Dubai';
   window.FRSContact = { FRESHA_URL: FRESHA_URL, PHONE_DISPLAY: PHONE_DISPLAY, PHONE_TEL: PHONE_TEL, MOBILE_DISPLAY: MOBILE_DISPLAY, MOBILE_TEL: MOBILE_TEL, WHATSAPP_URL: WHATSAPP_URL, EMAIL: EMAIL, DIRECTIONS_URL: DIRECTIONS_URL, GOOGLE_REVIEWS_URL: GOOGLE_REVIEWS_URL };
 
+  /* The Index always points into the one continuous-scroll homepage —
+     visiting the site is meant to feel like one long scroll through
+     everything, with Index there for anyone who wants to jump straight
+     to a section instead. Each of these pages still also exists on its
+     own URL (for search engines and direct links), just not as the
+     primary way people move around the site. */
   var PAGES = [
-    { href: 'index.html', label: 'Home' },
-    { href: 'about.html', label: 'About Us' },
-    { href: 'services.html', label: 'Services' },
-    { href: 'pricelist.html', label: 'Price List' },
-    { href: 'loyalty.html', label: 'Loyalty & Membership' },
-    { href: 'products.html', label: 'Products' },
-    { href: 'brands.html', label: 'Brand Partners' },
-    { href: 'team.html', label: 'Team' },
-    { href: 'gallery.html', label: 'Gallery' },
-    { href: 'reviews.html', label: 'Reviews' },
-    { href: 'location.html', label: 'Maps & Timings' },
-    { href: 'information.html', label: 'Information' },
-    { href: 'contact.html', label: 'Contact Us' },
-    { href: 'affirmation.html', label: 'Daily Affirmation' }
+    { href: 'index.html#home', label: 'Home' },
+    { href: 'index.html#about', label: 'About Us' },
+    { href: 'index.html#services', label: 'Services' },
+    { href: 'index.html#pricelist', label: 'Price List' },
+    { href: 'index.html#loyalty', label: 'Loyalty & Membership' },
+    { href: 'index.html#products', label: 'Products' },
+    { href: 'index.html#brands', label: 'Brand Partners' },
+    { href: 'index.html#team', label: 'Team' },
+    { href: 'index.html#gallery', label: 'Gallery' },
+    { href: 'index.html#reviews', label: 'Reviews' },
+    { href: 'index.html#location', label: 'Maps & Timings' },
+    { href: 'index.html#information', label: 'Information' },
+    { href: 'index.html#contact', label: 'Contact Us' },
+    { href: 'index.html#affirmation', label: 'Daily Affirmation' }
   ];
 
   function currentFile() {
@@ -90,8 +96,14 @@
     if (!mount) return;
     var here = currentFile();
 
+    // every entry points into the mega scroll page (index.html#anchor), but
+    // a standalone page (about.html, gallery.html...) opened directly should
+    // still show its own matching entry as current
+    var hereBase = here.replace(/\.html$/, '');
     var indexLinks = PAGES.map(function (p, i) {
-      var current = p.href === here ? ' aria-current="page"' : '';
+      var anchor = p.href.split('#')[1] || '';
+      var isCurrent = hereBase === anchor || (hereBase === 'index' && anchor === 'home');
+      var current = isCurrent ? ' aria-current="page"' : '';
       return '<a href="' + p.href + '"' + current + '><span class="idx">' + pad(i + 1) + '</span><span class="name">' + p.label + '</span></a>';
     }).join('');
 
@@ -233,10 +245,20 @@
      internal link — a blocked/slow script just leaves normal <a> browsing
      untouched, nothing on the page depends on this to be usable. ---- */
   function initPageTransition() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var overlay = document.createElement('div');
-    overlay.id = 'page-transition';
-    document.body.appendChild(overlay);
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var overlay = null;
+    if (!reduceMotion) {
+      overlay = document.createElement('div');
+      overlay.id = 'page-transition';
+      document.body.appendChild(overlay);
+    }
+
+    function closeIndexOverlay() {
+      var nav = document.getElementById('nav-overlay');
+      var toggle = document.getElementById('nav-toggle');
+      if (nav) { nav.classList.remove('is-open'); document.body.style.overflow = ''; }
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
 
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -244,6 +266,25 @@
       if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
       var href = a.getAttribute('href');
       if (!href || !/^[a-zA-Z0-9_-]+\.html(#.*)?$/.test(href)) return;
+
+      // a link into a section of the page we're already on (the Index,
+      // or any #anchor link) just smooth-scrolls there — no reload, no fade
+      var hashIdx = href.indexOf('#');
+      if (hashIdx !== -1) {
+        var targetFile = href.slice(0, hashIdx) || currentFile();
+        if (targetFile === currentFile()) {
+          var target = document.getElementById(href.slice(hashIdx + 1));
+          if (target) {
+            e.preventDefault();
+            closeIndexOverlay();
+            target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+            history.pushState(null, '', href);
+            return;
+          }
+        }
+      }
+
+      if (reduceMotion) return;
       e.preventDefault();
       overlay.classList.add('is-active');
       window.setTimeout(function () { window.location.href = href; }, 340);
@@ -392,6 +433,22 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---- land on the right chapter when arriving with a #anchor in the URL.
+     Native browsers usually do this on their own for a typed/typed-in URL,
+     but a script-driven navigation (our own page-transition click handler,
+     among others) doesn't reliably trigger it — so do it ourselves too,
+     landing everyone in the same place regardless of how they got here. ---- */
+  function initHashScroll() {
+    if (!window.location.hash) return;
+    var target = document.getElementById(window.location.hash.slice(1));
+    if (!target) return;
+    function jump() { target.scrollIntoView({ behavior: 'auto', block: 'start' }); }
+    // once now, and once more after every image above it has finished
+    // loading (and settled into its final size) in case that shifted things
+    window.setTimeout(jump, 50);
+    window.addEventListener('load', jump, { once: true });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
@@ -403,5 +460,6 @@
     initScrollProgress();
     initStagger();
     initCounters();
+    initHashScroll();
   });
 })();
