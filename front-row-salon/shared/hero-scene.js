@@ -1,9 +1,9 @@
 /* ==========================================================================
    FRONT ROW BEAUTY SALON — homepage hero, ambient 3D layer
-   A soft, slowly-twisting ribbon of gold drifting behind the hero photo,
-   with a light dust of particles and gentle mouse-parallax. Purely
-   decorative (aria-hidden, pointer-events: none) — the hero is fully
-   readable and usable with this switched off entirely.
+   A slowly turning gold medallion of the salon's own crest, drifting
+   behind the hero photo, with a light dust of particles and gentle
+   mouse-parallax. Purely decorative (aria-hidden, pointer-events: none)
+   — the hero is fully readable and usable with this switched off entirely.
 
    Loads three.js itself (self-hosted in shared/vendor/, no CDN) only when
    all of these hold, so it never costs anyone who wouldn't see it well:
@@ -65,35 +65,47 @@
     camera.position.set(0, 0, 9);
 
     /* warm, brand-matched lighting — brass key + rosewood rim, so the
-       ribbon catches the same gold/blush the rest of the site uses */
-    scene.add(new THREE.AmbientLight(0x392d22, 1.2));
-    var key = new THREE.DirectionalLight(0xd4af6a, 2.4);
+       medallion catches the same gold/blush the rest of the site uses */
+    scene.add(new THREE.AmbientLight(0x392d22, 1.3));
+    var key = new THREE.DirectionalLight(0xd4af6a, 2.6);
     key.position.set(4, 5, 6);
     scene.add(key);
-    var rim = new THREE.DirectionalLight(0xe0a3b4, 1.5);
+    var rim = new THREE.DirectionalLight(0xe0a3b4, 1.6);
     rim.position.set(-5, -2, -4);
     scene.add(rim);
+    var fill = new THREE.DirectionalLight(0xf6efe3, 0.6);
+    fill.position.set(0, -3, 5);
+    scene.add(fill);
 
-    /* a single, softly twisting ribbon — abstract rather than a literal
-       object, reads as light/hair/elegance rather than a random shape */
-    var curve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-2.6, 1.2, -0.6),
-      new THREE.Vector3(-0.9, -1.0, 0.9),
-      new THREE.Vector3(0.7, 1.4, -0.5),
-      new THREE.Vector3(2.3, -0.7, 0.7),
-      new THREE.Vector3(3.3, 1.1, -0.2)
-    ]);
-    var ribbon = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, 160, 0.17, 24, false),
-      new THREE.MeshPhysicalMaterial({
-        color: 0xd4af6a, metalness: 0.85, roughness: 0.22,
-        clearcoat: 0.6, clearcoatRoughness: 0.25
-      })
-    );
-    scene.add(ribbon);
+    /* the salon's own crest, as a slowly turning gold medallion — a coin
+       catching light rather than a flat logo pasted on the page */
+    var group = new THREE.Group();
+    scene.add(group);
 
-    /* a light drift of gold dust behind it */
-    var dustCount = 80;
+    var loader = new THREE.TextureLoader();
+    loader.load('images/logo-mark.jpg', function (tex) {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      var faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.55 });
+      var rimMat = new THREE.MeshPhysicalMaterial({
+        color: 0xd4af6a, metalness: 0.9, roughness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.2
+      });
+      var medallion = new THREE.Mesh(
+        new THREE.CylinderGeometry(1.9, 1.9, 0.28, 72),
+        [rimMat, faceMat, faceMat]
+      );
+      medallion.rotation.x = Math.PI / 2;
+      group.add(medallion);
+
+      /* a thin gold ring standing just proud of the face, like a bezel */
+      var bezel = new THREE.Mesh(
+        new THREE.TorusGeometry(1.9, 0.045, 16, 96),
+        rimMat
+      );
+      group.add(bezel);
+    });
+
+    /* a light drift of gold dust around it */
+    var dustCount = 70;
     var positions = new Float32Array(dustCount * 3);
     for (var i = 0; i < dustCount; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 9;
@@ -103,7 +115,7 @@
     var dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     var dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({
-      color: 0xf6efe3, size: 0.035, transparent: true, opacity: 0.55, sizeAttenuation: true
+      color: 0xf6efe3, size: 0.035, transparent: true, opacity: 0.5, sizeAttenuation: true
     }));
     scene.add(dust);
 
@@ -146,9 +158,9 @@
       var dt = Math.min(clock.getDelta(), 0.1);
       pointer.x += (pointerTarget.x - pointer.x) * 0.04;
       pointer.y += (pointerTarget.y - pointer.y) * 0.04;
-      ribbon.rotation.y += dt * 0.18;
-      ribbon.rotation.x = pointer.y * 0.15;
-      ribbon.rotation.z = -pointer.x * 0.1;
+      group.rotation.y += dt * 0.22;
+      group.rotation.x = pointer.y * 0.18;
+      group.rotation.z = -pointer.x * 0.06;
       dust.rotation.y += dt * 0.04;
       camera.position.x = pointer.x * 0.4;
       camera.position.y = -pointer.y * 0.3;
