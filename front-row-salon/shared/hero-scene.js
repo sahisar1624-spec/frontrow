@@ -40,8 +40,10 @@
   if (!hasWebGL()) return;
 
   function boot() {
-    import('./vendor/three.module.min.js')
-      .then(function (THREE) { startScene(THREE); })
+    Promise.all([
+      import('./vendor/three.module.min.js'),
+      import('./medallion.js')
+    ]).then(function (mods) { startScene(mods[0], mods[1].buildMedallion); })
       .catch(function () { /* library didn't load — hero just stays the plain photo */ });
   }
 
@@ -51,7 +53,7 @@
     window.setTimeout(boot, 350);
   }
 
-  function startScene(THREE) {
+  function startScene(THREE, buildMedallion) {
     var wrap = canvas.closest('.home-hero');
     if (!wrap || !canvas.parentElement) return;
 
@@ -79,30 +81,8 @@
 
     /* the salon's own crest, as a slowly turning gold medallion — a coin
        catching light rather than a flat logo pasted on the page */
-    var group = new THREE.Group();
+    var group = buildMedallion(THREE, 1.9);
     scene.add(group);
-
-    var loader = new THREE.TextureLoader();
-    loader.load('images/logo-mark.jpg', function (tex) {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      var faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.55 });
-      var rimMat = new THREE.MeshPhysicalMaterial({
-        color: 0xd4af6a, metalness: 0.9, roughness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.2
-      });
-      var medallion = new THREE.Mesh(
-        new THREE.CylinderGeometry(1.9, 1.9, 0.28, 72),
-        [rimMat, faceMat, faceMat]
-      );
-      medallion.rotation.x = Math.PI / 2;
-      group.add(medallion);
-
-      /* a thin gold ring standing just proud of the face, like a bezel */
-      var bezel = new THREE.Mesh(
-        new THREE.TorusGeometry(1.9, 0.045, 16, 96),
-        rimMat
-      );
-      group.add(bezel);
-    });
 
     /* a light drift of gold dust around it */
     var dustCount = 70;

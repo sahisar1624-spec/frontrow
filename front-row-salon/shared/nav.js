@@ -449,6 +449,35 @@
     window.addEventListener('load', jump, { once: true });
   }
 
+  /* ---- card tilt: a gentle perspective tilt toward the pointer on cards,
+     product photos and team portraits — mouse-driven "3D" that costs
+     nothing (CSS transform only, no WebGL) and reads on every page, not
+     just the homepage hero. Fine-pointer, hover-capable devices only, and
+     off entirely under prefers-reduced-motion. ---- */
+  function initTilt() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var els = document.querySelectorAll('.card, .teaser-card, .product-card, .team-card');
+    if (!els.length) return;
+    els.forEach(function (el) {
+      el.classList.add('tilt');
+      el.addEventListener('mouseenter', function () {
+        el.style.transition = 'border-color 0.5s var(--ease), box-shadow 0.5s var(--ease)';
+      });
+      el.addEventListener('mousemove', function (e) {
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        var lift = el.classList.contains('card') ? ' translateY(-4px)' : '';
+        el.style.transform = 'perspective(900px) rotateX(' + (py * -6) + 'deg) rotateY(' + (px * 8) + 'deg)' + lift;
+      });
+      el.addEventListener('mouseleave', function () {
+        el.style.transition = 'transform 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease)';
+        el.style.transform = '';
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     renderHeader();
     renderFooter();
@@ -461,5 +490,6 @@
     initStagger();
     initCounters();
     initHashScroll();
+    initTilt();
   });
 })();
