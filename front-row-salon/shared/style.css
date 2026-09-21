@@ -625,6 +625,36 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 
 /* ---------------------------------------------------------------------- */
+/* contact — ambient dust behind the details/form, and a one-time shimmer */
+/* across the footer the moment it's reached (same shimmer technique as   */
+/* .btn-primary elsewhere on the site).                                   */
+/* ---------------------------------------------------------------------- */
+.contact-stage { position: relative; }
+#contact-3d {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+}
+#contact-3d.is-ready { opacity: 0.45; }
+.contact-stage > .wrap { position: relative; z-index: 1; }
+@media (max-width: 899px) { #contact-3d { display: none; } }
+@media (prefers-reduced-motion: reduce) { #contact-3d { display: none; } }
+
+#site-footer .footer-top { position: relative; overflow: hidden; }
+#site-footer.arrival .footer-top::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 35%, rgba(212,175,106,0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: footer-shimmer 1.7s var(--ease) forwards;
+  pointer-events: none;
+}
+@keyframes footer-shimmer { to { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) { #site-footer.arrival .footer-top::after { display: none; } }
+
+/* ---------------------------------------------------------------------- */
 /* cards                                                                    */
 /* ---------------------------------------------------------------------- */
 .card {
