@@ -21,21 +21,40 @@ export function buildMedallion(THREE, radius) {
   sideGeo.rotateX(Math.PI / 2);
   group.add(new THREE.Mesh(sideGeo, rimMat));
 
-  var back = new THREE.Mesh(new THREE.CircleGeometry(radius, 72), rimMat);
-  back.position.z = -thickness / 2;
-  back.rotation.y = Math.PI;
-  group.add(back);
-
   var bezel = new THREE.Mesh(new THREE.TorusGeometry(radius, radius * 0.024, 16, 96), rimMat);
   group.add(bezel);
+
+  /* a plain placeholder for each face until the crest texture is in —
+     replaced below the instant it loads, so there's never a gap in the coin */
+  var frontPlaceholder = new THREE.Mesh(new THREE.CircleGeometry(radius, 72), rimMat);
+  frontPlaceholder.position.z = thickness / 2;
+  group.add(frontPlaceholder);
+  var backPlaceholder = new THREE.Mesh(new THREE.CircleGeometry(radius, 72), rimMat);
+  backPlaceholder.position.z = -thickness / 2;
+  backPlaceholder.rotation.y = Math.PI;
+  group.add(backPlaceholder);
 
   var loader = new THREE.TextureLoader();
   loader.load('images/logo-mark.jpg', function (tex) {
     tex.colorSpace = THREE.SRGBColorSpace;
+
+    /* front: the crest reads normally facing the camera */
     var faceMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.55 });
     var face = new THREE.Mesh(new THREE.CircleGeometry(radius, 72), faceMat);
     face.position.z = thickness / 2;
     group.add(face);
+    group.remove(frontPlaceholder);
+
+    /* back: the same crest, same texture — rotating the mesh 180° about Y
+       to face outward already lands the logo right-side up and readable
+       (verified against a render from a camera on that side); flipping
+       the texture on top of that rotation is what made it read backwards */
+    var backMat = new THREE.MeshStandardMaterial({ map: tex, metalness: 0.15, roughness: 0.55 });
+    var back = new THREE.Mesh(new THREE.CircleGeometry(radius, 72), backMat);
+    back.position.z = -thickness / 2;
+    back.rotation.y = Math.PI;
+    group.add(back);
+    group.remove(backPlaceholder);
   });
 
   return group;
