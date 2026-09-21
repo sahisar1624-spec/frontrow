@@ -511,6 +511,25 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 
 /* ---------------------------------------------------------------------- */
+/* pillar stage — the scroll-driven 3D companion behind the Services       */
+/* page's Hair / Nails / Body & Face rows. Purely decorative: the rows'    */
+/* real photos, copy and links sit above it and work identically with it  */
+/* switched off (narrow viewport, reduced motion, no WebGL).              */
+/* ---------------------------------------------------------------------- */
+.pillar-stage { position: relative; }
+.pillar-stage .pillar-row { position: relative; z-index: 1; }
+#services-3d {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+#services-3d.is-ready { opacity: 0.5; }
+@media (max-width: 899px) { #services-3d { display: none; } }
+@media (prefers-reduced-motion: reduce) { #services-3d { display: none; } }
+
+/* ---------------------------------------------------------------------- */
 /* cards                                                                    */
 /* ---------------------------------------------------------------------- */
 .card {
