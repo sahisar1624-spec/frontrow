@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  /* Paper & ink */
+  --color-paper: #fbf1ec;
+  --color-paper-soft: #fffaf7;
+  --color-ink: #34101f;
+  --color-ink-soft: #7a5460;
+  --color-line: #e9d5cc;
+
+  /* Primary (berry rose) */
+  --color-primary: #9c2f55;
+  --color-primary-dark: #6b1f44;
+  --color-primary-tint: #f3dde4;
+
+  /* Category swatches */
+  --color-nails: #c1447e;
+  --color-hair: #b97231;
+  --color-waxing: #c98f1f;
+  --color-massage: #5f7a5d;
+  --color-facial: #8b5a82;
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-work-sans);
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-soft: var(--color-paper-soft);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-line: var(--color-line);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-tint: var(--color-primary-tint);
+  --color-nails: var(--color-nails);
+  --color-hair: var(--color-hair);
+  --color-waxing: var(--color-waxing);
+  --color-massage: var(--color-massage);
+  --color-facial: var(--color-facial);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--color-primary-tint);
+  color: var(--color-ink);
+}
+
+/* A soft, hand-set underline used for the one memorable accent under the hero word. */
+.ink-underline {
+  position: relative;
+  white-space: nowrap;
+}
+.ink-underline svg {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.12em;
+  width: 104%;
+  height: 0.3em;
+  color: var(--color-primary);
+}

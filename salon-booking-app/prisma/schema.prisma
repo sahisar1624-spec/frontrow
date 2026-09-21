@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Singleton row (id is always "salon") holding the salon's public info.
+model Salon {
+  id          String @id @default("salon")
+  name        String
+  address     String
+  phone       String
+  email       String?
+  instagram   String?
+  tagline     String?
+  aboutText   String?
+}
+
+model WorkingHour {
+  id        Int     @id @default(autoincrement())
+  dayOfWeek Int // 0 = Sunday ... 6 = Saturday
+  isOpen    Boolean @default(true)
+  openTime  String // "09:00"
+  closeTime String // "18:00"
+
+  @@unique([dayOfWeek])
+}
+
+// A blocked window (e.g. lunch break, holiday, staff time off).
+// If startTime/endTime are null, the whole date is blocked.
+model BlockedSlot {
+  id        String   @id @default(cuid())
+  date      String // "2026-09-21"
+  startTime String?
+  endTime   String?
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model ServiceCategory {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+  order    Int       @default(0)
+  services Service[]
+}
+
+model Service {
+  id           String          @id @default(cuid())
+  name         String
+  description  String?
+  durationMin  Int
+  price        Float
+  order        Int             @default(0)
+  active       Boolean         @default(true)
+  categoryId   String
+  category     ServiceCategory @relation(fields: [categoryId], references: [id])
+  appointments Appointment[]
+}
+
+model Client {
+  id           String        @id @default(cuid())
+  name         String
+  phone        String        @unique
+  email        String?
+  notes        String?
+  createdAt    DateTime      @default(now())
+  appointments Appointment[]
+}
+
+model Appointment {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id])
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id])
+  date      String // "2026-09-21"
+  startTime String // "14:30"
+  endTime   String // "15:15"
+  status    String   @default("confirmed") // confirmed | cancelled
+  note      String?
+  source    String   @default("client") // client | admin
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([date])
+}
+
+model AdminUser {
+  id           String @id @default("admin")
+  passwordHash String
+}
