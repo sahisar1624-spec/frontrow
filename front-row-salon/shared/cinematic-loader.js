@@ -60,3 +60,28 @@ export function loadCinematic() {
   }
   return pending;
 }
+
+/* the bloom/glow post-processing chain — a separate, optional bundle since
+   not every cinematic section wants it. Self-hosted from three's own
+   examples/jsm/postprocessing (shared/vendor/postprocessing/), patched to
+   import three.module.min.js locally instead of the bare 'three' specifier
+   the upstream files use. */
+var pendingBloom;
+export function loadBloom() {
+  if (!pendingBloom) {
+    pendingBloom = Promise.all([
+      import('./vendor/postprocessing/EffectComposer.js'),
+      import('./vendor/postprocessing/RenderPass.js'),
+      import('./vendor/postprocessing/UnrealBloomPass.js'),
+      import('./vendor/postprocessing/OutputPass.js')
+    ]).then(function (mods) {
+      return {
+        EffectComposer: mods[0].EffectComposer,
+        RenderPass: mods[1].RenderPass,
+        UnrealBloomPass: mods[2].UnrealBloomPass,
+        OutputPass: mods[3].OutputPass
+      };
+    });
+  }
+  return pendingBloom;
+}

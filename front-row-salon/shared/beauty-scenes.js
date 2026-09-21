@@ -8,9 +8,13 @@
    ========================================================================== */
 
 function brassMat(THREE, opts) {
-  return new THREE.MeshPhysicalMaterial(Object.assign({
-    color: 0xd4af6a, metalness: 0.75, roughness: 0.3, clearcoat: 0.5, clearcoatRoughness: 0.25
-  }, opts || {}));
+  var base = {
+    color: 0xd4af6a, metalness: 0.75, roughness: 0.3, clearcoat: 0.5, clearcoatRoughness: 0.25,
+    emissive: 0xd4af6a, emissiveIntensity: 0.22
+  };
+  var merged = Object.assign({}, base, opts || {});
+  if (opts && opts.color && !opts.emissive) merged.emissive = opts.color;
+  return new THREE.MeshPhysicalMaterial(merged);
 }
 
 /* HAIR — a handful of flowing ribbon-strands, each its own gentle curve */
@@ -83,7 +87,7 @@ export function buildRibbonFlow(THREE) {
    library needed) standing in for skin, touch, unhurried care */
 export function buildFacialBlob(THREE) {
   var group = new THREE.Group();
-  var geo = new THREE.IcosahedronGeometry(1.7, 5);
+  var geo = new THREE.IcosahedronGeometry(2.15, 5);
   var pos = geo.attributes.position;
   var v = new THREE.Vector3();
   for (var i = 0; i < pos.count; i++) {

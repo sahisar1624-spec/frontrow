@@ -30,6 +30,8 @@
 
   --on-accent:    #17130f;   /* text sitting on gold/blush fills */
   --nav-bg:       rgba(16, 13, 14, 0.86);
+  --glass-bg:     rgba(16, 13, 14, 0.55);   /* content panels over a full-bleed 3D scene */
+  --glass-border: rgba(246, 239, 227, 0.16);
 
   /* ---- type ---- */
   --font-display: 'Bodoni Moda', 'Didot', 'Georgia', serif;
@@ -66,6 +68,8 @@
   --brass-soft:   rgba(156, 122, 46, 0.12);
 
   --nav-bg:       rgba(248, 243, 236, 0.86);
+  --glass-bg:     rgba(248, 243, 236, 0.72);
+  --glass-border: rgba(34, 26, 22, 0.16);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -508,6 +512,53 @@ main > section[id] { scroll-margin-top: 84px; }
 .tilt { transform-style: preserve-3d; }
 @media (prefers-reduced-motion: reduce) {
   .tilt { transform: none !important; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* cinema — a full-bleed, fixed 3D backdrop with real content floating     */
+/* over it in glass panels. Shared across every page that goes full-bleed */
+/* (Services, About, ...). The canvas is fixed to the viewport for the    */
+/* whole run of .cinema-block sections that follow it, so scrolling reads */
+/* as moving through one continuous scene rather than between pictures.   */
+/* ---------------------------------------------------------------------- */
+.cinema-run { position: relative; }
+.cinema-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.6s var(--ease);
+}
+.cinema-canvas.is-ready { opacity: 1; }
+.cinema-block {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: clamp(5rem, 10vw, 7rem) clamp(1.25rem, 6vw, 5rem);
+}
+.cinema-block:first-child { padding-top: clamp(7rem, 13vw, 9rem); }
+.glass-card {
+  max-width: 640px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  box-shadow: 0 44px 90px -32px rgba(0,0,0,0.55);
+}
+.glass-card h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.7rem, 3.2vw, 2.5rem); line-height: 1.1; margin: 0.7rem 0 1rem; }
+.glass-card p { color: var(--muted); line-height: 1.75; }
+.glass-thumb { width: 96px; height: 96px; border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); margin-top: 1.25rem; }
+.glass-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cinema-block.align-right { justify-content: flex-end; }
+@media (max-width: 899px) {
+  .cinema-canvas { display: none; }
+  .cinema-block { min-height: 0; padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1.25rem, 5vw, 2rem); }
+  .glass-card { background: var(--paper-card); backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-canvas { display: none; }
 }
 
 /* ---------------------------------------------------------------------- */
