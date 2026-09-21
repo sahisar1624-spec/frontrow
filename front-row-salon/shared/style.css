@@ -580,6 +580,51 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 
 /* ---------------------------------------------------------------------- */
+/* team — a plain 3-column grid until shared/team-carousel.js (desktop,   */
+/* motion-allowed only) promotes it into a central-portrait stage. Same    */
+/* six real cards throughout; this only repositions them.                 */
+/* ---------------------------------------------------------------------- */
+#team-grid.is-stage {
+  display: block;
+  position: relative;
+  min-height: 820px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  perspective: 1600px;
+}
+#team-grid.is-stage::before {
+  content: '';
+  position: absolute; inset: -10% -4% auto -4%;
+  height: 70%;
+  background: radial-gradient(ellipse at 50% 35%, var(--brass) 0%, transparent 65%);
+  opacity: 0.12;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+#team-grid.is-stage .team-card {
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 230px;
+  margin: 0;
+  cursor: pointer;
+  transform: translate(calc(-50% + var(--ox, 0px)), calc(-50% + var(--oy, 0px))) scale(0.66) rotateY(var(--rot, 0deg));
+  opacity: 0.5;
+  filter: blur(0.5px) saturate(0.8);
+  z-index: 1;
+  transition: transform 0.7s var(--ease), opacity 0.6s var(--ease), filter 0.6s var(--ease);
+}
+#team-grid.is-stage .team-card[data-state="orbit"]:hover,
+#team-grid.is-stage .team-card[data-state="orbit"]:focus-visible {
+  opacity: 0.9; filter: none; z-index: 3;
+}
+#team-grid.is-stage .team-card[data-state="active"] {
+  transform: translate(-50%, -50%) scale(1.18);
+  opacity: 1; filter: none; z-index: 5;
+  cursor: default;
+}
+
+/* ---------------------------------------------------------------------- */
 /* cards                                                                    */
 /* ---------------------------------------------------------------------- */
 .card {

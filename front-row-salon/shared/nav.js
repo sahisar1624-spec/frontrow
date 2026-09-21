@@ -457,7 +457,10 @@
   function initTilt() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var els = document.querySelectorAll('.card, .teaser-card, .product-card, .team-card');
+    // .team-card is excluded: the Team page drives its own richer 3D
+    // carousel (shared/team-carousel.js) on the same elements, and the
+    // two competing for the same inline transform would fight each other.
+    var els = document.querySelectorAll('.card:not(.team-card), .teaser-card, .product-card');
     if (!els.length) return;
     els.forEach(function (el) {
       el.classList.add('tilt');
