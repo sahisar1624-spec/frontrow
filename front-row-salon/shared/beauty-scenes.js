@@ -59,6 +59,26 @@ export function buildNailFan(THREE) {
   return group;
 }
 
+/* RIBBON — a single flowing brass ribbon, calmer than the hair strands,
+   standing in for "raw, authentic brilliance" behind the About page's
+   opening quote */
+export function buildRibbonFlow(THREE) {
+  var group = new THREE.Group();
+  var curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-2.8, 1.3, -0.6),
+    new THREE.Vector3(-1.0, -1.1, 0.8),
+    new THREE.Vector3(0.6, 1.3, -0.4),
+    new THREE.Vector3(2.2, -0.8, 0.6),
+    new THREE.Vector3(3.2, 1.0, -0.2)
+  ]);
+  var ribbon = new THREE.Mesh(
+    new THREE.TubeGeometry(curve, 160, 0.16, 24, false),
+    brassMat(THREE, { metalness: 0.85, roughness: 0.22 })
+  );
+  group.add(ribbon);
+  return group;
+}
+
 /* BODY & FACE — one soft, organic blob (hand-displaced sphere, no noise
    library needed) standing in for skin, touch, unhurried care */
 export function buildFacialBlob(THREE) {
