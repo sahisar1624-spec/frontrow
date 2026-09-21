@@ -549,6 +549,37 @@ main > section[id] { scroll-margin-top: 84px; }
 .about-photo-depth img { will-change: transform; }
 
 /* ---------------------------------------------------------------------- */
+/* gallery — the grid stays the grid (real <img>/<video>, real captions,   */
+/* real SEO), but each photo gets a one-time 3D "arrives toward camera"    */
+/* entrance and can be brought forward on click, with the rest of the      */
+/* room receding slightly behind it. shared/gallery-interactive.js drives  */
+/* the classes; this is CSS-only fallback-safe (no JS = plain grid).       */
+/* ---------------------------------------------------------------------- */
+#gallery-grid { perspective: 1400px; }
+#gallery-grid figure .media-placeholder {
+  cursor: pointer;
+  transition: transform 0.55s var(--ease), filter 0.55s var(--ease), opacity 0.55s var(--ease), box-shadow 0.55s var(--ease);
+}
+#gallery-grid figure:hover .media-placeholder,
+#gallery-grid figure:focus-visible .media-placeholder {
+  transform: scale(1.045) translateZ(20px);
+}
+#gallery-grid.has-focus figure:not(.is-focused) .media-placeholder {
+  opacity: 0.4;
+  filter: blur(1.5px) saturate(0.7);
+  transform: scale(0.94) translateZ(-60px);
+}
+#gallery-grid figure.is-focused { z-index: 5; }
+#gallery-grid figure.is-focused .media-placeholder {
+  transform: scale(1.16) translateZ(50px);
+  box-shadow: 0 34px 64px -22px rgba(0,0,0,0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  #gallery-grid figure .media-placeholder { transition: opacity 0.4s var(--ease) !important; transform: none !important; filter: none !important; }
+  #gallery-grid.has-focus figure:not(.is-focused) .media-placeholder { opacity: 0.55; }
+}
+
+/* ---------------------------------------------------------------------- */
 /* cards                                                                    */
 /* ---------------------------------------------------------------------- */
 .card {
