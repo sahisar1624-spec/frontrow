@@ -23,44 +23,30 @@
   var canvas = document.getElementById('hero-3d');
   if (!canvas) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(min-width: 720px)').matches) return;
-  if (navigator.connection && (navigator.connection.saveData ||
-      /2g/.test(navigator.connection.effectiveType || ''))) return;
+  import('./cinematic-loader.js').then(function (loader) {
+    if (!loader.guardsPass()) return;
 
-  function hasWebGL() {
-    try {
-      var c = document.createElement('canvas');
-      return !!(window.WebGLRenderingContext &&
-        (c.getContext('webgl2') || c.getContext('webgl')));
-    } catch (e) {
-      return false;
+    function boot() {
+      Promise.all([loader.loadCinematic(), loader.loadBloom(), import('./medallion.js')])
+        .then(function (mods) { startScene(mods[0].THREE, mods[1], mods[2].buildMedallion); })
+        .catch(function () { /* library didn't load — hero just stays the plain photo */ });
     }
-  }
-  if (!hasWebGL()) return;
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(boot, { timeout: 800 });
+    } else {
+      window.setTimeout(boot, 150);
+    }
+  });
 
-  function boot() {
-    Promise.all([
-      import('./vendor/three.module.min.js'),
-      import('./medallion.js')
-    ]).then(function (mods) { startScene(mods[0], mods[1].buildMedallion); })
-      .catch(function () { /* library didn't load — hero just stays the plain photo */ });
-  }
-
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(boot, { timeout: 2500 });
-  } else {
-    window.setTimeout(boot, 350);
-  }
-
-  function startScene(THREE, buildMedallion) {
+  function startScene(THREE, bloomMods, buildMedallion) {
     var wrap = canvas.closest('.home-hero');
     if (!wrap || !canvas.parentElement) return;
 
     var renderer = new THREE.WebGLRenderer({
-      canvas: canvas, alpha: true, antialias: true, powerPreference: 'low-power'
+      canvas: canvas, alpha: true, antialias: true, powerPreference: 'high-performance'
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
@@ -82,7 +68,14 @@
     /* the salon's own crest, as a slowly turning gold medallion — a coin
        catching light rather than a flat logo pasted on the page */
     var group = buildMedallion(THREE, 1.9);
+    group.traverse(function (o) { if (o.material) o.material.emissiveIntensity = (o.material.emissiveIntensity || 0.22) + 0.25; });
     scene.add(group);
+
+    var composer = new bloomMods.EffectComposer(renderer);
+    composer.addPass(new bloomMods.RenderPass(scene, camera));
+    var bloomPass = new bloomMods.UnrealBloomPass(new THREE.Vector2(800, 800), 0.5, 0.5, 0.42);
+    composer.addPass(bloomPass);
+    composer.addPass(new bloomMods.OutputPass());
 
     /* a light drift of gold dust around it */
     var dustCount = 70;
@@ -112,6 +105,8 @@
       var r = canvas.parentElement.getBoundingClientRect();
       var w = Math.max(1, r.width), h = Math.max(1, r.height);
       renderer.setSize(w, h, false);
+      composer.setSize(w, h);
+      bloomPass.setSize(w, h);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
     }
@@ -145,7 +140,7 @@
       camera.position.x = pointer.x * 0.4;
       camera.position.y = -pointer.y * 0.3;
       camera.lookAt(0, 0, 0);
-      renderer.render(scene, camera);
+      composer.render();
     }
     tick();
 

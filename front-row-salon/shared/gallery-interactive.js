@@ -23,6 +23,33 @@
 
   var grid = document.getElementById('gallery-grid');
   if (!grid) return;
+
+  /* a bold, bloom-lit ambient backdrop behind the (untouched) real photo
+     grid — a slowly turning gold medallion in a drift of dust, the same
+     premium atmosphere as Services/About without touching a single photo */
+  import('./ambient-scene.js').then(function (mod) {
+    import('./medallion.js').then(function (m) {
+      mod.startAmbientScene('gallery-cinema', '.gallery-grid', function (THREE) {
+        var group = new THREE.Group();
+        var medallion = m.buildMedallion(THREE, 2.4);
+        medallion.position.set(2.6, 0, -3);
+        group.add(medallion);
+
+        var count = 90;
+        var positions = new Float32Array(count * 3);
+        for (var i = 0; i < count; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 12;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 6 - 2;
+        }
+        var geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        var dust = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xd4af6a, size: 0.05, transparent: true, opacity: 0.6, sizeAttenuation: true }));
+        group.add(dust);
+        return group;
+      }, { camZ: 9.5, bloomStrength: 0.5, spinSpeed: 0.06 });
+    });
+  });
   var figures = Array.prototype.slice.call(grid.querySelectorAll(':scope > figure'));
   if (!figures.length) return;
 
@@ -59,24 +86,16 @@
     if (e.target === grid) clearFocus();
   });
 
-  /* -- one-time 3D entrance per tile, reduced-motion and phone-width gated -- */
+  /* -- one-time 3D entrance per tile, reduced-motion and phone-width gated --
+     uses the same shared, deduped loader as the ambient backdrop above so
+     the two never race to load (and re-register) GSAP independently. */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!window.matchMedia('(min-width: 720px)').matches) return;
 
-  function loadScript(src) {
-    return new Promise(function (resolve, reject) {
-      var s = document.createElement('script');
-      s.src = src;
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
   function boot() {
-    loadScript('shared/vendor/gsap.min.js')
-      .then(function () { return loadScript('shared/vendor/ScrollTrigger.min.js'); })
-      .then(function () { initScroll(window.gsap, window.ScrollTrigger); })
+    import('./cinematic-loader.js')
+      .then(function (loader) { return loader.loadCinematic(); })
+      .then(function (mods) { initScroll(mods.gsap, mods.ScrollTrigger); })
       .catch(function () { /* GSAP didn't load — the grid still works fine, plain */ });
   }
   if ('requestIdleCallback' in window) {
@@ -86,7 +105,6 @@
   }
 
   function initScroll(gsap, ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
     figures.forEach(function (fig, i) {
       var media = fig.querySelector('.media-placeholder');
       if (!media) return;

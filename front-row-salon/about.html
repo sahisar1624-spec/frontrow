@@ -17,19 +17,12 @@
 <meta name="twitter:description" content="Front Row Beauty Salon celebrates women in their real, most raw, authentic brilliance — with hair products made from natural, rich ingredients.">
 <meta name="twitter:image" content="https://frontrowbeautysalon.com/images/salon-styling-stations.jpg">
 <link rel="canonical" href="https://frontrowbeautysalon.com/about.html">
-<link rel="stylesheet" href="shared/style.css?v=20260913p">
+<link rel="stylesheet" href="shared/style.css?v=20260913q">
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
-  .about-lead { max-width: 900px; }
-  .about-lead blockquote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 340;
-    font-size: clamp(1.6rem, 3.4vw, 2.5rem);
-    line-height: 1.5;
-  }
-  .belief-grid { align-items: start; }
-  .belief-grid .card .eyebrow { margin-bottom: 1rem; }
+  .about-quote { font-family: var(--font-display); font-style: italic; font-weight: 340; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.5; }
+  .belief-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 760px; }
+  @media (max-width: 720px) { .belief-pair { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -47,57 +40,45 @@
     </div>
   </section>
 
-  <div class="story-stage">
-  <canvas id="about-3d" aria-hidden="true"></canvas>
+  <div class="cinema-run">
+    <canvas id="about-cinema" class="cinema-canvas" aria-hidden="true"></canvas>
 
-  <section class="section">
-    <div class="wrap about-lead">
-      <blockquote>&ldquo;At Front Row Beauty Salon, we celebrate women in their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love. We employ hair products with some of the most natural and rich ingredients because we believe you should never expect less.&rdquo;</blockquote>
-    </div>
-  </section>
+    <section class="cinema-block">
+      <div class="glass-card">
+        <p class="about-quote">&ldquo;At Front Row Beauty Salon, we celebrate women in their real, most raw, authentic brilliance, who believe in themselves and are ready to step into the look they love. We employ hair products with some of the most natural and rich ingredients because we believe you should never expect less.&rdquo;</p>
+      </div>
+    </section>
 
-  <section class="section section-alt">
-    <div class="wrap">
-      <div class="head-block reveal">
+    <section class="cinema-block align-right">
+      <div class="glass-card glass-card-wide">
         <div class="eyebrow">What we believe</div>
-        <h2>Two ideas, held the same way every time.</h2>
-      </div>
-      <div class="grid grid-2 belief-grid">
-        <div class="card reveal">
-          <div class="eyebrow">Authentic brilliance</div>
-          <h3 class="mb-1">You don't need to be talked into yourself.</h3>
-          <p class="text-muted">We work from who you already are, not from a trend board. A cut, a colour, a set of nails should make the person underneath more visible, not less — the confidence we're chasing is the kind that was already there, waiting for the right chair.</p>
-        </div>
-        <div class="card reveal">
-          <div class="eyebrow">Natural, rich ingredients</div>
-          <h3 class="mb-1">You should never expect less.</h3>
-          <p class="text-muted">What goes on your hair matters as much as what it's shaped into afterward. We choose products built from natural, rich ingredients as a baseline, not an upsell — because the result should hold up under real light, not just salon light.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  </div>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="grid grid-2" style="align-items:center;">
-        <div>
-          <div class="eyebrow">Inside the salon</div>
-          <h2 class="mt-1 mb-1">A room built to slow down in.</h2>
-          <p class="lede">Bur Dubai, Al Nasser Building — a short walk from Al Raffa Road, and an easy exhale once you're through the door.</p>
-        </div>
-        <div class="media-placeholder aspect-wide about-photo-depth">
-          <img src="images/salon-product-display.jpg" alt="Product display wall and seating at Front Row Beauty Salon, with the salon crest on the wall" loading="lazy" decoding="async">
-          <div class="ph-fallback">
-            <span class="ph-icon">&#9656;</span>
-            <span class="ph-label">Salon atmosphere, in motion</span>
-            <span class="ph-file">images/salon-product-display.jpg</span>
+        <h3>Two ideas, held the same way every time.</h3>
+        <div class="belief-pair">
+          <div>
+            <div class="eyebrow" style="margin-bottom:0.6rem;">Authentic brilliance</div>
+            <h4 class="mb-1">You don't need to be talked into yourself.</h4>
+            <p style="font-size:0.88rem;">We work from who you already are, not from a trend board. A cut, a colour, a set of nails should make the person underneath more visible, not less &mdash; the confidence we're chasing is the kind that was already there, waiting for the right chair.</p>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:0.6rem;">Natural, rich ingredients</div>
+            <h4 class="mb-1">You should never expect less.</h4>
+            <p style="font-size:0.88rem;">What goes on your hair matters as much as what it's shaped into afterward. We choose products built from natural, rich ingredients as a baseline, not an upsell &mdash; because the result should hold up under real light, not just salon light.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="cinema-block">
+      <div class="glass-card">
+        <div class="eyebrow">Inside the salon</div>
+        <h3>A room built to slow down in.</h3>
+        <p>Bur Dubai, Al Nasser Building — a short walk from Al Raffa Road, and an easy exhale once you're through the door.</p>
+        <div class="glass-thumb">
+          <img src="images/salon-product-display.jpg" alt="Product display wall and seating at Front Row Beauty Salon, with the salon crest on the wall" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+  </div>
 
   <section class="section">
     <div class="wrap">
@@ -114,9 +95,9 @@
 
 <footer id="site-footer"></footer>
 
-<script src="shared/nav.js?v=20260913p"></script>
-<script src="shared/chatbot.js?v=20260913p"></script>
-<script src="shared/page-hero-scene.js?v=20260913p"></script>
-<script src="shared/about-scene.js?v=20260913p"></script>
+<script src="shared/nav.js?v=20260913q"></script>
+<script src="shared/chatbot.js?v=20260913q"></script>
+<script src="shared/page-hero-scene.js?v=20260913q"></script>
+<script src="shared/about-scene.js?v=20260913q"></script>
 </body>
 </html>

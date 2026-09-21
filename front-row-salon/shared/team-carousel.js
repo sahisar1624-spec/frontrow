@@ -18,6 +18,24 @@
 
   var grid = document.getElementById('team-grid');
   if (!grid) return;
+
+  /* a bold, bloom-lit ambient backdrop — three small medallions drifting
+     around each other behind the carousel, echoing "many people, one
+     standard" without touching any of the real portrait cards */
+  import('./ambient-scene.js').then(function (mod) {
+    import('./medallion.js').then(function (m) {
+      mod.startAmbientScene('team-cinema', '#team-grid', function (THREE) {
+        var group = new THREE.Group();
+        var spots = [{ x: -2.8, y: 0.6, z: -2, r: 1 }, { x: 2.6, y: -0.8, z: -3, r: 0.8 }, { x: 0.4, y: 1.4, z: -4, r: 0.7 }];
+        spots.forEach(function (s) {
+          var med = m.buildMedallion(THREE, s.r);
+          med.position.set(s.x, s.y, s.z);
+          group.add(med);
+        });
+        return group;
+      }, { camZ: 9, bloomStrength: 0.5, spinSpeed: 0.05 });
+    });
+  });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll(':scope > .team-card'));

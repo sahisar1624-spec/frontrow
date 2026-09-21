@@ -497,7 +497,7 @@ main > section[id] { scroll-margin-top: 84px; }
   opacity: 0;
   transition: opacity 1.4s var(--ease);
 }
-#page-hero-3d.is-ready { opacity: 0.45; }
+#page-hero-3d.is-ready { opacity: 0.85; }
 .page-hero .wrap { position: relative; z-index: 1; }
 @media (max-width: 899px) { #page-hero-3d { display: none; } }
 @media (prefers-reduced-motion: reduce) { #page-hero-3d { display: none; } }
@@ -548,7 +548,23 @@ main > section[id] { scroll-margin-top: 84px; }
   box-shadow: 0 44px 90px -32px rgba(0,0,0,0.55);
 }
 .glass-card h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.7rem, 3.2vw, 2.5rem); line-height: 1.1; margin: 0.7rem 0 1rem; }
+.glass-card h4 { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; margin: 0 0 0.4rem; }
 .glass-card p { color: var(--muted); line-height: 1.75; }
+.glass-card-wide { max-width: 780px; }
+
+/* ambient-canvas — the reusable full-bleed bloom backdrop for pages whose
+   real content (photos, the team carousel, the contact form) stays put
+   in normal flow above it. See shared/ambient-scene.js. */
+.ambient-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.6s var(--ease);
+}
+.ambient-canvas.is-ready { opacity: 1; }
+@media (max-width: 899px) { .ambient-canvas { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ambient-canvas { display: none; } }
 .glass-thumb { width: 96px; height: 96px; border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); margin-top: 1.25rem; }
 .glass-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cinema-block.align-right { justify-content: flex-end; }
@@ -561,43 +577,6 @@ main > section[id] { scroll-margin-top: 84px; }
   .cinema-canvas { display: none; }
 }
 
-/* ---------------------------------------------------------------------- */
-/* pillar stage — the scroll-driven 3D companion behind the Services       */
-/* page's Hair / Nails / Body & Face rows. Purely decorative: the rows'    */
-/* real photos, copy and links sit above it and work identically with it  */
-/* switched off (narrow viewport, reduced motion, no WebGL).              */
-/* ---------------------------------------------------------------------- */
-.pillar-stage { position: relative; }
-.pillar-stage .pillar-row { position: relative; z-index: 1; }
-#services-3d {
-  position: absolute; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease);
-}
-#services-3d.is-ready { opacity: 0.5; }
-@media (max-width: 899px) { #services-3d { display: none; } }
-@media (prefers-reduced-motion: reduce) { #services-3d { display: none; } }
-
-/* story stage — same idea as the pillar stage, reused wherever a run of
-   sections gets a scroll-driven 3D companion behind it (About's quote +
-   beliefs today; other cinematic pages can reuse the class). */
-.story-stage { position: relative; }
-.story-stage > section { position: relative; z-index: 1; }
-.story-stage > section.section-alt { background: color-mix(in srgb, var(--paper-elev) 82%, transparent); }
-#about-3d {
-  position: absolute; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease);
-}
-#about-3d.is-ready { opacity: 0.5; }
-@media (max-width: 899px) { #about-3d { display: none; } }
-@media (prefers-reduced-motion: reduce) { #about-3d { display: none; } }
-
-.about-photo-depth img { will-change: transform; }
 
 /* ---------------------------------------------------------------------- */
 /* gallery — the grid stays the grid (real <img>/<video>, real captions,   */
@@ -676,23 +655,10 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 
 /* ---------------------------------------------------------------------- */
-/* contact — ambient dust behind the details/form, and a one-time shimmer */
-/* across the footer the moment it's reached (same shimmer technique as   */
-/* .btn-primary elsewhere on the site).                                   */
+/* contact — the footer's one-time "arrival" shimmer the moment it's      */
+/* reached (same shimmer technique as .btn-primary elsewhere). The        */
+/* ambient dust/medallion backdrop uses the shared .ambient-canvas system.*/
 /* ---------------------------------------------------------------------- */
-.contact-stage { position: relative; }
-#contact-3d {
-  position: absolute; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.4s var(--ease);
-}
-#contact-3d.is-ready { opacity: 0.45; }
-.contact-stage > .wrap { position: relative; z-index: 1; }
-@media (max-width: 899px) { #contact-3d { display: none; } }
-@media (prefers-reduced-motion: reduce) { #contact-3d { display: none; } }
-
 #site-footer .footer-top { position: relative; overflow: hidden; }
 #site-footer.arrival .footer-top::after {
   content: '';
