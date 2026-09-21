@@ -1457,6 +1457,20 @@ h3, .h3 { transition: color 0.4s var(--ease); }
   visibility: visible;
   transition: opacity 0.38s var(--ease);
 }
+/* a soft brass bloom at the centre of the fade, so moving between pages
+   reads as passing through one continuous scene rather than a plain
+   flash to blank — same idea as the site's medallion, just at the seam
+   between pages instead of on one of them */
+#page-transition::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(212,175,106,0.4) 0%, transparent 48%);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.45s var(--ease) 0.02s, transform 0.55s var(--ease) 0.02s;
+}
+#page-transition.is-active::after { opacity: 1; transform: scale(1.08); }
 @media (prefers-reduced-motion: reduce) {
   #page-transition { transition: none; }
+  #page-transition::after { display: none; }
 }
