@@ -21,15 +21,34 @@
 <link rel="stylesheet" href="shared/style.css?v=20260913x">
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
-  /* ---- home-only: editorial split hero ---- */
-  .home-hero { position: relative; overflow: hidden; padding: clamp(7.5rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--hairline); }
-  .home-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.85fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  @media (max-width: 860px) { .home-hero-grid { grid-template-columns: 1fr; } }
-  .home-hero-content h1 { margin: 1.1rem 0 1.4rem; }
+  /* ---- home-only: full-bleed photo hero ---- */
+  .home-hero {
+    position: relative; overflow: hidden;
+    min-height: min(92vh, 880px); display: flex; align-items: flex-end;
+    background-image: url('images/hero-salon-interior.jpg');
+    background-size: cover; background-position: center;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .home-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(16,13,14,.05) 0%, rgba(16,13,14,.22) 45%, rgba(16,13,14,.9) 100%);
+  }
+  :root[data-theme="light"] .home-hero::before {
+    background: linear-gradient(180deg, rgba(34,26,22,.08) 0%, rgba(34,26,22,.28) 45%, rgba(34,26,22,.88) 100%);
+  }
+  .home-hero-inner { position: relative; z-index: 1; width: 100%; padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2.5rem, 5vw, 3.5rem); }
+  .home-hero-inner .eyebrow { color: var(--brass); }
+  .home-hero-inner h1 { color: #f6efe3; margin: 1rem 0 1.2rem; max-width: 16ch; }
+  .home-hero-inner .lede { color: rgba(246,239,227,.85); max-width: 46ch; }
   .home-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-  .home-hero-figure { position: relative; }
-  .home-hero-figure .media-placeholder { aspect-ratio: 4/5; }
-  .home-hero-figure figcaption { margin-top: 0.85rem; font-size: 0.76rem; letter-spacing: 0.06em; color: var(--muted-dim); text-align: center; }
+  .home-hero-actions .btn-ghost { color: #f6efe3; border-color: rgba(246,239,227,.5); }
+  .home-hero-actions .btn-ghost:hover { color: var(--brass); border-color: var(--brass); }
+  .home-hero-facts {
+    display: flex; gap: clamp(1.2rem, 3vw, 2.2rem); flex-wrap: wrap;
+    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(246,239,227,.24);
+    font-size: 0.82rem; color: rgba(246,239,227,.72);
+  }
+  .home-hero-facts b { display: block; color: #f6efe3; font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; }
 
   /* ---- welcome strip ---- */
   .welcome-strip { max-width: 780px; }
@@ -112,28 +131,20 @@
 <main>
 
   <section class="home-hero" id="home">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="wrap home-hero-grid">
-      <div class="home-hero-content">
-        <div class="eyebrow">Front Row Beauty Salon &middot; Bur Dubai</div>
-        <h1>The seat you've been saving for yourself.</h1>
-        <p class="lede">Hair, nails, and beauty in a space built for real, unhurried brilliance — 4.9 rated across 63 reviews, and highly recommended.</p>
-        <div class="home-hero-actions">
-          <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
-          <a class="btn btn-ghost" href="services.html">Explore Services</a>
-        </div>
+    <div class="wrap home-hero-inner">
+      <div class="eyebrow">Front Row Beauty Salon &middot; Bur Dubai</div>
+      <h1>The seat you've been saving for yourself.</h1>
+      <p class="lede">Hair, nails, and beauty in a space built for real, unhurried brilliance — 4.9 rated across 63 reviews, and highly recommended.</p>
+      <div class="home-hero-actions">
+        <a class="btn btn-primary" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+        <a class="btn btn-ghost" href="services.html">Explore Services</a>
       </div>
-      <figure class="home-hero-figure reveal">
-        <div class="media-placeholder aspect-tall">
-          <img src="images/salon-styling-stations.jpg" alt="Styling stations inside Front Row Beauty Salon, gold-framed mirrors and black leather chairs" fetchpriority="high">
-          <div class="ph-fallback">
-            <span class="ph-icon">&#10022;</span>
-            <span class="ph-label">The salon, front and centre</span>
-            <span class="ph-file">images/salon-styling-stations.jpg</span>
-          </div>
-        </div>
-        <figcaption>Photographed in the salon &middot; Bur Dubai</figcaption>
-      </figure>
+      <div class="home-hero-facts">
+        <div><b>4.9&#9733;</b>Google Rating</div>
+        <div><b>63</b>Reviews</div>
+        <div><b>Daily</b>10am&ndash;9pm</div>
+        <div><b>Bur Dubai</b>Al Raffa Road</div>
+      </div>
     </div>
   </section>
 
