@@ -3,11 +3,12 @@
    Direction: black & gold luxury editorial — a fashion-magazine "front row"
    world after dark. Near-black charcoal ground with a warm grey ambience,
    ivory ink, foil-gold as the primary accent paired with a soft rose-blush
-   for femininity, a high-contrast editorial serif for display type, a
-   bloom-lit WebGL layer on the cinematic pages and a lightweight CSS-only
-   3D float carousel elsewhere. Every page includes this file — keep tokens
-   and components here so every page stays visually identical while each
-   page's content differs.
+   for femininity, a high-contrast editorial serif for display type, real
+   salon photography as full-bleed scenes (Services) and a lightweight
+   CSS-only 3D float carousel (Home, Products, ...) — no WebGL/canvas
+   anywhere, so nothing here depends on a 3D layer booting successfully.
+   Every page includes this file — keep tokens and components here so
+   every page stays visually identical while each page's content differs.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Work+Sans:wght@300;400;500;600&display=swap');
@@ -489,18 +490,7 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 .page-hero h1 { max-width: 18ch; }
 .page-hero .lede { margin-top: 1.25rem; }
-
-#page-hero-3d {
-  position: absolute; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.4s var(--ease);
-}
-#page-hero-3d.is-ready { opacity: 0.85; }
 .page-hero .wrap { position: relative; z-index: 1; }
-@media (max-width: 899px) { #page-hero-3d { display: none; } }
-@media (prefers-reduced-motion: reduce) { #page-hero-3d { display: none; } }
 
 /* ---------------------------------------------------------------------- */
 /* card tilt — a gentle perspective tilt toward the pointer, fine-pointer  */
@@ -515,75 +505,10 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 
 /* ---------------------------------------------------------------------- */
-/* cinema — a full-bleed, fixed 3D backdrop with real content floating     */
-/* over it in glass panels. Shared across every page that goes full-bleed */
-/* (Services, About, ...). The canvas is fixed to the viewport for the    */
-/* whole run of .cinema-block sections that follow it, so scrolling reads */
-/* as moving through one continuous scene rather than between pictures.   */
-/* ---------------------------------------------------------------------- */
-.cinema-run { position: relative; }
-.cinema-canvas {
-  position: fixed; inset: 0; z-index: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.6s var(--ease);
-}
-.cinema-canvas.is-ready { opacity: 1; }
-.cinema-block {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; align-items: center;
-  padding: clamp(5rem, 10vw, 7rem) clamp(1.25rem, 6vw, 5rem);
-}
-.cinema-block:first-child { padding-top: clamp(7rem, 13vw, 9rem); }
-.glass-card {
-  max-width: 640px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  box-shadow: 0 44px 90px -32px rgba(0,0,0,0.55);
-}
-.glass-card h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.7rem, 3.2vw, 2.5rem); line-height: 1.1; margin: 0.7rem 0 1rem; }
-.glass-card h4 { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; margin: 0 0 0.4rem; }
-.glass-card p { color: var(--muted); line-height: 1.75; }
-.glass-card-wide { max-width: 780px; }
-
-/* ambient-canvas — the reusable full-bleed bloom backdrop for pages whose
-   real content (photos, the team carousel, the contact form) stays put
-   in normal flow above it. See shared/ambient-scene.js. */
-.ambient-canvas {
-  position: fixed; inset: 0; z-index: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.6s var(--ease);
-}
-.ambient-canvas.is-ready { opacity: 1; }
-@media (max-width: 899px) { .ambient-canvas { display: none; } }
-@media (prefers-reduced-motion: reduce) { .ambient-canvas { display: none; } }
-.glass-thumb { width: 96px; height: 96px; border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); margin-top: 1.25rem; }
-.glass-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.cinema-block.align-right { justify-content: flex-end; }
-@media (max-width: 899px) {
-  .cinema-canvas { display: none; }
-  .cinema-block { min-height: 0; padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1.25rem, 5vw, 2rem); }
-  .glass-card { background: var(--paper-card); backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; max-width: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cinema-canvas { display: none; }
-}
-
-/* ---------------------------------------------------------------------- */
 /* cine-photo — a full-screen "scene" built from a real photo, not an      */
-/* abstract 3D object: the photo itself is the backdrop, a cinematic       */
-/* scrim keeps the text legible, and a subtle bloom-lit accent (dust, or   */
-/* — where there's no photo to use — the 3D object itself) sits over it.   */
-/* Each section is its own scene; scrolling from one to the next past a    */
-/* real photo is the transition, no crossfade logic needed.                */
+/* real photo: the photo itself is the backdrop, a cinematic scrim keeps   */
+/* the text legible. Each section is its own scene; scrolling from one to  */
+/* the next past a real photo is the transition, no crossfade needed.      */
 /* ---------------------------------------------------------------------- */
 .cine-run { position: relative; }
 .cine-photo {
@@ -599,12 +524,6 @@ main > section[id] { scroll-margin-top: 84px; }
   object-fit: cover;
   z-index: 0;
 }
-.cine-photo.cine-abstract {
-  /* intentionally fixed dark tones (not the theme tokens) in both themes —
-     this is a "scene" like the photo sections either side of it, not a
-     normal light-adapting section, so the light overlay text stays legible */
-  background: radial-gradient(ellipse at 70% 30%, #1a1617 0%, #100d0e 70%);
-}
 .cine-scrim {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(16,13,14,0.05) 0%, rgba(16,13,14,0.35) 45%, rgba(16,13,14,0.86) 100%);
@@ -613,14 +532,6 @@ main > section[id] { scroll-margin-top: 84px; }
 :root[data-theme="light"] .cine-scrim {
   background: linear-gradient(180deg, rgba(16,13,14,0.05) 0%, rgba(16,13,14,0.3) 45%, rgba(16,13,14,0.82) 100%);
 }
-.cine-accent {
-  position: absolute; inset: 0; z-index: 1;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.6s var(--ease);
-}
-.cine-accent.is-ready { opacity: 0.9; }
 .cine-content {
   position: relative; z-index: 2;
   max-width: 680px;
@@ -647,7 +558,6 @@ main > section[id] { scroll-margin-top: 84px; }
 .cine-cta { margin-top: 1.5rem; }
 @media (max-width: 899px) {
   .cine-photo { min-height: 0; flex-direction: column; align-items: stretch; }
-  .cine-accent { display: none; }
   .cine-photo-img { position: relative; height: 46vh; }
   /* below 900px the photo shrinks to a plain 46vh image block and the text
      drops into normal flow beneath it — no scrim behind it anymore, so the
@@ -659,7 +569,6 @@ main > section[id] { scroll-margin-top: 84px; }
   .cine-teaser { color: var(--ink); }
   .cine-full { color: var(--muted); }
 }
-@media (prefers-reduced-motion: reduce) { .cine-accent { display: none; } }
 
 
 /* ---------------------------------------------------------------------- */
@@ -688,9 +597,21 @@ main > section[id] { scroll-margin-top: 84px; }
   transform: scale(1.16) translateZ(50px);
   box-shadow: 0 34px 64px -22px rgba(0,0,0,0.6);
 }
+/* one-time "arrives toward camera" entrance, CSS-only (IntersectionObserver
+   in gallery-interactive.js just toggles .is-entered once per tile) */
+#gallery-grid figure.gallery-enter .media-placeholder {
+  transform: translateZ(-90px) rotateY(var(--enter-ry, 0deg));
+  opacity: 0.001;
+  transition: transform 0.9s var(--ease), opacity 0.9s var(--ease);
+}
+#gallery-grid figure.gallery-enter.is-entered .media-placeholder {
+  transform: translateZ(0) rotateY(0deg);
+  opacity: 1;
+}
 @media (prefers-reduced-motion: reduce) {
   #gallery-grid figure .media-placeholder { transition: opacity 0.4s var(--ease) !important; transform: none !important; filter: none !important; }
   #gallery-grid.has-focus figure:not(.is-focused) .media-placeholder { opacity: 0.55; }
+  #gallery-grid figure.gallery-enter .media-placeholder { opacity: 1; }
 }
 
 /* ---------------------------------------------------------------------- */

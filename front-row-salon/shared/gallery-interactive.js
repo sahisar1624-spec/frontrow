@@ -4,11 +4,10 @@
    and video clips, and re-drawing them as textures on a canvas would mean
    loading every one twice, at lower quality, with none of the SEO/
    accessibility a real <img>/<video> gets for free. Instead the actual
-   grid elements get the 3D treatment directly:
+   grid elements get the 3D treatment directly, pure CSS transforms:
 
-     - each tile arrives with a one-time "toward camera" 3D entrance as it
-       scrolls into view (GSAP ScrollTrigger, played once, then handed
-       back to CSS so nothing keeps fighting the hover/focus states below)
+     - each tile arrives with a one-time "toward camera" entrance as it
+       scrolls into view (IntersectionObserver, played once)
      - hovering a tile lifts it slightly forward
      - clicking a tile brings it to the foreground and gently recedes the
        rest of the room behind it — click again, press Escape, or click
@@ -24,35 +23,6 @@
   var grid = document.getElementById('gallery-grid');
   if (!grid) return;
 
-  /* a bold, bloom-lit ambient backdrop behind the (untouched) real photo
-     grid — a slowly turning gold medallion in a drift of dust, the same
-     premium atmosphere as Services/About without touching a single photo.
-     Host is .page-tail (the whole gallery + before/after + CTA content),
-     not just .gallery-grid, so the backdrop keeps running the full length
-     of the page instead of fading out once you scroll past the grid. */
-  import('./ambient-scene.js').then(function (mod) {
-    import('./medallion.js').then(function (m) {
-      mod.startAmbientScene('gallery-cinema', '.page-tail', function (THREE) {
-        var group = new THREE.Group();
-        var medallion = m.buildMedallion(THREE, 2.4);
-        medallion.position.set(2.6, 0, -3);
-        group.add(medallion);
-
-        var count = 90;
-        var positions = new Float32Array(count * 3);
-        for (var i = 0; i < count; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 12;
-          positions[i * 3 + 1] = (Math.random() - 0.5) * 8;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 6 - 2;
-        }
-        var geo = new THREE.BufferGeometry();
-        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        var dust = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xd4af6a, size: 0.05, transparent: true, opacity: 0.6, sizeAttenuation: true }));
-        group.add(dust);
-        return group;
-      }, { camZ: 9.5, bloomStrength: 0.5, spinSpeed: 0.06 });
-    });
-  });
   var figures = Array.prototype.slice.call(grid.querySelectorAll(':scope > figure'));
   if (!figures.length) return;
 
@@ -89,37 +59,26 @@
     if (e.target === grid) clearFocus();
   });
 
-  /* -- one-time 3D entrance per tile, reduced-motion and phone-width gated --
-     uses the same shared, deduped loader as the ambient backdrop above so
-     the two never race to load (and re-register) GSAP independently. */
+  /* -- one-time 3D entrance per tile, reduced-motion and phone-width gated -- */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!window.matchMedia('(min-width: 720px)').matches) return;
 
-  function boot() {
-    import('./cinematic-loader.js')
-      .then(function (loader) { return loader.loadCinematic(); })
-      .then(function (mods) { initScroll(mods.gsap, mods.ScrollTrigger); })
-      .catch(function () { /* GSAP didn't load — the grid still works fine, plain */ });
-  }
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(boot, { timeout: 2500 });
-  } else {
-    window.setTimeout(boot, 400);
-  }
+  figures.forEach(function (fig, i) {
+    var depth = (i % 3) - 1; // -1, 0, 1 — a little rotation variety across the grid
+    fig.style.setProperty('--enter-ry', (depth * 9) + 'deg');
+    fig.classList.add('gallery-enter');
+  });
 
-  function initScroll(gsap, ScrollTrigger) {
-    figures.forEach(function (fig, i) {
-      var media = fig.querySelector('.media-placeholder');
-      if (!media) return;
-      var depth = (i % 3) - 1; // -1, 0, 1 — a little rotation variety across the grid
-      gsap.fromTo(media,
-        { z: -90, rotateY: depth * 9, autoAlpha: 0.001, transformPerspective: 1200 },
-        {
-          z: 0, rotateY: 0, autoAlpha: 1, ease: 'power2.out', duration: 0.9,
-          scrollTrigger: { trigger: fig, start: 'top 88%' },
-          onComplete: function () { gsap.set(media, { clearProps: 'transform,opacity,visibility' }); }
-        }
-      );
-    });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-entered');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    figures.forEach(function (fig) { io.observe(fig); });
+  } else {
+    figures.forEach(function (fig) { fig.classList.add('is-entered'); });
   }
 })();
