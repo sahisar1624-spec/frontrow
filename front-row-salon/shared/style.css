@@ -577,6 +577,90 @@ main > section[id] { scroll-margin-top: 84px; }
   .cinema-canvas { display: none; }
 }
 
+/* ---------------------------------------------------------------------- */
+/* cine-photo — a full-screen "scene" built from a real photo, not an      */
+/* abstract 3D object: the photo itself is the backdrop, a cinematic       */
+/* scrim keeps the text legible, and a subtle bloom-lit accent (dust, or   */
+/* — where there's no photo to use — the 3D object itself) sits over it.   */
+/* Each section is its own scene; scrolling from one to the next past a    */
+/* real photo is the transition, no crossfade logic needed.                */
+/* ---------------------------------------------------------------------- */
+.cine-run { position: relative; }
+.cine-photo {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hairline);
+}
+.cine-photo-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.cine-photo.cine-abstract {
+  /* intentionally fixed dark tones (not the theme tokens) in both themes —
+     this is a "scene" like the photo sections either side of it, not a
+     normal light-adapting section, so the light overlay text stays legible */
+  background: radial-gradient(ellipse at 70% 30%, #1a1617 0%, #100d0e 70%);
+}
+.cine-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(16,13,14,0.05) 0%, rgba(16,13,14,0.35) 45%, rgba(16,13,14,0.86) 100%);
+  pointer-events: none;
+}
+:root[data-theme="light"] .cine-scrim {
+  background: linear-gradient(180deg, rgba(16,13,14,0.05) 0%, rgba(16,13,14,0.3) 45%, rgba(16,13,14,0.82) 100%);
+}
+.cine-accent {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.6s var(--ease);
+}
+.cine-accent.is-ready { opacity: 0.9; }
+.cine-content {
+  position: relative; z-index: 2;
+  max-width: 680px;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 6vw, 5rem) clamp(3rem, 7vw, 5rem);
+  /* fixed light tone, not var(--ink) — this text always sits over the dark
+     photo scrim (or the .cine-abstract dark gradient) regardless of theme */
+  color: #f6efe3;
+}
+.cine-content h2 {
+  font-family: var(--font-display); font-weight: 500; color: #f6efe3;
+  font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.04; margin: 0.7rem 0 1.1rem;
+}
+.cine-teaser { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.6; color: #f6efe3; max-width: 46ch; }
+.cine-full { font-size: 0.96rem; line-height: 1.75; color: #d8cfc4; max-width: 52ch; margin-top: 0.9rem; }
+.cine-expand {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  background: none; border: none; color: var(--brass);
+  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  cursor: pointer; padding: 0.9rem 0 0; font-family: var(--font-body);
+}
+.cine-expand:hover { color: var(--rosewood); }
+.cine-expand .chev { display: inline-block; transition: transform 0.3s var(--ease); }
+.cine-content.is-expanded .cine-expand .chev { transform: rotate(180deg); }
+.cine-cta { margin-top: 1.5rem; }
+@media (max-width: 899px) {
+  .cine-photo { min-height: 0; flex-direction: column; align-items: stretch; }
+  .cine-accent { display: none; }
+  .cine-photo-img { position: relative; height: 46vh; }
+  /* below 900px the photo shrinks to a plain 46vh image block and the text
+     drops into normal flow beneath it — no scrim behind it anymore, so the
+     light-on-dark palette above would be illegible and needs to switch to
+     the page's own theme-aware tokens */
+  .cine-scrim { display: none; }
+  .cine-content { padding-top: 1.5rem; color: var(--ink); }
+  .cine-content h2 { color: var(--ink); }
+  .cine-teaser { color: var(--ink); }
+  .cine-full { color: var(--muted); }
+}
+@media (prefers-reduced-motion: reduce) { .cine-accent { display: none; } }
+
 
 /* ---------------------------------------------------------------------- */
 /* gallery — the grid stays the grid (real <img>/<video>, real captions,   */
