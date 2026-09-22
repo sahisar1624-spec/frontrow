@@ -3,10 +3,10 @@
    Direction: black & gold luxury editorial — a fashion-magazine "front row"
    world after dark. Near-black charcoal ground with a warm grey ambience,
    ivory ink, foil-gold as the primary accent paired with a soft rose-blush
-   for femininity, a high-contrast editorial serif for display type,
-   restrained scroll reveals instead of scroll-scrubbed animation. No 3D
-   anywhere on the site. Every page includes this file — keep tokens and
-   components here so every page stays visually identical while each
+   for femininity, a high-contrast editorial serif for display type, a
+   bloom-lit WebGL layer on the cinematic pages and a lightweight CSS-only
+   3D float carousel elsewhere. Every page includes this file — keep tokens
+   and components here so every page stays visually identical while each
    page's content differs.
    ========================================================================== */
 
@@ -1574,4 +1574,83 @@ h3, .h3 { transition: color 0.4s var(--ease); }
 @media (prefers-reduced-motion: reduce) {
   #page-transition { transition: none; }
   #page-transition::after { display: none; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* float-carousel — a real-photo 3D carousel drifting sideways on a soft   */
+/* coloured blob, the tilted-product-shot look. Pure CSS (transform +      */
+/* @keyframes, no WebGL/canvas), so unlike the bloom-lit layer this one    */
+/* has no loader, no WebGL guard and nothing that can silently fail to     */
+/* boot — it is running the moment the stylesheet parses.                 */
+/* ---------------------------------------------------------------------- */
+.float-carousel {
+  position: relative;
+  height: clamp(240px, 34vw, 420px);
+  margin: clamp(1.5rem, 4vw, 3rem) 0;
+  perspective: 1600px;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.float-blob {
+  position: absolute;
+  inset: -15% -8%;
+  background: radial-gradient(ellipse at 45% 45%, var(--rosewood) 0%, var(--brass) 52%, transparent 74%);
+  opacity: 0.22;
+  border-radius: 44% 56% 62% 38% / 48% 42% 58% 52%;
+  filter: blur(6px);
+  animation: float-blob-morph 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes float-blob-morph {
+  0%   { border-radius: 44% 56% 62% 38% / 48% 42% 58% 52%; transform: rotate(0deg) scale(1); }
+  100% { border-radius: 58% 42% 40% 60% / 60% 48% 52% 40%; transform: rotate(6deg) scale(1.06); }
+}
+.float-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3.5vw, 2.75rem);
+  transform: translateY(-50%);
+  transform-style: preserve-3d;
+  animation: float-drift 32s linear infinite;
+  will-change: transform;
+}
+.float-carousel:hover .float-track { animation-play-state: paused; }
+.float-item {
+  flex: 0 0 auto;
+  width: clamp(108px, 11vw, 152px);
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 30px 60px -22px rgba(0,0,0,0.5);
+  transform: rotateY(var(--fc-ry, -10deg)) rotateX(var(--fc-rx, 4deg));
+  animation: float-bob 5.5s ease-in-out infinite;
+  animation-delay: var(--fc-delay, 0s);
+}
+.float-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@keyframes float-bob {
+  0%, 100% { transform: rotateY(var(--fc-ry, -10deg)) rotateX(var(--fc-rx, 4deg)) translateY(0); }
+  50%      { transform: rotateY(calc(var(--fc-ry, -10deg) * -1)) rotateX(calc(var(--fc-rx, 4deg) * -1)) translateY(-16px); }
+}
+@keyframes float-drift {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(-50%); }
+}
+.float-carousel-cap {
+  position: absolute; left: 0; right: 0; bottom: 0.6rem; z-index: 2;
+  text-align: center; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted-dim);
+  pointer-events: none;
+}
+@media (max-width: 719px) {
+  .float-carousel { height: clamp(190px, 46vw, 260px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-track, .float-item, .float-blob { animation: none; }
+  .float-track { position: relative; top: auto; left: auto; transform: none; justify-content: center; flex-wrap: wrap; }
+  /* the track holds two copies of the same photos back-to-back for a
+     seamless drift loop — with the loop off, only show the first copy */
+  .float-track > .float-item:nth-child(n+7) { display: none; }
 }
