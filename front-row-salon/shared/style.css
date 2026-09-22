@@ -513,7 +513,7 @@ main > section[id] { scroll-margin-top: 84px; }
 .cine-run { position: relative; }
 .cine-photo {
   position: relative;
-  min-height: 100vh;
+  min-height: clamp(440px, 68vh, 760px);
   display: flex; align-items: flex-end;
   overflow: hidden;
   border-bottom: 1px solid var(--hairline);
