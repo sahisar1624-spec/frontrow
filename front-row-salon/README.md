@@ -1,100 +1,144 @@
-# Front Row Salon — website
+# Front Row Beauty Salon — website
 
-A static, no-build multi-page site for Front Row Salon (Bur Dubai). Every
+A static, no-build multi-page site for Front Row Beauty Salon (Bur Dubai). Every
 `.html` file opens directly in a browser — no server, no bundler, no
 npm install, and no 3D/WebGL anywhere on the site.
 
-**Design direction:** warm, light editorial — a fashion-magazine "front
-row" world. Paper-warm background, espresso ink, a rosewood/berry accent
-paired with brass gold, Bodoni Moda for display type paired with Work
-Sans, a magazine-masthead nav with a numbered full-screen "Index"
-overlay, and restrained scroll-reveal motion in place of any
-scroll-driven animation.
+**Design direction:** black & gold luxury editorial — a fashion-magazine
+"front row" world after dark. Near-black charcoal ground with a warm grey
+ambience, ivory ink, foil-gold as the primary accent paired with a soft
+rose-blush for a feminine, premium touch (never masculine), Bodoni Moda
+for display type paired with Work Sans, a magazine-masthead nav with a
+numbered full-screen "Index" overlay, and restrained scroll-reveal motion
+in place of any scroll-driven animation.
 
 ## Structure
 
 ```
 front-row-salon/
-  index.html             Home — editorial split hero (headline + framed photo/video)
-  about.html              About Us
-  services.html           Services
-  pricelist.html           Price List
-  team.html                Team
-  location.html            Maps & Timings
-  brands.html              Brand Partners
-  contact.html             Contact Us
-  reviews.html             Reviews
-  information.html         Information
-  gallery.html              Gallery
-  affirmation.html          Daily Affirmation — quiet, breathing paper card
+  index.html               Home — editorial split hero (headline + real salon photo)
+  about.html                About Us
+  services.html             Services — with three photo + long-form copy sections
+                             on Hair, Nails and Body & Face
+  pricelist.html             Price List
+  products.html               Products — retail catalogue, ready to fill in
+  brands.html                 Brand Partners — the 12 partner brands
+  team.html                    Team
+  gallery.html                  Gallery
+  reviews.html                   Reviews
+  location.html                   Maps & Timings — live Google Maps embed
+  information.html                 Information
+  contact.html                      Contact Us
+  affirmation.html                   Daily Affirmation — quiet, breathing card
   shared/
     style.css              design tokens, typography, every shared component
     nav.js                 injects the header nav + footer, the Index overlay,
-                            scroll-reveal, and the media-placeholder loader
-  images/                 drop real photos in here (see filenames below)
+                            scroll-reveal, media-placeholder loader, and the
+                            site's contact details / Fresha URL (single source
+                            of truth — see FRSContact in nav.js)
+  images/                 real salon photos + logo live here (see below)
   videos/                 drop real video clips in here (see filenames below)
 ```
 
 Fonts (Bodoni Moda, Work Sans) load from Google Fonts via a `@import` in
-`shared/style.css` — the only external dependency on the whole site.
-Everything else is plain HTML/CSS/vanilla JS.
+`shared/style.css` — the only external dependency on the whole site, aside
+from the Google Maps embed on `location.html`.
 
 ## Booking
 
-Every "Book Now" button on the site links out to the real Fresha booking
-page in a new tab:
+Every "Book Now" button links out to the real Fresha venue page in a new tab:
 
 ```
-https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking
+https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true
 ```
 
 There is no custom booking form anywhere — this is intentional.
 
-## Dropping in real photos & videos
+## Contact details (live on every page)
+
+- Phone: **+971 4 336 5582**
+- Mobile / WhatsApp: **+971 50 232 9348**
+- Email: **frontrowsalon22@gmail.com**
+- Address: Al Nasser Building, Kuwait Street, Al Raffa Road, Mankhool, Bur
+  Dubai, Shop 5 — open daily, 10:00 am – 9:00 pm
+- These live in one place — `shared/nav.js` (`FRESHA_URL`, `PHONE_*`,
+  `MOBILE_*`, `WHATSAPP_URL`, `EMAIL`, `DIRECTIONS_URL`) — and are used to
+  render the header, footer and Index overlay everywhere. Update them
+  there once and every page picks it up.
+
+## Logo & real photos
+
+The salon crest and five real interior photos are already in `images/`:
+
+- `logo-mark.jpg` — the square crest (used in the header/footer brand mark
+  and as the browser-tab favicon)
+- `logo-full.jpg` — the full logo with the "Front Row Beauty Salon" ring
+  text, for larger display if needed
+- `salon-styling-stations.jpg` — gold-framed mirrors, styling chairs (home
+  hero, Services/Hair)
+- `salon-treatment-room-1.jpg`, `salon-treatment-room-2.jpg` — facial/body
+  treatment rooms (Services/Body & Face, gallery)
+- `salon-product-display.jpg` — the Nashi Argan shelf with the salon crest
+  on the wall (About, Brand Partners)
+- `salon-reception.jpg` — the reception desk with the salon crest (home
+  teaser, Maps & Timings, gallery)
+
+`gallery.html` also uses copies of these under its original filenames
+(`interior-1.jpg`, `styling-chairs.jpg`, `reception.jpg`, `gallery-2.jpg`,
+`gallery-3.jpg`) so its captions line up — replace those copies with
+different shots any time without touching the HTML.
+
+## Dropping in more photos & videos
 
 Every image and video on the site is wired as a **placeholder that
 upgrades itself automatically.** Each one is an `<img>` or `<video>`
-pointing at the real filename it expects, sitting inside a
-`.media-placeholder` box that shows a soft paper-toned gradient + a
-caption + the expected filename until that file actually exists. The
-moment a file of the right name lands in `/images` or `/videos`, the
-placeholder fades out and the real photo/clip fades in — **no HTML or
-CSS edits required.**
+pointing at the filename it expects, sitting inside a `.media-placeholder`
+box that shows a soft dark gradient + a caption + the expected filename
+until that file actually exists. The moment a file of the right name lands
+in `/images` or `/videos`, the placeholder fades out and the real
+photo/clip fades in — **no HTML or CSS edits required.**
 
-Just save your files with these exact names:
-
-### Home (`index.html`)
-- `videos/hero-loop.mp4` — looping video inside the framed hero portrait (optional; falls back to a plain placeholder frame if missing)
-- `images/teaser-services.jpg`, `images/teaser-team.jpg`, `images/teaser-gallery.jpg`
-
-### About (`about.html`)
-- `videos/about-atmosphere.mp4` — optional salon-atmosphere clip
+Still open (no photo supplied yet):
 
 ### Team (`team.html`)
-- `images/team-jessy.jpg`
-- `images/team-marian.jpg`
-- `images/team-maricon.jpg`
-- `images/team-sima.jpg`
-- `images/team-nash.jpg`
-- `images/team-naina.jpg`
+- `images/team-jessy.jpg`, `images/team-marian.jpg`, `images/team-maricon.jpg`,
+  `images/team-sima.jpg`, `images/team-nash.jpg`, `images/team-naina.jpg`
+- `images/teaser-team.jpg` — used on the home page "Team" teaser card
+
+### Services (`services.html`)
+- `images/nail-station.jpg` — nail bar / nail art close-up for the Nails
+  pillar section
+
+### Products (`products.html`)
+- `images/product-nashi-argan-shampoo.jpg`, `images/product-olaplex.jpg`,
+  `images/product-k18.jpg`, `images/product-dermalogica.jpg`,
+  `images/product-essie.jpg`, `images/product-klio.jpg` — one square photo
+  per featured product. Add more `.product-card` tiles in `products.html`
+  the same way for L'Oréal, Inoa, Schwarzkopf Professional, Esthemax,
+  Lycon and Rica products as they're photographed; update the price and
+  description text alongside each photo.
 
 ### Gallery (`gallery.html`)
-- `images/interior-1.jpg` — modern interior
-- `images/styling-chairs.jpg` — styling stations
-- `images/nail-station.jpg` — nail care area
-- `images/reception.jpg` — reception area
-- `images/gallery-2.jpg`, `images/gallery-3.jpg` — additional detail shots
 - `videos/gallery-clip-1.mp4`, `videos/gallery-clip-2.mp4` — hover-to-play clips
 
-Add more `<figure>` tiles in `gallery.html` following the same pattern for
-any additional photos or clips.
+Add more `<figure>` or `.product-card` tiles following the existing
+pattern for any additional photos or products.
+
+## Brand Partners
+
+`brands.html` lists the 12 brands the salon works with: L'Oréal, Olaplex,
+Inoa, Schwarzkopf Professional, K18, Nashi, Dermalogica, Esthemax, Lycon,
+Rica, Essie and Klio. Logo marks are shown as styled text tiles pending
+permission to use each brand's artwork — swap in real logo images in the
+`.brand-tile` markup whenever that's available.
 
 ## Content notes
 
 - Dishna is a former team member and does **not** appear anywhere on the site, per instruction.
 - Prices shown are exactly what was supplied. Categories without a given price are marked "Ask in salon" rather than an invented number — see `pricelist.html`.
-- Phone number, Instagram and WhatsApp are not yet supplied — they appear as clearly marked placeholders in the footer and on `contact.html`.
-- The Google Maps embed on `location.html` is a labeled placeholder; drop in a Google Maps Embed API `<iframe>` once a key is available (the spot is commented inline).
+- The Google Maps embed on `location.html` uses the keyless
+  `maps.google.com/maps?...&output=embed` format (no API key required) —
+  swap in a Google Maps Embed API key + iframe later if preferred.
 - The contact form on `contact.html` is front-end only — it shows a "message sent" confirmation state but does not send anywhere yet.
 
 ## Accessibility
