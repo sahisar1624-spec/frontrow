@@ -82,3 +82,52 @@
     figures.forEach(function (fig) { fig.classList.add('is-entered'); });
   }
 })();
+
+/* ==========================================================================
+   "Our Work" — a horizontal side-scroll strip of real client photos.
+   Native touch/trackpad swipe already scrolls it with zero JS; this only
+   adds two things a plain mouse can't do on its own: a vertical wheel
+   gesture over the strip scrolls it sideways, and the prev/next buttons
+   step one card at a time (disabling themselves at each end).
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var strip = document.getElementById('our-work-grid');
+  if (!strip) return;
+
+  var prevBtn = document.getElementById('our-work-prev');
+  var nextBtn = document.getElementById('our-work-next');
+
+  strip.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    e.preventDefault();
+    strip.scrollBy({ left: e.deltaY, behavior: 'auto' });
+  }, { passive: false });
+
+  function cardStep() {
+    var first = strip.querySelector('figure');
+    if (!first) return strip.clientWidth * 0.8;
+    var style = getComputedStyle(strip);
+    var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function updateButtons() {
+    if (!prevBtn || !nextBtn) return;
+    var max = strip.scrollWidth - strip.clientWidth - 1;
+    prevBtn.disabled = strip.scrollLeft <= 0;
+    nextBtn.disabled = strip.scrollLeft >= max;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function () {
+    strip.scrollBy({ left: -cardStep() * 2, behavior: 'smooth' });
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function () {
+    strip.scrollBy({ left: cardStep() * 2, behavior: 'smooth' });
+  });
+
+  strip.addEventListener('scroll', updateButtons, { passive: true });
+  window.addEventListener('resize', updateButtons);
+  updateButtons();
+})();

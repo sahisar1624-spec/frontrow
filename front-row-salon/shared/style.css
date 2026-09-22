@@ -1556,3 +1556,50 @@ h3, .h3 { transition: color 0.4s var(--ease); }
      seamless drift loop — with the loop off, only show the first copy */
   .float-track > .float-item:nth-child(n+7) { display: none; }
 }
+
+/* ---------------------------------------------------------------------- */
+/* our-work-scroll — a horizontal side-scroll strip of real client photos. */
+/* Native touch/trackpad swipe works with no JS; the page's own small      */
+/* script maps vertical mouse-wheel to horizontal scroll and wires the     */
+/* prev/next buttons, so a plain mouse works too. Scroll-snap keeps each   */
+/* photo settling square in view instead of stopping mid-card.             */
+/* ---------------------------------------------------------------------- */
+.our-work-wrap { position: relative; }
+.our-work-scroll {
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: clamp(1.25rem, 5vw, 3rem);
+  padding: 0.25rem clamp(1.25rem, 5vw, 3rem) 1.25rem;
+  margin: 0 clamp(-1.25rem, -5vw, -3rem);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brass) transparent;
+}
+.our-work-scroll::-webkit-scrollbar { height: 6px; }
+.our-work-scroll::-webkit-scrollbar-track { background: transparent; }
+.our-work-scroll::-webkit-scrollbar-thumb { background: var(--brass); border-radius: 999px; }
+.our-work-scroll > figure {
+  flex: 0 0 auto;
+  width: clamp(190px, 22vw, 260px);
+  scroll-snap-align: start;
+  margin: 0;
+}
+.our-work-nav {
+  position: absolute; top: 40%; z-index: 2;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper-card); border: 1px solid var(--hairline); color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+  box-shadow: 0 12px 30px -12px rgba(0,0,0,0.5);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.our-work-nav:hover { border-color: var(--brass); color: var(--brass); }
+.our-work-nav.prev { left: -8px; }
+.our-work-nav.next { right: -8px; }
+.our-work-nav[disabled] { opacity: 0.3; cursor: default; pointer-events: none; }
+@media (max-width: 640px) {
+  .our-work-nav { display: none; }
+}

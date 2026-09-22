@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="A look inside Front Row Beauty Salon — interior, styling stations, nail care area and reception.">
 <meta name="twitter:image" content="https://frontrowbeautysalon.com/images/salon-styling-stations.jpg">
 <link rel="canonical" href="https://frontrowbeautysalon.com/gallery.html">
-<link rel="stylesheet" href="shared/style.css?v=20260913w">
+<link rel="stylesheet" href="shared/style.css?v=20260913x">
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 </head>
 <body>
@@ -151,9 +151,11 @@
       <div class="head-block reveal">
         <div class="eyebrow">Our Work</div>
         <h2>Some of what we've done.</h2>
-        <p class="lede">Real results from real appointments &mdash; hair and nails, straight from the chair.</p>
+        <p class="lede">Real results from real appointments &mdash; hair and nails, straight from the chair. Scroll sideways for more.</p>
       </div>
-      <div class="grid grid-4" id="our-work-grid">
+      <div class="our-work-wrap">
+        <button type="button" class="our-work-nav prev" id="our-work-prev" aria-label="Scroll to previous photos" disabled>&#8249;</button>
+        <div class="our-work-scroll" id="our-work-grid">
 
         <figure class="reveal">
           <div class="media-placeholder aspect-portrait">
@@ -291,6 +293,8 @@
           <figcaption class="gallery-caption">Shimmer burgundy manicure</figcaption>
         </figure>
 
+        </div>
+        <button type="button" class="our-work-nav next" id="our-work-next" aria-label="Scroll to more photos">&#8250;</button>
       </div>
     </div>
   </section>
@@ -311,9 +315,9 @@
 
 <footer id="site-footer"></footer>
 
-<script src="shared/nav.js?v=20260913w"></script>
-<script src="shared/chatbot.js?v=20260913w"></script>
-<script src="shared/gallery-interactive.js?v=20260913w"></script>
+<script src="shared/nav.js?v=20260913x"></script>
+<script src="shared/chatbot.js?v=20260913x"></script>
+<script src="shared/gallery-interactive.js?v=20260913x"></script>
 <script>
   /* Video tiles autoplay muted + loop only on hover/focus, so the gallery
      stays quiet until someone actually looks at a clip. */
