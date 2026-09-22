@@ -34,30 +34,35 @@
   }
   .cine-content .eyebrow { margin-bottom: 0.85rem; }
 
-  /* ---- ribbon-accent: soft flowing light-ribbons behind the Hair photo only ---- */
-  .ribbon-accent {
-    position: absolute; inset: 0; z-index: 1;
-    pointer-events: none; opacity: 0.85; mix-blend-mode: screen;
+  /* ---- glow-accent: sparkle dust + a soft hairline light-sweep, Hair photo only ---- */
+  .glow-accent { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .glow-dust { position: absolute; inset: 0; mix-blend-mode: screen; }
+  .glow-dust span {
+    position: absolute; border-radius: 50%; filter: blur(0.5px);
+    animation-name: dust-rise; animation-timing-function: linear; animation-iteration-count: infinite;
   }
-  .ribbon-accent svg { width: 100%; height: 100%; display: block; }
-  .ribbon-accent path { fill: none; stroke-linecap: round; }
-  .ribbon-accent .r1 { stroke: url(#ribbon-gold); stroke-width: 12; animation: ribbon-pulse 7s ease-in-out infinite; }
-  .ribbon-accent .r2 { stroke: url(#ribbon-rose); stroke-width: 10; animation: ribbon-pulse 8.5s ease-in-out infinite -2.5s; }
-  .ribbon-accent .r3 { stroke: url(#ribbon-ivory); stroke-width: 8; animation: ribbon-pulse 9.5s ease-in-out infinite -5s; }
-  .ribbon-accent g { animation: ribbon-drift 24s ease-in-out infinite; transform-origin: 60% 40%; }
-  @keyframes ribbon-pulse {
-    0%, 100% { opacity: 0.55; }
-    50% { opacity: 1; }
+  @keyframes dust-rise {
+    0% { transform: translateY(0) scale(0.6); opacity: 0; }
+    12% { opacity: 1; }
+    82% { opacity: 0.75; }
+    100% { transform: translateY(-360px) scale(1.1); opacity: 0; }
   }
-  @keyframes ribbon-drift {
-    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    50% { transform: translate(-2%, 2%) rotate(1.4deg) scale(1.03); }
+  .glow-sweep::before {
+    content: ''; position: absolute; top: -20%; bottom: -20%; left: -30%; width: 22%;
+    background: linear-gradient(100deg, transparent 20%, rgba(212,175,106,0.5) 48%, rgba(246,239,227,0.32) 52%, transparent 80%);
+    filter: blur(6px);
+    animation: sweep-move 7s ease-in-out infinite;
+  }
+  @keyframes sweep-move {
+    0% { left: -30%; }
+    55% { left: 120%; }
+    100% { left: 120%; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ribbon-accent path, .ribbon-accent g { animation: none; }
+    .glow-dust span, .glow-sweep::before { animation: none; opacity: 0; }
   }
   @media (max-width: 899px) {
-    .ribbon-accent { display: none; }
+    .glow-accent { display: none; }
   }
 </style>
 </head>
@@ -80,34 +85,27 @@
     <section class="cine-photo">
       <img class="cine-photo-img" src="images/salon-styling-stations.jpg" alt="Hair styling station at Front Row Beauty Salon" loading="lazy" decoding="async">
       <div class="cine-scrim" aria-hidden="true"></div>
-      <div class="ribbon-accent" aria-hidden="true">
-        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="ribbon-gold" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#d4af6a" stop-opacity="0"/>
-              <stop offset="50%" stop-color="#d4af6a" stop-opacity="0.95"/>
-              <stop offset="100%" stop-color="#d4af6a" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="ribbon-rose" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#e0a3b4" stop-opacity="0"/>
-              <stop offset="50%" stop-color="#e0a3b4" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#e0a3b4" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="ribbon-ivory" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f6efe3" stop-opacity="0"/>
-              <stop offset="50%" stop-color="#f6efe3" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#f6efe3" stop-opacity="0"/>
-            </linearGradient>
-            <filter id="ribbon-glow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="8"/>
-            </filter>
-          </defs>
-          <g filter="url(#ribbon-glow)">
-            <path class="r1" d="M1550,-40 C1420,180 1500,260 1330,380 C1160,500 1250,560 1080,680 C910,800 980,840 800,960"/>
-            <path class="r2" d="M1480,-60 C1300,140 1420,240 1220,360 C1020,480 1140,540 940,660 C740,780 830,820 630,940"/>
-            <path class="r3" d="M1420,-80 C1200,120 1340,220 1110,340 C880,460 1020,520 800,640 C580,760 680,800 460,920"/>
-          </g>
-        </svg>
+      <div class="glow-accent glow-sweep" aria-hidden="true">
+        <div class="glow-dust">
+          <span style="left:33.1%; bottom:-19px; width:4.0px; height:4.0px; background:#d4af6a; box-shadow:0 0 10.0px #d4af6a; animation-duration:7.4s; animation-delay:-7.0s;"></span>
+          <span style="left:36.9%; bottom:-13px; width:3.5px; height:3.5px; background:#f6efe3; box-shadow:0 0 8.8px #f6efe3; animation-duration:7.2s; animation-delay:-5.6s;"></span>
+          <span style="left:10.3%; bottom:-15px; width:3.3px; height:3.3px; background:#e0a3b4; box-shadow:0 0 8.2px #e0a3b4; animation-duration:12.0s; animation-delay:-1.6s;"></span>
+          <span style="left:24.1%; bottom:-48px; width:4.8px; height:4.8px; background:#d4af6a; box-shadow:0 0 12.0px #d4af6a; animation-duration:10.5s; animation-delay:-5.2s;"></span>
+          <span style="left:91.9%; bottom:-13px; width:4.6px; height:4.6px; background:#f6efe3; box-shadow:0 0 11.5px #f6efe3; animation-duration:8.7s; animation-delay:-1.9s;"></span>
+          <span style="left:14.6%; bottom:-29px; width:4.4px; height:4.4px; background:#e0a3b4; box-shadow:0 0 11.0px #e0a3b4; animation-duration:8.1s; animation-delay:-7.6s;"></span>
+          <span style="left:61.5%; bottom:-32px; width:3.6px; height:3.6px; background:#d4af6a; box-shadow:0 0 9.0px #d4af6a; animation-duration:7.4s; animation-delay:-0.8s;"></span>
+          <span style="left:22.5%; bottom:-51px; width:3.3px; height:3.3px; background:#f6efe3; box-shadow:0 0 8.2px #f6efe3; animation-duration:8.9s; animation-delay:-7.6s;"></span>
+          <span style="left:44.8%; bottom:-28px; width:4.4px; height:4.4px; background:#e0a3b4; box-shadow:0 0 11.0px #e0a3b4; animation-duration:11.2s; animation-delay:-3.2s;"></span>
+          <span style="left:55.7%; bottom:-42px; width:4.6px; height:4.6px; background:#d4af6a; box-shadow:0 0 11.5px #d4af6a; animation-duration:11.4s; animation-delay:-3.7s;"></span>
+          <span style="left:92.2%; bottom:-17px; width:3.3px; height:3.3px; background:#f6efe3; box-shadow:0 0 8.2px #f6efe3; animation-duration:11.5s; animation-delay:-2.0s;"></span>
+          <span style="left:48.0%; bottom:-12px; width:4.0px; height:4.0px; background:#e0a3b4; box-shadow:0 0 10.0px #e0a3b4; animation-duration:11.6s; animation-delay:-7.4s;"></span>
+          <span style="left:82.8%; bottom:-29px; width:4.1px; height:4.1px; background:#d4af6a; box-shadow:0 0 10.2px #d4af6a; animation-duration:10.6s; animation-delay:-7.5s;"></span>
+          <span style="left:45.1%; bottom:-60px; width:4.8px; height:4.8px; background:#f6efe3; box-shadow:0 0 12.0px #f6efe3; animation-duration:9.8s; animation-delay:-8.6s;"></span>
+          <span style="left:9.5%; bottom:-52px; width:3.9px; height:3.9px; background:#e0a3b4; box-shadow:0 0 9.8px #e0a3b4; animation-duration:13.0s; animation-delay:-10.7s;"></span>
+          <span style="left:29.6%; bottom:-33px; width:4.0px; height:4.0px; background:#d4af6a; box-shadow:0 0 10.0px #d4af6a; animation-duration:7.1s; animation-delay:-6.0s;"></span>
+          <span style="left:19.1%; bottom:-17px; width:2.2px; height:2.2px; background:#f6efe3; box-shadow:0 0 5.5px #f6efe3; animation-duration:11.6s; animation-delay:-1.7s;"></span>
+          <span style="left:26.3%; bottom:-33px; width:4.6px; height:4.6px; background:#e0a3b4; box-shadow:0 0 11.5px #e0a3b4; animation-duration:7.5s; animation-delay:-5.8s;"></span>
+        </div>
       </div>
       <div class="cine-content">
         <div class="eyebrow">Hair</div>
