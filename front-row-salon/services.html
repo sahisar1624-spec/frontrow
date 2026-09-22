@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Hair cutting & styling, colour, treatments, nails, nail extensions, nail art, waxing, threading, bleaching, massage, facials and makeup at Front Row Beauty Salon, Bur Dubai.">
 <meta name="twitter:image" content="https://frontrowbeautysalon.com/images/salon-styling-stations.jpg">
 <link rel="canonical" href="https://frontrowbeautysalon.com/services.html">
-<link rel="stylesheet" href="shared/style.css?v=20260913x">
+<link rel="stylesheet" href="shared/style.css?v=20260913y">
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 <style>
   .promo-callout {
@@ -33,6 +33,32 @@
     margin-bottom: clamp(2.5rem, 5vw, 4rem);
   }
   .cine-content .eyebrow { margin-bottom: 0.85rem; }
+
+  /* ---- ribbon-accent: soft flowing light-ribbons behind the Hair photo only ---- */
+  .ribbon-accent {
+    position: absolute; inset: 0; z-index: 1;
+    pointer-events: none; opacity: 0.85; mix-blend-mode: screen;
+  }
+  .ribbon-accent svg { width: 100%; height: 100%; display: block; }
+  .ribbon-accent path { fill: none; stroke-linecap: round; }
+  .ribbon-accent .r1 { stroke: url(#ribbon-gold); stroke-width: 12; animation: ribbon-pulse 7s ease-in-out infinite; }
+  .ribbon-accent .r2 { stroke: url(#ribbon-rose); stroke-width: 10; animation: ribbon-pulse 8.5s ease-in-out infinite -2.5s; }
+  .ribbon-accent .r3 { stroke: url(#ribbon-ivory); stroke-width: 8; animation: ribbon-pulse 9.5s ease-in-out infinite -5s; }
+  .ribbon-accent g { animation: ribbon-drift 24s ease-in-out infinite; transform-origin: 60% 40%; }
+  @keyframes ribbon-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  @keyframes ribbon-drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    50% { transform: translate(-2%, 2%) rotate(1.4deg) scale(1.03); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ribbon-accent path, .ribbon-accent g { animation: none; }
+  }
+  @media (max-width: 899px) {
+    .ribbon-accent { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -54,6 +80,35 @@
     <section class="cine-photo">
       <img class="cine-photo-img" src="images/salon-styling-stations.jpg" alt="Hair styling station at Front Row Beauty Salon" loading="lazy" decoding="async">
       <div class="cine-scrim" aria-hidden="true"></div>
+      <div class="ribbon-accent" aria-hidden="true">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="ribbon-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d4af6a" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#d4af6a" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#d4af6a" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="ribbon-rose" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e0a3b4" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#e0a3b4" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#e0a3b4" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="ribbon-ivory" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f6efe3" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#f6efe3" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#f6efe3" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="ribbon-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8"/>
+            </filter>
+          </defs>
+          <g filter="url(#ribbon-glow)">
+            <path class="r1" d="M1550,-40 C1420,180 1500,260 1330,380 C1160,500 1250,560 1080,680 C910,800 980,840 800,960"/>
+            <path class="r2" d="M1480,-60 C1300,140 1420,240 1220,360 C1020,480 1140,540 940,660 C740,780 830,820 630,940"/>
+            <path class="r3" d="M1420,-80 C1200,120 1340,220 1110,340 C880,460 1020,520 800,640 C580,760 680,800 460,920"/>
+          </g>
+        </svg>
+      </div>
       <div class="cine-content">
         <div class="eyebrow">Hair</div>
         <h2>Cut, coloured and finished around how your hair actually falls.</h2>
@@ -220,8 +275,8 @@
 
 <footer id="site-footer"></footer>
 
-<script src="shared/nav.js?v=20260913x"></script>
-<script src="shared/chatbot.js?v=20260913x"></script>
-<script src="shared/services-scene.js?v=20260913x"></script>
+<script src="shared/nav.js?v=20260913y"></script>
+<script src="shared/chatbot.js?v=20260913y"></script>
+<script src="shared/services-scene.js?v=20260913y"></script>
 </body>
 </html>
