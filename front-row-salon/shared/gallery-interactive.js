@@ -26,10 +26,13 @@
 
   /* a bold, bloom-lit ambient backdrop behind the (untouched) real photo
      grid — a slowly turning gold medallion in a drift of dust, the same
-     premium atmosphere as Services/About without touching a single photo */
+     premium atmosphere as Services/About without touching a single photo.
+     Host is .page-tail (the whole gallery + before/after + CTA content),
+     not just .gallery-grid, so the backdrop keeps running the full length
+     of the page instead of fading out once you scroll past the grid. */
   import('./ambient-scene.js').then(function (mod) {
     import('./medallion.js').then(function (m) {
-      mod.startAmbientScene('gallery-cinema', '.gallery-grid', function (THREE) {
+      mod.startAmbientScene('gallery-cinema', '.page-tail', function (THREE) {
         var group = new THREE.Group();
         var medallion = m.buildMedallion(THREE, 2.4);
         medallion.position.set(2.6, 0, -3);
