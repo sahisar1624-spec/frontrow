@@ -710,13 +710,6 @@ main > section[id] { scroll-margin-top: 84px; }
   border: 1px solid var(--hairline);
   aspect-ratio: 4 / 3;
 }
-.media-placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px solid var(--hairline);
-  pointer-events: none;
-}
 .media-placeholder img,
 .media-placeholder video {
   position: absolute;
@@ -730,7 +723,6 @@ main > section[id] { scroll-margin-top: 84px; }
 }
 .media-placeholder.is-loaded img,
 .media-placeholder.is-loaded video { opacity: 1; }
-.media-placeholder.is-loaded::after { border-color: rgba(246,239,227,0.35); }
 .ph-fallback {
   position: absolute;
   inset: 0;
@@ -1347,17 +1339,6 @@ html.js-ready .stagger-word.is-visible { opacity: 1; transform: translateY(0); }
 /* ---------------------------------------------------------------------- */
 /* before / after pairs — gallery                                          */
 /* ---------------------------------------------------------------------- */
-.before-after-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--gutter); }
-.before-after-pair figcaption { margin-top: 0.85rem; font-family: var(--font-display); font-style: italic; font-size: 1rem; color: var(--ink); text-align: center; }
-.before-after-frames { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-.before-after-frames .media-placeholder { aspect-ratio: 3/4; }
-.before-after-tag {
-  position: absolute; top: 0.6rem; left: 0.6rem; z-index: 2;
-  background: rgba(16,13,14,0.72); color: var(--ink);
-  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.25rem 0.6rem; border-radius: 999px;
-}
-
 /* ---------------------------------------------------------------------- */
 /* floating actions — WhatsApp shortcut + mobile-only Book Now bar         */
 /* ---------------------------------------------------------------------- */
