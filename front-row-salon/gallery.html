@@ -2,10 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("frs-theme");if(t==="light")document.documentElement.setAttribute("data-theme","light");}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery — Front Row Salon</title>
-<meta name="description" content="A look inside Front Row Salon — interior, styling stations, nail care area and reception.">
-<link rel="stylesheet" href="shared/style.css">
+<title>Gallery — Front Row Beauty Salon</title>
+<meta name="description" content="A look inside Front Row Beauty Salon — interior, styling stations, nail care area and reception.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Front Row Beauty Salon">
+<meta property="og:title" content="Gallery — Front Row Beauty Salon">
+<meta property="og:description" content="A look inside Front Row Beauty Salon — interior, styling stations, nail care area and reception.">
+<meta property="og:url" content="https://frontrowbeautysalon.com/gallery.html">
+<meta property="og:image" content="https://frontrowbeautysalon.com/images/salon-styling-stations.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gallery — Front Row Beauty Salon">
+<meta name="twitter:description" content="A look inside Front Row Beauty Salon — interior, styling stations, nail care area and reception.">
+<meta name="twitter:image" content="https://frontrowbeautysalon.com/images/salon-styling-stations.jpg">
+<link rel="canonical" href="https://frontrowbeautysalon.com/gallery.html">
+<link rel="stylesheet" href="shared/style.css?v=20260913z">
+<link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
 </head>
 <body>
 
@@ -14,20 +27,22 @@
 <main class="page-shell">
 
   <section class="page-hero">
-    <div class="wrap">
+    <div class="wrap reveal">
       <div class="eyebrow">Gallery</div>
       <h1>The room, in pieces.</h1>
       <p class="lede">Photos and clips land here as they're ready &mdash; hover a video tile to see it move.</p>
     </div>
   </section>
 
+  <div class="page-tail">
+
   <section class="section">
     <div class="wrap">
       <div class="gallery-grid" id="gallery-grid">
 
-        <figure class="span-2">
+        <figure class="span-2 reveal">
           <div class="media-placeholder">
-            <img src="images/interior-1.jpg" alt="Modern interior at Front Row Salon">
+            <img src="images/interior-1.jpg" alt="Modern interior at Front Row Beauty Salon" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Modern interior</span>
@@ -37,9 +52,9 @@
           <figcaption class="gallery-caption">Modern interior</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder">
-            <img src="images/styling-chairs.jpg" alt="Styling stations at Front Row Salon">
+            <img src="images/styling-chairs.jpg" alt="Styling stations at Front Row Beauty Salon" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Styling stations</span>
@@ -49,9 +64,9 @@
           <figcaption class="gallery-caption">Styling stations</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder">
-            <img src="images/nail-station.jpg" alt="Nail care area at Front Row Salon">
+            <img src="images/nail-station.jpg" alt="Nail care area at Front Row Beauty Salon" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Nail care area</span>
@@ -61,7 +76,7 @@
           <figcaption class="gallery-caption">Nail care area</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder gallery-video" data-gallery-video>
             <video muted loop playsinline preload="metadata">
               <source src="videos/gallery-clip-1.mp4" type="video/mp4">
@@ -76,9 +91,9 @@
           <figcaption class="gallery-caption">In motion</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder">
-            <img src="images/reception.jpg" alt="Reception area at Front Row Salon">
+            <img src="images/reception.jpg" alt="Reception area at Front Row Beauty Salon" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Reception area</span>
@@ -88,9 +103,9 @@
           <figcaption class="gallery-caption">Reception area</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder">
-            <img src="images/gallery-2.jpg" alt="Front Row Salon, detail">
+            <img src="images/gallery-2.jpg" alt="Front Row Beauty Salon, detail" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Detail shot</span>
@@ -100,7 +115,7 @@
           <figcaption class="gallery-caption">Detail</figcaption>
         </figure>
 
-        <figure class="span-2">
+        <figure class="span-2 reveal">
           <div class="media-placeholder gallery-video" data-gallery-video>
             <video muted loop playsinline preload="metadata">
               <source src="videos/gallery-clip-2.mp4" type="video/mp4">
@@ -115,9 +130,9 @@
           <figcaption class="gallery-caption">In motion</figcaption>
         </figure>
 
-        <figure>
+        <figure class="reveal">
           <div class="media-placeholder">
-            <img src="images/gallery-3.jpg" alt="Front Row Salon, detail">
+            <img src="images/gallery-3.jpg" alt="Front Row Beauty Salon, detail" loading="lazy" decoding="async">
             <div class="ph-fallback">
               <span class="ph-icon">&#10022;</span>
               <span class="ph-label">Detail shot</span>
@@ -133,19 +148,176 @@
 
   <section class="section section-alt">
     <div class="wrap">
-      <div class="cta-band">
-        <div class="eyebrow center" style="justify-content:center;">See it in person</div>
-        <h2>The photos don't do it justice.</h2>
-        <a class="btn btn-primary mt-2" href="https://www.fresha.com/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/booking" target="_blank" rel="noopener noreferrer">Book Now</a>
+      <div class="head-block reveal">
+        <div class="eyebrow">Our Work</div>
+        <h2>Some of what we've done.</h2>
+        <p class="lede">Real results from real appointments &mdash; hair and nails, straight from the chair. Scroll sideways for more.</p>
+      </div>
+      <div class="our-work-wrap">
+        <button type="button" class="our-work-nav prev" id="our-work-prev" aria-label="Scroll to previous photos" disabled>&#8249;</button>
+        <div class="our-work-scroll" id="our-work-grid">
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-balayage-waves.jpg" alt="Balayage waves finished at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Balayage waves</span></div>
+          </div>
+          <figcaption class="gallery-caption">Balayage waves</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-copper-balayage.jpg" alt="Copper balayage finished at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Copper balayage</span></div>
+          </div>
+          <figcaption class="gallery-caption">Copper balayage</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-burgundy-colour.jpg" alt="Burgundy colour finished at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Burgundy colour</span></div>
+          </div>
+          <figcaption class="gallery-caption">Burgundy colour</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-textured-pixie.jpg" alt="Textured pixie cut at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Textured pixie</span></div>
+          </div>
+          <figcaption class="gallery-caption">Textured pixie</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-chocolate-brown.jpg" alt="Rich chocolate brown colour at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Chocolate brown</span></div>
+          </div>
+          <figcaption class="gallery-caption">Chocolate brown</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-sleek-straight.jpg" alt="Sleek straight finish at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Sleek straight finish</span></div>
+          </div>
+          <figcaption class="gallery-caption">Sleek straight finish</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-layered-shag.jpg" alt="Layered shag cut at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Layered shag cut</span></div>
+          </div>
+          <figcaption class="gallery-caption">Layered shag cut</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-deep-wine-tone.jpg" alt="Deep wine tone colour at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Deep wine tone</span></div>
+          </div>
+          <figcaption class="gallery-caption">Deep wine tone</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-golden-balayage.jpg" alt="Golden balayage finished at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Golden balayage</span></div>
+          </div>
+          <figcaption class="gallery-caption">Golden balayage</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-snowflake-art.jpg" alt="Snowflake nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Snowflake nail art</span></div>
+          </div>
+          <figcaption class="gallery-caption">Snowflake nail art</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-soft-layers.jpg" alt="Soft layered haircut at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Soft layers</span></div>
+          </div>
+          <figcaption class="gallery-caption">Soft layers</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-hair-long-layers.jpg" alt="Long layered haircut at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Long layers</span></div>
+          </div>
+          <figcaption class="gallery-caption">Long layers</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-glitter-ombre.jpg" alt="Glitter ombre nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Glitter ombr&eacute; nail art</span></div>
+          </div>
+          <figcaption class="gallery-caption">Glitter ombr&eacute; nail art</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-chrome-blue.jpg" alt="Chrome blue nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Chrome blue nail art</span></div>
+          </div>
+          <figcaption class="gallery-caption">Chrome blue nail art</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-neon-french.jpg" alt="Neon French tip nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Neon French tips</span></div>
+          </div>
+          <figcaption class="gallery-caption">Neon French tips</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-classic-french.jpg" alt="Classic French nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Classic French nail art</span></div>
+          </div>
+          <figcaption class="gallery-caption">Classic French nail art</figcaption>
+        </figure>
+
+        <figure class="reveal">
+          <div class="media-placeholder aspect-portrait">
+            <img src="images/work-nails-shimmer-burgundy.jpg" alt="Shimmer burgundy nail art at Front Row Beauty Salon" loading="lazy" decoding="async">
+            <div class="ph-fallback"><span class="ph-icon">&#10022;</span><span class="ph-label">Shimmer burgundy nail art</span></div>
+          </div>
+          <figcaption class="gallery-caption">Shimmer burgundy nail art</figcaption>
+        </figure>
+
+        </div>
+        <button type="button" class="our-work-nav next" id="our-work-next" aria-label="Scroll to more photos">&#8250;</button>
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div class="eyebrow center" style="justify-content:center;">See it in person</div>
+        <h2>The photos don't do it justice.</h2>
+        <a class="btn btn-primary mt-2" href="https://www.fresha.com/en-GB/a/front-row-salon-dubai-al-nasser-building-kuwait-street-al-raffa-road-mankhool-bur-dubai-m7l7b4k4/all-offer?venue=true" target="_blank" rel="noopener noreferrer">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  </div>
 
 </main>
 
 <footer id="site-footer"></footer>
 
-<script src="shared/nav.js"></script>
+<script src="shared/nav.js?v=20260913z"></script>
+<script src="shared/chatbot.js?v=20260913z"></script>
+<script src="shared/gallery-interactive.js?v=20260913z"></script>
 <script>
   /* Video tiles autoplay muted + loop only on hover/focus, so the gallery
      stays quiet until someone actually looks at a clip. */
