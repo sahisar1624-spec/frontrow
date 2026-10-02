@@ -62,10 +62,23 @@
   }
 
   /* ---- testimonial band ---- */
-  .testimonial-band { text-align: center; max-width: 820px; margin: 0 auto; }
+  .testimonial-band { text-align: center; max-width: 820px; margin: 0 auto; position: relative; }
   .testimonial-band .review-stars { justify-content: center; display: flex; margin-bottom: 1.5rem; }
   .testimonial-band .review-quote { font-size: clamp(1.4rem, 3vw, 2rem); }
   .testimonial-band .review-name { margin-top: 1.5rem; display: block; color: var(--muted); }
+  .testimonial-stack { position: relative; min-height: clamp(220px, 32vw, 280px); }
+  .testimonial-slide {
+    position: absolute; inset: 0; opacity: 0; visibility: hidden;
+    transition: opacity .6s var(--ease);
+  }
+  .testimonial-slide.is-active { position: relative; opacity: 1; visibility: visible; }
+  .testimonial-dots { display: flex; justify-content: center; gap: .6rem; margin-top: 1.75rem; }
+  .t-dot {
+    width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
+    background: var(--hairline); cursor: pointer; transition: background .3s var(--ease), transform .3s var(--ease);
+  }
+  .t-dot.is-active { background: var(--brass); transform: scale(1.25); }
+  @media (prefers-reduced-motion: reduce) { .testimonial-slide { transition: none; } }
 
   /* ---- merged in from the standalone pages below, for the continuous scroll ---- */
 .about-lead { max-width: 900px; }
@@ -252,10 +265,29 @@
   </section>
 
   <section class="section">
-    <div class="wrap testimonial-band reveal">
-      <div class="review-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-quote">&ldquo;Amazing service as always. I've been going to this salon for the last 2 years and I always had a very good experience. Thank you to all the staff for the best service and for always looking after me.&rdquo;</p>
-      <span class="review-name">&mdash; Cecilia C., 2 years ago</span>
+    <div class="wrap testimonial-band reveal" id="testimonial-rotator">
+      <div class="testimonial-stack">
+        <div class="testimonial-slide is-active" data-slide="0">
+          <div class="review-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Amazing service as always. I've been going to this salon for the last 2 years and I always had a very good experience. Thank you to all the staff for the best service and for always looking after me.&rdquo;</p>
+          <span class="review-name">&mdash; Cecilia C., 2 years ago</span>
+        </div>
+        <div class="testimonial-slide" data-slide="1">
+          <div class="review-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-quote">&ldquo;Mary and Jessy were amazing. They spent almost 2 hours for my Mani Pedi and did a fantastic job. Thank you.&rdquo;</p>
+          <span class="review-name">&mdash; Dipti M., 7 months ago</span>
+        </div>
+        <div class="testimonial-slide" data-slide="2">
+          <div class="review-stars" aria-label="4.75 out of 5 stars">&#9733;&#9733;&#9733;&#9733;<span style="opacity:0.25;">&#9733;</span></div>
+          <p class="review-quote">&ldquo;The salon is clean, the staff is efficient and pleasant, and their services are reasonably priced. I will definitely visit them again.&rdquo;</p>
+          <span class="review-name">&mdash; Petula D., 10 months ago</span>
+        </div>
+      </div>
+      <div class="testimonial-dots" role="tablist" aria-label="Choose a review to show">
+        <button type="button" class="t-dot is-active" data-dot="0" aria-label="Show review from Cecilia C."></button>
+        <button type="button" class="t-dot" data-dot="1" aria-label="Show review from Dipti M."></button>
+        <button type="button" class="t-dot" data-dot="2" aria-label="Show review from Petula D."></button>
+      </div>
       <div class="mt-2">
         <a class="link-arrow" href="reviews.html">Read more reviews &rarr;</a>
       </div>
@@ -1856,6 +1888,38 @@ function swapAffirmation() {
   }, 480);
 }
 btn.addEventListener('click', swapAffirmation);
+})();
+
+(function () {
+  'use strict';
+  var root = document.getElementById('testimonial-rotator');
+  if (!root) return;
+  var slides = Array.prototype.slice.call(root.querySelectorAll('.testimonial-slide'));
+  var dots = Array.prototype.slice.call(root.querySelectorAll('.t-dot'));
+  if (slides.length < 2) return;
+  var current = 0;
+  var timer = null;
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach(function (s, idx) { s.classList.toggle('is-active', idx === current); });
+    dots.forEach(function (d, idx) { d.classList.toggle('is-active', idx === current); });
+  }
+  function next() { show(current + 1); }
+  function startAuto() {
+    if (prefersReducedMotion) return;
+    stopAuto();
+    timer = window.setInterval(next, 6000);
+  }
+  function stopAuto() { if (timer) { window.clearInterval(timer); timer = null; } }
+
+  dots.forEach(function (dot, idx) {
+    dot.addEventListener('click', function () { show(idx); startAuto(); });
+  });
+  root.addEventListener('mouseenter', stopAuto);
+  root.addEventListener('mouseleave', startAuto);
+  startAuto();
 })();
 </script>
 </body>

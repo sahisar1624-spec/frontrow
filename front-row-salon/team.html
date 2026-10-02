@@ -19,6 +19,17 @@
 <link rel="canonical" href="https://frontrowbeautysalon.com/team.html">
 <link rel="stylesheet" href="shared/style.css?v=20260913z">
 <link rel="icon" href="images/logo-mark.jpg" type="image/jpeg">
+<style>
+  /* ---- stylist spotlight: a little more presence on hover ---- */
+  .team-card { transition: transform .35s var(--ease); }
+  .team-card:hover { transform: translateY(-4px); }
+  .team-card .media-placeholder { transition: box-shadow .35s var(--ease); }
+  .team-card:hover .media-placeholder { box-shadow: 0 18px 40px -16px rgba(212,175,106,.45); }
+  .team-card .media-placeholder img { transition: transform .5s var(--ease); }
+  .team-card:hover .media-placeholder img { transform: scale(1.05); }
+  .team-card .rating-pill { transition: border-color .35s var(--ease), color .35s var(--ease); }
+  .team-card:hover .rating-pill { border-color: var(--brass); color: var(--brass); }
+</style>
 </head>
 <body>
 
